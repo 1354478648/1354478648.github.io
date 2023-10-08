@@ -22,31 +22,34 @@
     var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="别人的经验不一定可靠，遇事要动脑思考，自己去尝试。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="糖泥的个人博客">
-<meta property="og:url" content="http://1354478648.github.io/index.html">
+  <meta name="description" content="Vue核心初识Vue12345678910111213141516&lt;!--准备一个容器--&gt;&lt;div id&#x3D;&quot;root&quot;&gt;    &lt;h1&gt;Hello, &amp;#123;&amp;#123;name&amp;#125;&amp;#125;&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue的学习笔记">
+<meta property="og:url" content="http://1354478648.github.io/2023/10/08/Vue%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="糖泥的个人博客">
-<meta property="og:description" content="别人的经验不一定可靠，遇事要动脑思考，自己去尝试。">
+<meta property="og:description" content="Vue核心初识Vue12345678910111213141516&lt;!--准备一个容器--&gt;&lt;div id&#x3D;&quot;root&quot;&gt;    &lt;h1&gt;Hello, &amp;#123;&amp;#123;name&amp;#125;&amp;#125;&lt;&#x2F;h1&gt;&lt;&#x2F;div&gt;&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&amp;g">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-08T05:21:53.000Z">
+<meta property="article:modified_time" content="2023-10-08T05:24:57.259Z">
 <meta property="article:author" content="Downey">
-<meta property="article:tag" content="Java,后端,Vue,前端,全栈">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Vue">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://1354478648.github.io/">
+<link rel="canonical" href="http://1354478648.github.io/2023/10/08/Vue%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>糖泥的个人博客</title>
+  <title>Vue的学习笔记 | 糖泥的个人博客</title>
   
 
 
@@ -183,9 +186,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -201,10 +205,9 @@
       <meta itemprop="name" content="糖泥的个人博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/08/Vue%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Vue的学习笔记</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Vue的学习笔记
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -226,7 +229,14 @@
                 </span>
             </span>
 
-          <br>
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
             <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="far fa-file-word"></i>
@@ -251,7 +261,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="Vue核心"><a href="#Vue核心" class="headerlink" title="Vue核心"></a>Vue核心</h2><h3 id="初识Vue"><a href="#初识Vue" class="headerlink" title="初识Vue"></a>初识Vue</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--准备一个容器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//创建Vue实例</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//el用于指定当前Vue实例为哪个容器服务，值通常是css选择器字符串</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#root&#x27;</span>, <span class="comment">//此处是id选择器</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//data用于存储数据，数据供el所指定的容器去使用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">name</span>: <span class="string">&#x27;Vue!&#x27;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="Vue核心"><a href="#Vue核心" class="headerlink" title="Vue核心"></a>Vue核心</h2><h3 id="初识Vue"><a href="#初识Vue" class="headerlink" title="初识Vue"></a>初识Vue</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--准备一个容器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//创建Vue实例</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//el用于指定当前Vue实例为哪个容器服务，值通常是css选择器字符串</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#root&#x27;</span>, <span class="comment">//此处是id选择器</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//data用于存储数据，数据供el所指定的容器去使用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">name</span>: <span class="string">&#x27;Vue!&#x27;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ol>
 <li>想让Vue工作，就必须创建一个Vue实例，且要传入一个配置对象</li>
 <li><code>root</code>容器里的代码依然符合html规范，只不过混入了一些特殊的Vue语法</li>
@@ -983,110 +993,51 @@
 <p>解决刷新页面的404问题，在Nginx中添加以下配置：当请求为404时，重定向到index页面</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    try_files $uri $uri/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://1354478648.github.io/2023/10/08/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Downey">
-      <meta itemprop="description" content="别人的经验不一定可靠，遇事要动脑思考，自己去尝试。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="糖泥的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/08/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">Ajax的学习笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-08 13:16:20 / 修改时间：13:25:18" itemprop="dateCreated datePublished" datetime="2023-10-08T13:16:20+08:00">2023-10-08</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>30 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="AJAX入门"><a href="#AJAX入门" class="headerlink" title="AJAX入门"></a>AJAX入门</h3><p>AJAX是浏览器与服务器进行<strong>数据通信</strong>的技术</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/10/08/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Downey
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://1354478648.github.io/2023/10/08/Vue%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Vue的学习笔记">http://1354478648.github.io/2023/10/08/Vue的学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/Vue/" rel="tag"># Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/08/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Ajax的学习笔记">
+      <i class="fa fa-chevron-left"></i> Ajax的学习笔记
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -1139,6 +1090,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E6%A0%B8%E5%BF%83"><span class="nav-number">1.</span> <span class="nav-text">Vue核心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E8%AF%86Vue"><span class="nav-number">1.1.</span> <span class="nav-text">初识Vue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">模板语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.3.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#el%E5%92%8Cdata%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%86%99%E6%B3%95"><span class="nav-number">1.4.</span> <span class="nav-text">el和data的两种写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.5.</span> <span class="nav-text">MVVM模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%90%86"><span class="nav-number">1.5.1.</span> <span class="nav-text">数据代理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9E%E9%A1%BEObject-defineProperty"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">回顾Object.defineProperty</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%A3%E7%90%86-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">数据代理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86"><span class="nav-number">1.6.</span> <span class="nav-text">事件处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BF%AE%E9%A5%B0%E7%AC%A6"><span class="nav-number">1.6.1.</span> <span class="nav-text">事件修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%AE%E7%9B%98%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.6.2.</span> <span class="nav-text">键盘事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">1.7.</span> <span class="nav-text">计算属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%86%99"><span class="nav-number">1.7.1.</span> <span class="nav-text">简写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E8%A7%86%E5%B1%9E%E6%80%A7"><span class="nav-number">1.8.</span> <span class="nav-text">监视属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E7%9B%91%E8%A7%86"><span class="nav-number">1.8.1.</span> <span class="nav-text">深度监视</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%86%99-1"><span class="nav-number">1.8.2.</span> <span class="nav-text">简写</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.9.</span> <span class="nav-text">绑定样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%91%E5%AE%9Aclass%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.9.1.</span> <span class="nav-text">绑定class样式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%91%E5%AE%9Astyle%E6%A0%B7%E5%BC%8F"><span class="nav-number">1.9.2.</span> <span class="nav-text">绑定style样式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%B8%B2%E6%9F%93"><span class="nav-number">1.10.</span> <span class="nav-text">条件渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%B8%B2%E6%9F%93"><span class="nav-number">1.11.</span> <span class="nav-text">列表渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E8%BF%87%E6%BB%A4"><span class="nav-number">1.11.1.</span> <span class="nav-text">列表过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%8E%92%E5%BA%8F"><span class="nav-number">1.11.2.</span> <span class="nav-text">列表排序</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B6%E9%9B%86%E8%A1%A8%E5%8D%95%E6%95%B0%E6%8D%AE"><span class="nav-number">1.12.</span> <span class="nav-text">收集表单数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="nav-number">1.13.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.</span> <span class="nav-text">内置指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v-text%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.1.</span> <span class="nav-text">v-text指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-html%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.2.</span> <span class="nav-text">v-html指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-cloak%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.3.</span> <span class="nav-text">v-cloak指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-once%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.4.</span> <span class="nav-text">v-once指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#v-pre%E6%8C%87%E4%BB%A4"><span class="nav-number">1.14.5.</span> <span class="nav-text">v-pre指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.15.</span> <span class="nav-text">生命周期</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E7%BB%84%E4%BB%B6%E5%8C%96%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">Vue组件化编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">组件概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">非单文件组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E5%B5%8C%E5%A5%97"><span class="nav-number">2.2.1.</span> <span class="nav-text">组件的嵌套</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VueComponent"><span class="nav-number">2.2.2.</span> <span class="nav-text">VueComponent</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">单文件组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue%E8%84%9A%E6%89%8B%E6%9E%B6"><span class="nav-number">3.</span> <span class="nav-text">Vue脚手架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.1.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ref%E5%B1%9E%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">ref属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prop%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">3.4.</span> <span class="nav-text">prop配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mixins%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="nav-number">3.5.</span> <span class="nav-text">mixins配置项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">3.6.</span> <span class="nav-text">插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scoped%E5%B1%9E%E6%80%A7"><span class="nav-number">3.7.</span> <span class="nav-text">scoped属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9AToDoList%E9%A1%B9%E7%9B%AE"><span class="nav-number">3.8.</span> <span class="nav-text">案例：ToDoList项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9D%99%E6%80%81%E7%BB%84%E4%BB%B6"><span class="nav-number">3.8.1.</span> <span class="nav-text">静态组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E8%AF%86%E5%8C%96%E5%88%97%E8%A1%A8"><span class="nav-number">3.8.2.</span> <span class="nav-text">初识化列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0todo"><span class="nav-number">3.8.3.</span> <span class="nav-text">添加todo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%8B%BE%E9%80%89"><span class="nav-number">3.8.4.</span> <span class="nav-text">修改勾选</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4todo"><span class="nav-number">3.8.5.</span> <span class="nav-text">删除todo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%95%E9%83%A8%E7%BB%9F%E8%AE%A1"><span class="nav-number">3.8.6.</span> <span class="nav-text">底部统计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%95%E9%83%A8%E4%BA%A4%E4%BA%92"><span class="nav-number">3.8.7.</span> <span class="nav-text">底部交互</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93TodoList%E6%A1%88%E4%BE%8B"><span class="nav-number">3.8.8.</span> <span class="nav-text">总结TodoList案例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebStorage"><span class="nav-number">3.9.</span> <span class="nav-text">WebStorage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TodoList%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-number">3.9.1.</span> <span class="nav-text">TodoList案例实现本地存储</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.10.</span> <span class="nav-text">自定义事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6%E8%A7%A3%E7%BB%91"><span class="nav-number">3.10.1.</span> <span class="nav-text">自定义事件解绑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TodoList%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.10.2.</span> <span class="nav-text">TodoList案例实现自定义事件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF"><span class="nav-number">3.11.</span> <span class="nav-text">全局事件总线</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TodoList%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%E5%85%A8%E5%B1%80%E4%BA%8B%E4%BB%B6%E6%80%BB%E7%BA%BF"><span class="nav-number">3.11.1.</span> <span class="nav-text">TodoList案例实现全局事件总线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E8%AE%A2%E9%98%85%E4%B8%8E%E5%8F%91%E5%B8%83"><span class="nav-number">3.12.</span> <span class="nav-text">消息订阅与发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TodoList%E6%A1%88%E4%BE%8B%E5%AE%9E%E7%8E%B0%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD"><span class="nav-number">3.13.</span> <span class="nav-text">TodoList案例实现修改功能</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nextTick"><span class="nav-number">3.13.1.</span> <span class="nav-text">nextTick</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E5%BA%A6%E4%B8%8E%E5%8A%A8%E7%94%BB"><span class="nav-number">3.14.</span> <span class="nav-text">过度与动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86"><span class="nav-number">3.15.</span> <span class="nav-text">配置代理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vue-resource"><span class="nav-number">3.15.1.</span> <span class="nav-text">vue-resource</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E6%A7%BD"><span class="nav-number">3.16.</span> <span class="nav-text">插槽</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VueX"><span class="nav-number">4.</span> <span class="nav-text">VueX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%AD%E5%BB%BAVuex%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83"><span class="nav-number">4.1.</span> <span class="nav-text">搭建Vuex开发环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B1%82%E5%92%8C%E6%A1%88%E4%BE%8B"><span class="nav-number">4.2.</span> <span class="nav-text">求和案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%AFVue%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.1.</span> <span class="nav-text">纯Vue实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vuex%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">Vuex实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#getters%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">getters的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E4%B8%AAmap%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text">四个map方法的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%84%E4%BB%B6%E5%85%B1%E4%BA%AB%E6%95%B0%E6%8D%AE"><span class="nav-number">4.5.</span> <span class="nav-text">多组件共享数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E5%92%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4"><span class="nav-number">4.6.</span> <span class="nav-text">模块化和命名空间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1"><span class="nav-number">5.</span> <span class="nav-text">路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%EF%BC%88%E5%A4%9A%E7%BA%A7%EF%BC%89%E8%B7%AF%E7%94%B1"><span class="nav-number">5.2.</span> <span class="nav-text">嵌套（多级）路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84query%E5%8F%82%E6%95%B0"><span class="nav-number">5.3.</span> <span class="nav-text">路由的query参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E8%B7%AF%E7%94%B1%E5%91%BD%E5%90%8D"><span class="nav-number">5.4.</span> <span class="nav-text">为路由命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84params%E5%8F%82%E6%95%B0"><span class="nav-number">5.5.</span> <span class="nav-text">路由的params参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%9A%84props%E9%85%8D%E7%BD%AE"><span class="nav-number">5.6.</span> <span class="nav-text">路由的props配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9A%84replace%E5%B1%9E%E6%80%A7"><span class="nav-number">5.7.</span> <span class="nav-text">&lt;router-link&gt;的replace属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%BC%8F%E8%B7%AF%E7%94%B1%E5%AF%BC%E8%88%AA"><span class="nav-number">5.8.</span> <span class="nav-text">编程式路由导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E8%B7%AF%E7%94%B1%E7%BB%84%E4%BB%B6"><span class="nav-number">5.9.</span> <span class="nav-text">缓存路由组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0"><span class="nav-number">5.10.</span> <span class="nav-text">生命周期钩子函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="nav-number">5.11.</span> <span class="nav-text">路由守卫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="nav-number">5.11.1.</span> <span class="nav-text">全局路由守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8B%AC%E4%BA%AB%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="nav-number">5.11.2.</span> <span class="nav-text">独享路由守卫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E5%86%85%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB"><span class="nav-number">5.11.3.</span> <span class="nav-text">组件内路由守卫</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">5.12.</span> <span class="nav-text">路由器的两种工作模式</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
