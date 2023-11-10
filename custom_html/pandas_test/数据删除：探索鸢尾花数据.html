@@ -15425,11 +15425,11 @@ dtype: int64</pre>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><code>.fillna</code>方法用于用指定的值填充数据框中的缺失值：</p>
 <ol>
-<li><code>value</code>参数用于填充缺失值的值，可以是标量值，也可以是不同列的值的字典，比如：<div class="highlight"><pre><span></span><span class="c1"># 使用0填充缺失值</span>
+<li><code>value</code>参数用于填充缺失值的值，可以是标量值，也可以是不同列的值的字典，比如：</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c1"># 使用0填充缺失值</span>
 <span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
-</li>
-</ol>
 <div class="highlight"><pre><span></span><span class="c1"># A表示列名，0表示在该列填充的标量值</span>
 <span class="n">fill_values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span> <span class="p">:</span> <span class="mi">99</span><span class="p">}</span>
 <span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">fill_values</span><span class="p">)</span>
@@ -15438,14 +15438,17 @@ dtype: int64</pre>
 <span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 <ol>
-<li><code>method</code>参数用于指定填充缺失值的方法，比如<code>ffill</code>向前填充、<code>bfill</code>向后填充、<code>interpolate</code>线性插值
-```python
-# 替换缺失值为前一个非缺失值（前向填充）
-filled_df = df.fillna(method='ffill')</li>
+<li><code>method</code>参数用于指定填充缺失值的方法，比如<code>ffill</code>向前填充、<code>bfill</code>向后填充、<code>interpolate</code>线性插值</li>
 </ol>
-<h1 id="%E6%9B%BF%E6%8D%A2%E7%BC%BA%E5%A4%B1%E5%80%BC%E4%B8%BA%E5%90%8E%E4%B8%80%E4%B8%AA%E9%9D%9E%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%88%E5%90%8E%E5%90%91%E5%A1%AB%E5%85%85%EF%BC%89">&#26367;&#25442;&#32570;&#22833;&#20540;&#20026;&#21518;&#19968;&#20010;&#38750;&#32570;&#22833;&#20540;&#65288;&#21518;&#21521;&#22635;&#20805;&#65289;<a class="anchor-link" href="#%E6%9B%BF%E6%8D%A2%E7%BC%BA%E5%A4%B1%E5%80%BC%E4%B8%BA%E5%90%8E%E4%B8%80%E4%B8%AA%E9%9D%9E%E7%BC%BA%E5%A4%B1%E5%80%BC%EF%BC%88%E5%90%8E%E5%90%91%E5%A1%AB%E5%85%85%EF%BC%89">&#182;</a></h1><p>filled_df = df.fillna(method='bfill')</p>
-<h1 id="%E6%9B%BF%E6%8D%A2%E7%BC%BA%E5%A4%B1%E5%80%BC%E4%B8%BA%E5%89%8D%E5%90%8E%E4%B8%A4%E4%B8%AA%E9%9D%9E%E7%BC%BA%E5%A4%B1%E5%80%BC%E7%9A%84%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%88%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC%EF%BC%89">&#26367;&#25442;&#32570;&#22833;&#20540;&#20026;&#21069;&#21518;&#20004;&#20010;&#38750;&#32570;&#22833;&#20540;&#30340;&#24179;&#22343;&#25968;&#65288;&#32447;&#24615;&#25554;&#20540;&#65289;<a class="anchor-link" href="#%E6%9B%BF%E6%8D%A2%E7%BC%BA%E5%A4%B1%E5%80%BC%E4%B8%BA%E5%89%8D%E5%90%8E%E4%B8%A4%E4%B8%AA%E9%9D%9E%E7%BC%BA%E5%A4%B1%E5%80%BC%E7%9A%84%E5%B9%B3%E5%9D%87%E6%95%B0%EF%BC%88%E7%BA%BF%E6%80%A7%E6%8F%92%E5%80%BC%EF%BC%89">&#182;</a></h1><p>filled_df = df.fillna(method='interpolate')
-```</p>
+<div class="highlight"><pre><span></span><span class="c1"># 替换缺失值为前一个非缺失值（前向填充）</span>
+<span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;ffill&#39;</span><span class="p">)</span>
+
+<span class="c1"># 替换缺失值为后一个非缺失值（后向填充）</span>
+<span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;bfill&#39;</span><span class="p">)</span>
+
+<span class="c1"># 替换缺失值为前后两个非缺失值的平均数（线性插值）</span>
+<span class="n">filled_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;interpolate&#39;</span><span class="p">)</span>
+</pre></div>
 <ol>
 <li><p><code>limit</code>指定要填充的连续缺失值的最大数量，即超过指定数量的缺失值依然保持空值</p>
 </li>
