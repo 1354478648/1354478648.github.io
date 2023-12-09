@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Docker 是一个快速构建、运行、管理应用的工具，在本文将会学到： 1. 能利用Docker部署常见软件 2. 能利用Docker打包并部署Java应用 3. 理解Docker数据卷的基本作用 4. 能看懂DockerCompose文件  视频链接：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HP4118797&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker学习笔记">
+<meta property="og:url" content="http://1354478648.github.io/2023/12/09/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="糖泥的个人博客">
+<meta property="og:description" content="Docker 是一个快速构建、运行、管理应用的工具，在本文将会学到： 1. 能利用Docker部署常见软件 2. 能利用Docker打包并部署Java应用 3. 理解Docker数据卷的基本作用 4. 能看懂DockerCompose文件  视频链接：https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1HP4118797&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_14-50-01.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_14-50-41.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_14-55-15.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-17-11.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-18-02.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-19-00.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-24-20.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-34-18.png">
+<meta property="og:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_15-45-50.png">
+<meta property="article:published_time" content="2023-12-09T06:40:58.000Z">
+<meta property="article:modified_time" content="2023-12-09T07:53:52.271Z">
+<meta property="article:author" content="Downey">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="Docker">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://1354478648.github.io/images/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/PixPin_2023-12-09_14-50-01.png">
+
+<link rel="canonical" href="http://1354478648.github.io/2023/12/09/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Docker学习笔记 | 糖泥的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">糖泥的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://1354478648.github.io/2023/12/09/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Downey">
+      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="糖泥的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Docker学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-12-09 14:40:58 / 修改时间：15:53:52" itemprop="dateCreated datePublished" datetime="2023-12-09T14:40:58+08:00">2023-12-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Docker 是一个快速构建、运行、管理应用的工具，在本文将会学到： 1.
+能利用Docker部署常见软件 2. 能利用Docker打包并部署Java应用 3.
+理解Docker数据卷的基本作用 4. 能看懂DockerCompose文件</p>
+<blockquote>
+<p>视频链接：https://www.bilibili.com/video/BV1HP4118797/</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="前置准备">前置准备</h2>
+<h3 id="准备linux环境">准备Linux环境</h3>
+<h4 id="安装vmware-workstation">安装VMware Workstation</h4>
+<p>Windows 使用 VMware Workstation 在本地安装一台虚拟机（Windows 10
+及以上版本的操作系统需要下载 VMware Workstation 16 Pro 及以上版本）</p>
+<blockquote>
+<p>下载地址：
+https://www.vmware.com/cn/products/workstation-pro/workstation-pro-evaluation.html</p>
+</blockquote>
+<p>卸载旧版 VMware Workstation（如果有的话）： 1. 打开控制面板，卸载
+VMware Workstation</p>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_14-50-01.png" width="80%" height="auto"></p>
+<ol start="2" type="1">
+<li>在原来的安装目录中删除残留的整个 VMware 文件夹</li>
+</ol>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_14-50-41.png" width="80%" height="auto"></p>
+<ol start="3" type="1">
+<li>Win + R
+打开面板输入<code>regedit</code>调出注册表，打开<code>HKEY_CURRENT_USER</code>→<code>Software</code>，找到并删除<code>VMware.Inc</code></li>
+</ol>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_14-55-15.png" width="80%" height="auto"></p>
+<p>此时可以安装新版 VMware
+Workstation，如果是卸载重装的情况，可能会存在安装不了虚拟网卡的问题，可以参考该文章：https://www.u72.net/zhishi/show-92927.html</p>
+<h4 id="创建虚拟机">创建虚拟机</h4>
+<ol type="1">
+<li>最大磁盘大小选择 100 GB，并将虚拟磁盘存储为单个文件</li>
+<li>将内存设置为 8192 MB，CPU核心数设置为 4 核</li>
+</ol>
+<p>其他步骤省略...</p>
+<h4 id="安装-centos-7">安装 CentOS 7</h4>
+<ol type="1">
+<li>日期和时间选择亚洲/上海，语言支持选择简体中文</li>
+<li>系统安装位置选择刚刚添加的磁盘</li>
+<li>在系统网络和主机名中，打开以太网 ens33，在右下角配置中找到 IPv4
+设置，将方法设置为“手动”，在下面添加地址，地址、子网掩码、网关、DNS
+服务器可以照抄以太网 ens33的设置，最后修改主机名为 localhost 并应用</li>
+<li>点击“开始安装”，设置 ROOT 密码</li>
+<li>可以设置虚拟机快照</li>
+</ol>
+<h4 id="安装-ssh-客户端">安装 SSH 客户端</h4>
+<p>步骤省略...</p>
+<h3 id="安装-docker">安装 Docker</h3>
+<ol type="1">
+<li><p>如果系统中存在旧的Docker，则卸载 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">yum remove docker \</span><br><span class="line">    docker-client \</span><br><span class="line">    docker-client-latest \</span><br><span class="line">    docker-common \</span><br><span class="line">    docker-latest \</span><br><span class="line">    docker-latest-logrotate \</span><br><span class="line">    docker-logrotate \</span><br><span class="line">    docker-engine</span><br></pre></td></tr></table></figure></p></li>
+<li><p>安装 yum 工具 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils</span><br></pre></td></tr></table></figure></p></li>
+<li><p>配置 Docker 的 yum 源 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure></p></li>
+<li><p>安装 Docker <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin</span><br></pre></td></tr></table></figure></p></li>
+<li><p>启动和校验 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动Docker</span></span><br><span class="line">systemctl start docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">停止Docker</span></span><br><span class="line">systemctl stop docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">重启</span></span><br><span class="line">systemctl restart docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">设置开机自启</span></span><br><span class="line">systemctl enable docker</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行docker ps命令，如果不报错，说明安装启动成功</span></span><br><span class="line">docker ps</span><br></pre></td></tr></table></figure></p></li>
+<li><p>配置镜像加速 在阿里云中找到“容器镜像服务ACR”，进入控制台
+<img src="\images\Docker学习笔记\PixPin_2023-12-09_15-17-11.png" width="80%" height="auto"></p></li>
+</ol>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_15-18-02.png" width="80%" height="auto"></p>
+<p>按步骤配置镜像加速器
+<img src="\images\Docker学习笔记\PixPin_2023-12-09_15-19-00.png" width="80%" height="auto"></p>
+<h2 id="快速入门">快速入门</h2>
+<h3 id="安装-mysql">安装 MySQL</h3>
+<p>过去我们在 Linux 上安装 MySQL 需要搜索并下载 MySQL 安装包、上传至
+Linux 环境、编译和配置环境、最后安装</p>
+<p>而使用 Docker 安装，仅仅需要一步，在命令行输入以下命令
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name mysql \</span><br><span class="line">  -p 3306:3306 \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  -e MYSQL_ROOT_PASSWORD=123 \</span><br><span class="line">  mysql</span><br></pre></td></tr></table></figure></p>
+<p>运行效果如图：</p>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_15-24-20.png" width="80%" height="auto"></p>
+<p>MySQL 安装完毕！我们可以使用任何客户端工具，比如 Navicat 连接到
+MySQL</p>
+<p>当我们利用 Docker 安装应用时，Docker
+会自动搜索并下载应用<strong>镜像（image）</strong>。镜像不仅包含应用本身，还包含应用运行所需要的环境、配置、系统函数库。Docker
+会在运行镜像时创建一个独立运行的隔离环境，称为<strong>容器（container）</strong>，因此我们不需要再关注不同的操作系统、不同的运行环境了。</p>
+<p>Docker 官方提供了一个专门管理、存储镜像的网站 https://hub.docker.com/
+，并对公众开放了镜像上传和下载的权利。这种提供存储、管理Docker镜像的服务器，被称为DockerRegistry，可以翻译为镜像仓库，像阿里云、华为云等也会提供第三方仓库，我们（或企业）也可以搭建自己私有的镜像仓库。</p>
+<p>Docker
+服务部署应用时，首先要去搜索并下载应用对应的镜像，然后根据镜像创建并允许容器，应用就部署完成了。用一幅图标识如下：</p>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_15-34-18.png" width="80%" height="auto"></p>
+<h3 id="命令解读">命令解读</h3>
+<p>在上面我们执行的命令是什么意思呢？ <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name mysql \</span><br><span class="line">  -p 3306:3306 \</span><br><span class="line">  -e TZ=Asia/Shanghai \</span><br><span class="line">  -e MYSQL_ROOT_PASSWORD=123 \</span><br><span class="line">  mysql</span><br></pre></td></tr></table></figure></p>
+<ol type="1">
+<li><p><code>docker run -d</code>：创建并运行一个容器，<code>-d</code>则是让容器以后台进程运行，否则
+docker
+进程将会以“霸屏”的形式打印日志，导致我们无法在该命令行执行其他命令</p></li>
+<li><p><code>--name mysql</code>：给容器设置名称为<code>mysql</code>，任意别名都可以</p></li>
+<li><p><code>-p 3306:3306</code>：设置端口映射
+我们刚刚知道，<strong>容器是个隔离环境</strong>，外界是不可访问的。但是可以<strong>将宿主机端口映射到容器内的端口</strong>，当访问宿主机指定端口时，就是在访问容器内的端口了（比如说
+Windows 系统的宿主机无法访问到容器的 3306 号端口，但它可以访问到 CentOS
+系统的虚拟机的某某号端口，而虚拟机可以访问到容器的 3306
+号端口，因此我们将虚拟机的某某号端口映射到容器的 3306 号端口，那么
+Windows 系统的宿主机就可以操控容器了）</p></li>
+</ol>
+<p><img src="\images\Docker学习笔记\PixPin_2023-12-09_15-45-50.png" width="80%" height="auto"></p>
+<p>容器内端口往往是由容器内的进程决定，例如 MySQL 进程默认端口是
+3306，因此容器内端口一定是
+3306；而宿主机端口则可以任意指定，一般与容器内保持一致。</p>
+<p>格式：<code>-p 宿主机端口:容器内端口</code>，示例中就是将宿主机（CentOS
+虚拟机）的 3306 映射到容器内的 3306 端口</p>
+<ol start="4" type="1">
+<li><code>-e TZ=Asia/Shanghai</code>：配置容器内进程运行时的一些参数（环境变量）
+格式：<code>-e KEY=VALUE</code>，<code>KEY</code>和<code>VALUE</code>都由容器内进程决定，需要去镜像仓库参考镜像的使用文档</li>
+</ol>
+<p>案例中，<code>TZ=Asia/Shanghai</code>表示设置时区、<code>MYSQL_ROOT_PASSWORD=123</code>表示设置默认密码</p>
+<ol start="5" type="1">
+<li><code>mysql</code>：设置<strong>镜像名称</strong>，Docker
+会根据这个名称在镜像仓库中搜索并下载镜像
+格式：<code>REPOSITORY:TAG</code>，表示<code>镜像名称:版本号</code>，例如<code>mysql:8.0</code>。<code>TAG</code>可以省略，默认下载最新版本</li>
+</ol>
+<ul>
+<li>注意：镜像的名称不是随意的，而是要到 DockerRegistry
+中寻找，镜像运行时的配置也不是随意的，要参考镜像的帮助文档，这些在
+DockerHub 网站或者软件的官方网站中都能找到。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>糖泥
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://1354478648.github.io/2023/12/09/Docker%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Docker学习笔记">http://1354478648.github.io/2023/12/09/Docker学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/29/Vue3%E4%B8%ADaxios%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%B0%81%E8%A3%85/" rel="prev" title="Vue3中axios的基本使用与封装">
+      <i class="fa fa-chevron-left"></i> Vue3中axios的基本使用与封装
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">前置准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87linux%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">准备Linux环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85vmware-workstation"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装VMware Workstation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-centos-7"><span class="nav-number">1.1.3.</span> <span class="nav-text">安装 CentOS 7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-ssh-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.1.4.</span> <span class="nav-text">安装 SSH 客户端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-docker"><span class="nav-number">1.2.</span> <span class="nav-text">安装 Docker</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text">快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-mysql"><span class="nav-number">2.1.</span> <span class="nav-text">安装 MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A7%A3%E8%AF%BB"><span class="nav-number">2.2.</span> <span class="nav-text">命令解读</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Downey"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Downey</p>
+  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Downey</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">614k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:36</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
