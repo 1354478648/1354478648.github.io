@@ -33,8 +33,9 @@
 <meta property="og:image" content="http://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-36-21.png">
 <meta property="og:image" content="http://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-37-12.png">
 <meta property="og:image" content="http://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-41-57.png">
+<meta property="og:image" content="http://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-03_14-49-13.png">
 <meta property="article:published_time" content="2024-01-02T05:19:55.000Z">
-<meta property="article:modified_time" content="2024-01-02T08:28:13.151Z">
+<meta property="article:modified_time" content="2024-01-03T08:21:27.397Z">
 <meta property="article:author" content="Downey">
 <meta property="article:tag" content="后端">
 <meta property="article:tag" content="Go">
@@ -226,10 +227,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-01-02 13:19:55 / 修改时间：16:28:13" itemprop="dateCreated datePublished" datetime="2024-01-02T13:19:55+08:00">2024-01-02</time>
+              <time title="创建时间：2024-01-02 13:19:55" itemprop="dateCreated datePublished" datetime="2024-01-02T13:19:55+08:00">2024-01-02</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-03 16:21:27" itemprop="dateModified" datetime="2024-01-03T16:21:27+08:00">2024-01-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,14 +260,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.4k</span>
+              <span>8.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>10 分钟</span>
+              <span>16 分钟</span>
             </span>
 
         </div>
@@ -370,12 +377,131 @@
 <blockquote>
 <p>官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114517">https://goframe.org/pages/viewpage.action?pageId=1114517</a></p>
 </blockquote>
+<p>比如我们将实例化后的<code>userController</code>绑定到以<code>/user</code>为前缀的路由组里</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">usercontroller := user.New()</span><br><span class="line">s.Group(<span class="string">&quot;/user&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(group *ghttp.RouterGroup)</span></span> &#123;</span><br><span class="line">    group.Middleware(ghttp.MiddlewareHandlerResponse)</span><br><span class="line">    group.Bind(</span><br><span class="line">        usercontroller, <span class="comment">// 绑定到控制器对象</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以用GET POST PUT等定义路由</span></span><br><span class="line">    group.GET(<span class="string">&quot;/get&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">        r.Response.Writeln(<span class="string">&quot;/user/get&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="规范路由-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">规范路由<span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h3>
 <p>规范路由是为了解决一些规范化和自动化管理接口的场景，更适用于团队多人协作使用</p>
 <p>规范路由需要使用<code>YAML</code>配置文件：<code>manifest/config/config.yaml</code></p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">address:</span>     <span class="string">&quot;:8000&quot;</span></span><br><span class="line">  <span class="attr">openapiPath:</span> <span class="string">&quot;/api.json&quot;</span></span><br><span class="line">  <span class="attr">swaggerPath:</span> <span class="string">&quot;/swagger&quot;</span></span><br></pre></td></tr></table></figure>
 <p>在定义规范路由时使用固定的格式：它不再像前文中只需要接收<code>*ghttp.Request</code>类型参数的函数</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Handler</span><span class="params">(ctx context.Context, req *Request)</span></span> (res *Response, err <span class="type">error</span>)</span><br></pre></td></tr></table></figure>
+<p>其中形参和返回值各为两个，并且都是必须的一个都不能少：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>参数</strong></th>
+<th style="text-align:left"><strong>说明</strong></th>
+<th style="text-align:left"><strong>注意事项</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>ctx context.Context</code></td>
+<td style="text-align:left">上下文</td>
+<td style="text-align:left"><code>Server</code>组件会自动从请求中获取并传递给接口方法</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>req *Request</code></td>
+<td style="text-align:left">请求对象</td>
+<td style="text-align:left">就算没有接收参数也要定义，因为<strong>请求结构体</strong>中不仅仅包含请求参数的定义，也包含了接口的请求定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>res *Response</code></td>
+<td style="text-align:left">返回对象</td>
+<td style="text-align:left">就算没有返回参数也要定义，因为<strong>返回结构体</strong>中不仅仅包含返回参数的定义，也可以包含接口返回定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>err error	</code></td>
+<td style="text-align:left">错误对象</td>
+<td style="text-align:left"><code>Server</code>通过该参数判断接口执行成功或失败。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="请求-返回结构体">请求 / 返回结构体</h4>
+<p>在规范化路由注册中，非常重要的是请求 / 返回结构体的定义，在该结构体不仅仅包含了输入参数的定义，也包含了接口的定义，特别是路由地址、请求方法、接口描述等信息。为保证命名规范化，输入数据结构以<code>XxxReq</code>方式命名，输出数据结构以<code>XxxRes</code>方式命名。即便输入或者输出参数为空，也需要定义相应的数据结构，这样的目的一个是便于后续扩展，另一个是便于接口信息的管理</p>
+<p><span class="github-emoji" alias="exclamation" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png?v8">❗</span>    <strong>这个<code>Xxx</code>是控制类的方法名</strong>，个人感觉定义结构体类似我们在自定义Spring框架中的注解，比如<code>@PostMapping</code>之类的（当然这个注解是框架提供的，如果看到后文，其实有点<code>@PostMapping</code>、<code>@PathVariable</code>、<code>@RequestParam</code>等等注解混合使用的感觉）</p>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-03_14-49-13.png" width="80%" height="auto">
+<p>其写法参照上图，需要将请求 / 返回结构体封装到<code>/api/xxx</code>目录下的<code>xxx.go</code>文件中</p>
+<p>在请求结构体中一定有<code>g.meta</code>元数据，通过后面打<code>tag</code>的方式定义路由地址、请求方法、接口描述等信息，而结构体其他具体写什么内容会在后文中具体展开</p>
+<p>在控制类中导入请求 / 返回结构体，比如导入<code>user</code>（通常可以自动导入）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hellogf/api/user<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后实现控制器方法，比如实现添加用户的方法，注意请求 / 返回结构体的使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> AddUser(ctx context.Context, req *user.AddReq) (res *user.AddRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	res = &amp;user.AddRes&#123;</span><br><span class="line">		Name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">		Age:  <span class="number">18</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义返回数据</span></span><br><span class="line">	<span class="comment">// g.RequestFromCtx(ctx).Response.Writeln(&quot;Hello&quot;)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="规范路由注册">规范路由注册</h4>
+<p>推荐使用实例化对象的方式来管理所有路由方法，并通过分组路由的<code>Bind</code>方法执行统一注册</p>
+<p>我们知道，在规范化路由方式下，路由地址以及请求方式将由请求结构体在<code>g.Meta</code>中定义，但我们依然可以通过分组路由定义分组下的所有路由前缀（很像Spring框架中的<code>@RequestMapping</code>注解）</p>
+<p>比如注册<code>user</code>和<code>hello</code>控制类的对象（<code>/internal/cmd/cmd.go</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">userController := user.New()</span><br><span class="line">helloController := hello.NewHello()</span><br><span class="line">s.Group(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(group *ghttp.RouterGroup)</span></span> &#123;</span><br><span class="line">	group.Middleware(ghttp.MiddlewareHandlerResponse)</span><br><span class="line">	group.Bind(</span><br><span class="line">		userController,</span><br><span class="line">		helloController,</span><br><span class="line">	)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><span class="github-emoji" alias="confused" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f615.png?v8">😕</span> 为什么推荐使用规范路由？<br>
+从我对Java语言的Spring框架的理解来对官方文档中所描述的特性进行展开阐述：</p>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 请求 / 返回结构体很类似Java中注解的使用，这在上文中也提到过；</p>
+<ul>
+<li>规范化API按照结构化编程设计</li>
+<li>规范化API接口方法参数风格定义</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 我们通过实例化控制器对象，注册对象中的全部公有方法，另外可以通过分组路由，类似<code>@RequestMapping</code>类注解添加路由前缀；</p>
+<ul>
+<li>更加简化的路由注册与维护</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 返回数据直接是通用返回结果类的形式了，因此不需要再额外定义这个类了；</p>
+<ul>
+<li>统一接口返回数据格式设计</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 不再需要我们手动整合Swagger组件（需要在配置文件中进行配置，但通常初始化项目的时候已经自动配置）；</p>
+<ul>
+<li>保障代码与接口文档同步维护</li>
+<li>自动生成基于标准OpenAPIv3协议的接口文档</li>
+<li>自动生成SwaggerUI页面</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 通过打<code>tag</code>的方式实现类似Spring Validation参数校验框架的效果，这个后文会介绍</p>
+<ul>
+<li>自动的API参数对象化接收与校验</li>
+</ul>
+<h2 id="请求与返回">请求与返回</h2>
+<h3 id="请求输入">请求输入</h3>
+<h4 id="基本使用-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">基本使用 <span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h4>
+<p>如何获取请求参数有很多种API，比如获取<code>Query</code>数据的<code>GetQuery</code>、<code>Form</code>数据的<code>GetForm</code>等等，但这里仅介绍<code>GetRequest</code>，这个API可以获取客户端提交的所有参数，按照参数优先级进行覆盖，不区分提交方式。</p>
+<blockquote>
+<p>如果想知道其他API的用法，参照官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114483">https://goframe.org/pages/viewpage.action?pageId=1114483</a></p>
+</blockquote>
+<p>首先，需要知道在<code>Goframe</code>框架中，有以下几种提交类型：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">提交类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Router</code></td>
+<td style="text-align:left">路由参数。来源于路由规则匹配，比如<code>/article/id=&#123;id&#125;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Query</code></td>
+<td style="text-align:left"><code>Query</code>参数。<code>URL</code>中的<code>Query String</code>参数解析，如：<code>http://127.0.0.1/index?id=1&amp;name=john</code>中的<code>id=1&amp;name=john</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Form</code></td>
+<td style="text-align:left">表单参数。最常见的提交方式，提交的<code>Content-Type</code>往往为：<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>multipart/mixed</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Body</code></td>
+<td style="text-align:left">内容参数。从<code>Body</code>中获取并解析得到的参数，<code>JSON</code>/<code>XML</code>请求往往使用这种方式提交。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Custom</code></td>
+<td style="text-align:left">自定义参数，往往在服务端的中间件、服务函数中通过<code>SetParam/GetParam</code>方法管理。</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们使用<code>GetRequest</code>方法获取请求参数，那么客户端提交什么参数，我们都可以获取到</p>
+<p>另外<code>Get</code>方法是<code>GetRequest</code>的别名，<code>GetRequest</code>方法需要传参，用于指定获取哪个参数，比如<code>GetRequest(&quot;username&quot;)</code>，而<code>GetRequestMapping</code>不需要传参，用于获取全部请求参数，其别名是<code>GetMapping</code></p>
+<p>我们通过下面的例子来了解<code>GetRequest</code>的使用：</p>
+<ol>
+<li>准备<code>hello</code>的<code>params</code>方法的请求 / 返回结构体</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> hello</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gogf/gf/v2/frame/g&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ParamsReq <span class="keyword">struct</span> &#123;</span><br><span class="line">	g.Meta <span class="string">`path:&quot;/params/age=&#123;age&#125;&quot; method:&quot;all&quot;`</span></span><br><span class="line"></span><br><span class="line">	UserName <span class="type">string</span></span><br><span class="line">	Password <span class="type">string</span></span><br><span class="line">	Age      <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ParamsRes <span class="keyword">struct</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -475,7 +601,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">安装框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">项目启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">项目目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">路由管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99"><span class="nav-number">2.1.</span> <span class="nav-text">路由规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.</span> <span class="nav-text">路由注册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.1.</span> <span class="nav-text">函数注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.2.</span> <span class="nav-text">对象注册</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E5%85%AC%E5%BC%80%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">绑定对象公开方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">绑定对象指定方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5RESTFul%E9%A3%8E%E6%A0%BC%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">以RESTFul风格绑定对象方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.3.</span> <span class="nav-text">分组路由⭐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.4.</span> <span class="nav-text">规范路由⭐</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">安装框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">项目启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">项目目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">路由管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99"><span class="nav-number">2.1.</span> <span class="nav-text">路由规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.</span> <span class="nav-text">路由注册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.1.</span> <span class="nav-text">函数注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.2.</span> <span class="nav-text">对象注册</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E5%85%AC%E5%BC%80%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">绑定对象公开方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">绑定对象指定方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5RESTFul%E9%A3%8E%E6%A0%BC%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">以RESTFul风格绑定对象方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.3.</span> <span class="nav-text">分组路由⭐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.4.</span> <span class="nav-text">规范路由⭐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">2.4.1.</span> <span class="nav-text">请求 &#x2F; 返回结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%B7%AF%E7%94%B1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.4.2.</span> <span class="nav-text">规范路由注册</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%B8%8E%E8%BF%94%E5%9B%9E"><span class="nav-number">3.</span> <span class="nav-text">请求与返回</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BE%93%E5%85%A5"><span class="nav-number">3.1.</span> <span class="nav-text">请求输入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">3.1.1.</span> <span class="nav-text">基本使用 ⭐</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -567,12 +693,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">659k</span>
+    <span title="站点总字数">662k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:58</span>
+    <span title="站点阅读时长">20:04</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
