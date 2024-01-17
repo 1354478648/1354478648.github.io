@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Redis是一个基于内存的key-value结构数据库。NoSQL（Not Only SQL），不仅仅是SQL，泛指非关系型数据库，NoSQL数据库并不是要取代关系型数据库，而是关系型数据库的补充。  Reids的应用场景：缓存、任务队列、消息队列、分布式锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis的学习笔记">
+<meta property="og:url" content="https://1354478648.github.io/2023/06/19/Redis%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="糖泥的个人博客">
+<meta property="og:description" content="Redis是一个基于内存的key-value结构数据库。NoSQL（Not Only SQL），不仅仅是SQL，泛指非关系型数据库，NoSQL数据库并不是要取代关系型数据库，而是关系型数据库的补充。  Reids的应用场景：缓存、任务队列、消息队列、分布式锁">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T07:55:43.000Z">
+<meta property="article:modified_time" content="2023-10-10T14:54:24.050Z">
+<meta property="article:author" content="Downey">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Redis">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://1354478648.github.io/2023/06/19/Redis%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Redis的学习笔记 | 糖泥的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">糖泥的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1354478648.github.io/2023/06/19/Redis%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Downey">
+      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="糖泥的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis的学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-19 15:55:43" itemprop="dateCreated datePublished" datetime="2023-06-19T15:55:43+08:00">2023-06-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-10 22:54:24" itemprop="dateModified" datetime="2023-10-10T22:54:24+08:00">2023-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>17 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Redis是一个基于<strong>内存</strong>的key-value结构数据库。NoSQL（Not Only SQL），不仅仅是SQL，泛指<strong>非关系型数据库</strong>，NoSQL数据库并不是要取代关系型数据库，而是关系型数据库的补充。</p>
+<ul>
+<li>Reids的应用场景：缓存、任务队列、消息队列、分布式锁</li>
+</ul>
+<span id="more"></span>
+<h3 id="Redis入门">Redis入门</h3>
+<h4 id="服务启动与停止">服务启动与停止</h4>
+<p>Windows系统中启动Redis，直接双击<code>redis-server.exe</code>即可启动Redis服务，Redis服务默认端口为6379</p>
+<h4 id="Linux安装与连接">Linux安装与连接</h4>
+<p>在Linux系统中安装Redis的步骤：</p>
+<ol>
+<li>将Redis安装包上传到Linux</li>
+<li>解压安装包，命令：<code>tar -zxvf redis-4.0.0.tar.gz -C /usr/local</code></li>
+<li>安装Redis的依赖环境gcc，命令：<code>yum install gcc-c++</code></li>
+<li>进入<code>/usr/local/redis-4.0.0</code>，进行编译，命令：<code>make</code></li>
+<li>进入redis的src目录，进行安装，命令：<code>make install</code></li>
+</ol>
+<p><strong>启动Redis：</strong><br>
+在src目录下输入命令：<code>./redis-server</code>以启动服务端，然后另起一个窗口输入命令：<code>./redis-cli</code>以启动客户端</p>
+<blockquote>
+<p>为了防止Redis服务端“霸屏”，可以通过vim打开redis.conf并找到<code>daemonize no</code>（可以输入命令<code>/dae</code>快速找到），将其改为<code>daemonize yes</code>。然后启动服务端的时候需要带上配置文件，比如<code>/redis-server ./redis.conf</code></p>
+</blockquote>
+<p><strong>设置密码：</strong><br>
+用vim打开redis.conf，找到<code>requirepass foobared</code>（如果是第一次设置，这行是一个注释，将注释去掉），把<code>foobared</code>改为想要设置的密码；<br>
+重新启动服务端（通过<code>ps -ef|grep redis</code>找到服务端进程号，然后用<code>kill -9 PID</code>杀死服务端进程），重新启动客户端：<code>src/redis-cli -h localhost -p 6379</code>，在命令行中输入<code>auth 密码</code>进行登录验证（或者<code>src/redis-cli -h localhost -p 6379 -a 密码</code>）</p>
+<p><strong>远程连接：</strong><br>
+用vim打开redis.conf，找到<code>bind 127.0.0.1</code>，将这行注释掉。然后重新启动Linux的Redis服务端，在Windows的cmd窗口运行客户端<code>.\redis-cli.exe -h Linux主机IP -p 6379 -a 密码</code></p>
+<h3 id="数据类型">数据类型</h3>
+<p>Redis存储的是key-value结构的数据，其中key是字符串类型，value有5种常用的数据类型：</p>
+<ol>
+<li>字符串<code>string</code>（普通字符串，常用）</li>
+<li>哈希<code>hash</code>（适合存储对象）</li>
+<li>列表<code>list</code>（按照插入顺序排序，可以有重复元素）</li>
+<li>集合<code>set</code>（无序集合，没有重复元素）</li>
+<li>有序集合<code>sorted set</code>（有序集合，没有重复元素）</li>
+</ol>
+<h4 id="字符串string操作命令">字符串<code>string</code>操作命令</h4>
+<p><code>SET [key] [value]</code>：设置指定key的值<br>
+<code>GET [key]</code>：获取指定key的值<br>
+<code>SETEX [KEY] [SECONDS] [VALUE]</code>：设置指定key的值，并将key的过期时间设为seconds秒<br>
+<code>SETNX [KEY] [VALUE]</code>：只有在key不存在时设置key的值</p>
+<h4 id="哈希hash操作命令">哈希<code>hash</code>操作命令</h4>
+<p>Redis hash是一个string类型的field和value的映射表，hash特别适合用于存储对象，常用命令：<br>
+<code>HSET [KEY] [FIELD] [VALUE]</code>：将哈希表key中的字段field的值设为value<br>
+<code>HGET [KEY] [FIELD]</code>：获取存储在哈希表中指定字段的值<br>
+<code>HDEL [KEY] [FIELD]</code>：删除存储在哈希表中的指定字段<br>
+<code>HKEYS [KEY]</code>：获取哈希表中所有字段<br>
+<code>HVALS [KEY]</code>：获取哈希表中所有值<br>
+<code>HGETALL [KEY]</code>：获取在哈希表中指定key的所有字段和值</p>
+<h4 id="列表list操作命令">列表<code>list</code>操作命令</h4>
+<p>Redis列表是简单的字符串列表，按照插入顺序排序，常用命令：<br>
+<code>LPUSH [KEY] [VALUE1] [VALUE2] ...</code>：将一个或多个值插入到列表头部<br>
+<code>LRANGE [KEY] [START] [STOP]</code>：获取列表指定范围内的元素（0到-1可以获取全部）<br>
+<code>RPOP [KEY]</code>：移除并获取列表最后一个元素<br>
+<code>LLEN [KEY]</code>：获取列表长度<br>
+<code>BRPOP [KEY1] [KEY2] [TIMEOUT]</code>：移除并获取列表的最后一个元素，如果列表没有元素会阻塞列表直到等待超时或发现可弹出元素为止</p>
+<h4 id="集合set操作命令">集合<code>set</code>操作命令</h4>
+<p>Redis set是string类型的无序集合。集合成员是唯一的，这就意味着集合中不能出现重复的数据，常用命令：<br>
+<code>SADD [KEY] [MEMBER1] [MEMBER2]</code>：向集合添加一个或多个成员<br>
+<code>SMEMBERS [KEY]</code>：返回集合中的所有成员<br>
+<code>SCARD [KEY]</code>：获取集合的成员数<br>
+<code>SINTER [KEY1] [KEY2]</code>：返回给定所有集合的交集<br>
+<code>SUNION [KEY1] [KEY2]</code>：返回所有给定集合的并集<br>
+<code>SDIFF [KEY1] [KEY2]</code>：返回给定所有集合的差集<br>
+<code>SREM [KEY] [MEMBER1] [MEMBER2]</code>：移除集合中一个或多个成员</p>
+<h4 id="有序集合sorted-set操作命令">有序集合<code>sorted set</code>操作命令</h4>
+<p>Redis sorted set有序集合是string类型元素的集合，且不允许重复的成员。每个元素都会关联一个double类型的分数（score）。redis正是通过分数来为集合中的成员进行从小到大排序。有序集合的成员是惟一的，但分数却可以重复。常用命令：<br>
+<code>ZADD [KEY] [SCORE1] [MEMBER1] [[SCORE2] [MEMBER2]] ...</code>：向有序集合添加一个或多个成员，或者更新已存在成员的分数<br>
+<code>ZRANGE [KEY] [START] [STOP] [WITHSCORES]</code>：通过索引区间返回有序集合中指定区间内的成员<br>
+<code>ZINCRBY [KEY] [INCREMENT] [MEMBER]</code>：有序集合中对指定成员的分数加上增量increment<br>
+<code>ZREM [KEY] [MEMBER] [MEMBER2] ...</code>：移除有序集合中的一个或多个成员</p>
+<h4 id="通用命令">通用命令</h4>
+<p><code>KEYS [PATTERN]</code> ：查找所有给定模式（pattern）的key，比如<code>keys *</code>查看所有key<br>
+<code>EXISTS [KEY]</code>：检查给定key是否存在<br>
+<code>TYPE [KEY]</code>：返回key所储存的值的类型<br>
+<code>TTL [KEY]</code>：返回给定key的剩余生存时间TTL，以秒为单位<br>
+<code>DEL [KEY]</code>：该命令用于在key存在时删除key</p>
+<h3 id="在Java中操作Redis">在Java中操作Redis</h3>
+<p>Redis的Java客户端很多，官方推荐的有三种：Jedis、Lettuce、Redisson；<br>
+Spring对Redis客户端进行了整合，提供了Spring Data Redis，在SpringBoot项目中还提供了对应的Starter，即<code>spring-boot-starter-data-redis</code></p>
+<h4 id="Jedis">Jedis</h4>
+<p>首先需要导入Jedis的Maven坐标：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>redis.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jedis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>下面通过示例代码来演示如果通过Java操作Redis：使用Jedis操作Redis的步骤：获取连接、执行操作、关闭连接</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testRedis</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">// 1.获取连接</span></span><br><span class="line">    <span class="type">Jedis</span> <span class="variable">jedis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jedis</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">6379</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2.执行具体的操作</span></span><br><span class="line">    jedis.set(<span class="string">&quot;username&quot;</span>, <span class="string">&quot;xiaoming&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">username</span> <span class="operator">=</span> jedis.get(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">    System.out.println(username);</span><br><span class="line">    <span class="comment">//jedis.del(&quot;username&quot;);</span></span><br><span class="line"></span><br><span class="line">    jedis.hset(<span class="string">&quot;myHash&quot;</span>, <span class="string">&quot;addr&quot;</span>, <span class="string">&quot;BeiJing&quot;</span>);</span><br><span class="line">    <span class="type">String</span> <span class="variable">addr</span> <span class="operator">=</span> jedis.hget(<span class="string">&quot;myHash&quot;</span>, <span class="string">&quot;addr&quot;</span>);</span><br><span class="line">    System.out.println(addr);</span><br><span class="line"></span><br><span class="line">    Set&lt;String&gt; keys = jedis.keys(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span>(String key : keys)&#123;</span><br><span class="line">        System.out.println(key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3.关闭连接</span></span><br><span class="line">    jedis.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Spring-Data-Redis">Spring Data Redis</h4>
+<h5 id="准备工作">准备工作</h5>
+<p>在SpringBoot项目中，可以使用Spring Data Redis来简化Redis操作，以下是maven坐标：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>新建application.yml配置文件，输入Redis相关配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">application:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">springDataRedis_demo</span></span><br><span class="line">  <span class="comment">#Redis相关配置</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="string">localhost</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">    <span class="comment">#password: 2002</span></span><br><span class="line">    <span class="attr">database:</span> <span class="number">0</span> <span class="comment">#操作的是0号数据库</span></span><br><span class="line">    <span class="attr">jedis:</span></span><br><span class="line">      <span class="comment">#Redis连接池配置</span></span><br><span class="line">      <span class="attr">pool:</span></span><br><span class="line">        <span class="attr">max-active:</span> <span class="number">8</span> <span class="comment">#最大连接数</span></span><br><span class="line">        <span class="attr">max-wait:</span> <span class="string">1ms</span> <span class="comment">#连接池最大阻塞等待时间</span></span><br><span class="line">        <span class="attr">max-idle:</span> <span class="number">4</span> <span class="comment">#连接池中的最大空闲连接</span></span><br><span class="line">        <span class="attr">min-idle:</span> <span class="number">0</span> <span class="comment">#连接池中的最小空闲连接</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Redis默认可以操作16个数据库，这个可以在Redis配置文件中进行修改。在Redis命令行中输入<code>select 数据库号数</code>可以切换数据库。这里我们默认操作0号数据库。</p>
+</blockquote>
+<p>Spring Data Redis中提供了一个高度封装的类：<code>RedisTemplate</code>，针对Jedis客户端中大量api进行了归类封装，将同一类型操作封装为operation接口，具体分类如下：</p>
+<ol>
+<li><code>ValueOperations</code>：简单K-V操作</li>
+<li><code>SetOperations</code>：set类型数据操作</li>
+<li><code>ZSetOperations</code>：zset类型数据操作</li>
+<li><code>HashOperations</code>：针对map类型的数据操作</li>
+<li><code>ListOperations</code>：针对list类型的数据操作</li>
+</ol>
+<p>在测试类中输入以下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 使用Jedis操作Redis</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">JedisDemoApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testString</span><span class="params">()</span>&#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;city&quot;</span>, <span class="string">&quot;BeiJing&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此处自动注入的<code>redisTemplate</code>是SpringBoot提供好的，不需要我们额外书写。但会造成一个问题，我们set的Key和Value会序列化，导致数据在数据库中是乱码的，因此我们需要新建一个配置类修改默认的序列化器，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> <span class="keyword">extends</span> <span class="title class_">CachingConfigurerSupport</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;Object, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory connectionFactory)</span>&#123;</span><br><span class="line">        RedisTemplate&lt;Object, Object&gt; redisTemplate = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//默认的key序列化器为：JdkSerializationRedisSerializer</span></span><br><span class="line">        redisTemplate.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        redisTemplate.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line"></span><br><span class="line">        redisTemplate.setConnectionFactory(connectionFactory);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> redisTemplate;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样，我们才会get正常格式的key字符串。由于value字符串在获取时会经过反序列化，因此实际上我们不需要再修改value的序列化器。</p>
+<h5 id="操作String数据类型">操作String数据类型</h5>
+<ol>
+<li><code>SET [key] [value]</code>：设置指定key的值（上面已经演示过了）</li>
+<li><code>GET [key]</code>：获取指定key的值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span>  <span class="variable">city123</span> <span class="operator">=</span> (String) redisTemplate.opsForValue().get(<span class="string">&quot;city123&quot;</span>);</span><br><span class="line">System.out.println(city123);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>SETEX [KEY] [SECONDS] [VALUE]</code>：设置指定key的值，并将key的过期时间设为seconds秒</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redisTemplate.opsForValue().set(<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;value1&quot;</span>, <span class="number">10L</span>, TimeUnit.SECONDS);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里的时间是Long型数据，需要后面跟L</p>
+</blockquote>
+<ol start="4">
+<li><code>SETNX [KEY] [VALUE]</code>：只有在key不存在时设置key的值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> redisTemplate.opsForValue().setIfAbsent(<span class="string">&quot;city123&quot;</span>, <span class="string">&quot;NanJing&quot;</span>);</span><br><span class="line">System.out.println(aBoolean);</span><br></pre></td></tr></table></figure>
+<h5 id="操作Hash数据类型">操作Hash数据类型</h5>
+<p>先创建<code>HashOperations</code>接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">HashOperations</span> <span class="variable">hashOperations</span> <span class="operator">=</span> redisTemplate.opsForHash();</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>HSET [KEY] [FIELD] [VALUE]</code>：将哈希表key中的字段field的值设为value</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hashOperations.put(<span class="string">&quot;student1&quot;</span>, <span class="string">&quot;name&quot;</span>, <span class="string">&quot;xiaoming&quot;</span>);</span><br><span class="line">hashOperations.put(<span class="string">&quot;student1&quot;</span>, <span class="string">&quot;age&quot;</span>, <span class="string">&quot;20&quot;</span>);</span><br><span class="line">hashOperations.put(<span class="string">&quot;student1&quot;</span>, <span class="string">&quot;addr&quot;</span>, <span class="string">&quot;BeiJing&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>HGET [KEY] [FIELD]</code>：获取存储在哈希表中指定字段的值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> (String) hashOperations.get(<span class="string">&quot;student1&quot;</span>, <span class="string">&quot;name&quot;</span>);</span><br><span class="line">System.out.println(name);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>HKEYS [KEY]</code>：获取哈希表中所有字段</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Set</span> <span class="variable">keys</span> <span class="operator">=</span> hashOperations.keys(<span class="string">&quot;student1&quot;</span>);</span><br><span class="line"><span class="keyword">for</span>(Object key : keys)&#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><code>HVALS [KEY]</code>：获取哈希表中所有值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">List</span> <span class="variable">student1</span> <span class="operator">=</span> hashOperations.values(<span class="string">&quot;student1&quot;</span>);</span><br><span class="line"><span class="keyword">for</span>(Object student : student1)&#123;</span><br><span class="line">    System.out.println(student);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="操作List数据类型">操作List数据类型</h5>
+<p>先创建<code>ListOperations</code>接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ListOperations</span> <span class="variable">listOperations</span> <span class="operator">=</span> redisTemplate.opsForList();</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>LPUSH [KEY] [VALUE1] [VALUE2] ...</code>：将一个或多个值插入到列表头部</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listOperations.leftPush(<span class="string">&quot;myList&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br><span class="line">listOperations.leftPushAll(<span class="string">&quot;myList&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;d&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>LRANGE [KEY] [START] [STOP]</code>：获取列表指定范围内的元素（0到-1可以获取全部）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; myList = listOperations.range(<span class="string">&quot;myList&quot;</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span>(String value : myList)&#123;</span><br><span class="line">    System.out.println(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>RPOP [KEY]</code>：移除并获取列表最后一个元素、<code>LLEN [KEY]</code>：获取列表长度</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获得列表长度</span></span><br><span class="line"><span class="type">Long</span> <span class="variable">size</span> <span class="operator">=</span> listOperations.size(<span class="string">&quot;myList&quot;</span>);</span><br><span class="line"><span class="type">int</span> <span class="variable">lSize</span> <span class="operator">=</span> size.intValue();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; lSize; i++) &#123;</span><br><span class="line">    <span class="comment">//出队列</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">element</span> <span class="operator">=</span> (String) listOperations.rightPop(<span class="string">&quot;myList&quot;</span>);</span><br><span class="line">    System.out.println(element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="操作Set数据类型">操作Set数据类型</h5>
+<p>先创建<code>SetOperations</code>接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">SetOperations</span> <span class="variable">setOperations</span> <span class="operator">=</span> redisTemplate.opsForSet();</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>SADD [KEY] [MEMBER1] [MEMBER2]</code>：向集合添加一个或多个成员</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setOperations.add(<span class="string">&quot;mySet&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="string">&quot;a&quot;</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>SMEMBERS [KEY]</code>：返回集合中的所有成员</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; mySet = setOperations.members(<span class="string">&quot;mySet&quot;</span>);</span><br><span class="line"><span class="keyword">for</span>(String member : mySet)&#123;</span><br><span class="line">    System.out.println(member);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>SREM [KEY] [MEMBER1] [MEMBER2]</code>：移除集合中一个或多个成员</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setOperations.remove(<span class="string">&quot;mySet&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="操作ZSet数据类型">操作ZSet数据类型</h5>
+<p>先创建<code>SetOperations</code>接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ZSetOperations</span> <span class="variable">zSetOperations</span> <span class="operator">=</span> redisTemplate.opsForZSet();</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>ZADD [KEY] [SCORE1] [MEMBER1] [[SCORE2] [MEMBER2]] ...</code>：向有序集合添加一个或多个成员，或者更新已存在成员的分数</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">zSetOperations.add(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="number">10.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="number">11.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;c&quot;</span>, <span class="number">12.0</span>);</span><br><span class="line">zSetOperations.add(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="number">13.0</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>ZRANGE [KEY] [START] [STOP] [WITHSCORES]</code>：通过索引区间返回有序集合中指定区间内的成员</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; myZSet = zSetOperations.range(<span class="string">&quot;myZSet&quot;</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line"><span class="keyword">for</span>(String s : myZSet)&#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>ZINCRBY [KEY] [INCREMENT] [MEMBER]</code>：有序集合中对指定成员的分数加上增量increment</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zSetOperations.incrementScore(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="number">20.0</span>);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><code>ZREM [KEY] [MEMBER] [MEMBER2] ...</code>：移除有序集合中的一个或多个成员</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zSetOperations.remove(<span class="string">&quot;myZSet&quot;</span>, <span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h5 id="操作通用命令">操作通用命令</h5>
+<ol>
+<li><code>KEYS [PATTERN]</code> ：查找所有给定模式（pattern）的key，比如<code>keys *</code>查看所有key</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Set&lt;String&gt; keys = redisTemplate.keys(<span class="string">&quot;*&quot;</span>);</span><br><span class="line"><span class="keyword">for</span>(String key : keys)&#123;</span><br><span class="line">    System.out.println(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>EXISTS [KEY]</code>：检查给定key是否存在</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Boolean</span> <span class="variable">aBoolean</span> <span class="operator">=</span> redisTemplate.hasKey(<span class="string">&quot;city123&quot;</span>);</span><br><span class="line">System.out.println(aBoolean);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><code>TYPE [KEY]</code>：返回key所储存的值的类型</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DataType</span> <span class="variable">dataType</span> <span class="operator">=</span> redisTemplate.type(<span class="string">&quot;mySet&quot;</span>);</span><br><span class="line">System.out.println(dataType);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><code>DEL [KEY]</code>：该命令用于在key存在时删除key</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redisTemplate.delete(<span class="string">&quot;myZSet&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>糖泥
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://1354478648.github.io/2023/06/19/Redis%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Redis的学习笔记">https://1354478648.github.io/2023/06/19/Redis的学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/05/08/%E7%91%9E%E5%90%89%E5%A4%96%E5%8D%96%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" rel="prev" title="瑞吉外卖项目记录">
+      <i class="fa fa-chevron-left"></i> 瑞吉外卖项目记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/18/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="Ajax的学习笔记">
+      Ajax的学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">Redis入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%90%AF%E5%8A%A8%E4%B8%8E%E5%81%9C%E6%AD%A2"><span class="nav-number">1.1.</span> <span class="nav-text">服务启动与停止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux%E5%AE%89%E8%A3%85%E4%B8%8E%E8%BF%9E%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">Linux安装与连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2string%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">字符串string操作命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%88%E5%B8%8Chash%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">哈希hash操作命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8list%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">列表list操作命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88set%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.4.</span> <span class="nav-text">集合set操作命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88sorted-set%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">有序集合sorted set操作命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">通用命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8Java%E4%B8%AD%E6%93%8D%E4%BD%9CRedis"><span class="nav-number">3.</span> <span class="nav-text">在Java中操作Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Jedis"><span class="nav-number">3.1.</span> <span class="nav-text">Jedis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Data-Redis"><span class="nav-number">3.2.</span> <span class="nav-text">Spring Data Redis</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">3.2.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CString%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.2.</span> <span class="nav-text">操作String数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CHash%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.3.</span> <span class="nav-text">操作Hash数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CList%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.4.</span> <span class="nav-text">操作List数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CSet%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.5.</span> <span class="nav-text">操作Set数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9CZSet%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.2.6.</span> <span class="nav-text">操作ZSet数据类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E9%80%9A%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">3.2.7.</span> <span class="nav-text">操作通用命令</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Downey"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Downey</p>
+  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Downey</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">688k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:52</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

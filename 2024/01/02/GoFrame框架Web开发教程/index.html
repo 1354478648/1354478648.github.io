@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="GoFrame是一款模块化、高性能、企业级的Go基础开发框架。GoFrame是一款通用性的基础开发框架，是Golang标准库的一个增强扩展级，包含通用核心的基础开发组件，优点是实战化、模块化、文档全面、模块丰富、易用性高、通用性强、面向团队。GoFrame既可用于开发完整的工程化项目，由于框架基础采用模块化解耦设计，因此也可以作为工具库使用。  官方文档：https:&#x2F;&#x2F;goframe.org&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoFrame框架Web开发教程">
+<meta property="og:url" content="https://1354478648.github.io/2024/01/02/GoFrame%E6%A1%86%E6%9E%B6Web%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="糖泥的个人博客">
+<meta property="og:description" content="GoFrame是一款模块化、高性能、企业级的Go基础开发框架。GoFrame是一款通用性的基础开发框架，是Golang标准库的一个增强扩展级，包含通用核心的基础开发组件，优点是实战化、模块化、文档全面、模块丰富、易用性高、通用性强、面向团队。GoFrame既可用于开发完整的工程化项目，由于框架基础采用模块化解耦设计，因此也可以作为工具库使用。  官方文档：https:&#x2F;&#x2F;goframe.org&#x2F;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/logo.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-36-21.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-37-12.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2023-12-29_13-41-57.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-03_14-49-13.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-04_12-26-31.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-04_12-45-01.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-04_14-53-48.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-04_15-03-36.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-15_22-28-27.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-15_22-38-34.png">
+<meta property="og:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/PixPin_2024-01-15_22-54-04.png">
+<meta property="article:published_time" content="2024-01-02T05:19:55.000Z">
+<meta property="article:modified_time" content="2024-01-16T14:45:22.814Z">
+<meta property="article:author" content="Downey">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="实习记录">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://1354478648.github.io/images/GoFrame%E6%A1%86%E6%9E%B6Web%E6%9C%8D%E5%8A%A1%E5%BC%80%E5%8F%91/logo.png">
+
+<link rel="canonical" href="https://1354478648.github.io/2024/01/02/GoFrame%E6%A1%86%E6%9E%B6Web%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GoFrame框架Web开发教程 | 糖泥的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">糖泥的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1354478648.github.io/2024/01/02/GoFrame%E6%A1%86%E6%9E%B6Web%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Downey">
+      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="糖泥的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GoFrame框架Web开发教程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-01-02 13:19:55" itemprop="dateCreated datePublished" datetime="2024-01-02T13:19:55+08:00">2024-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-16 22:45:22" itemprop="dateModified" datetime="2024-01-16T22:45:22+08:00">2024-01-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>35k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1:03</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="\images\GoFrame框架Web服务开发\logo.png" width="30%" height="auto">
+<p>GoFrame是一款模块化、高性能、企业级的Go基础开发框架。GoFrame是一款通用性的基础开发框架，是Golang标准库的一个增强扩展级，包含通用核心的基础开发组件，优点是实战化、模块化、文档全面、模块丰富、易用性高、通用性强、面向团队。GoFrame既可用于开发完整的工程化项目，由于框架基础采用模块化解耦设计，因此也可以作为工具库使用。</p>
+<blockquote>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114119">https://goframe.org/pages/viewpage.action?pageId=1114119</a></p>
+</blockquote>
+<blockquote>
+<p>视频教程：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Uu4y1u7kX">https://www.bilibili.com/video/BV1Uu4y1u7kX</a></p>
+</blockquote>
+<blockquote>
+<p>学习笔记：<a target="_blank" rel="noopener" href="https://gitee.com/unlimited13/code">https://gitee.com/unlimited13/code</a></p>
+</blockquote>
+<span id="more"></span>
+<h2 id="准备工作">准备工作</h2>
+<h3 id="前置条件">前置条件</h3>
+<ol>
+<li>已安装Go语言开发环境，已配置好<code>GOROOT</code>、<code>GOPATH</code>环境变量</li>
+<li>熟悉Go语言语法与基本使用</li>
+</ol>
+<h3 id="安装框架">安装框架</h3>
+<blockquote>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/gogf/gf/releases">https://github.com/gogf/gf/releases</a></p>
+</blockquote>
+<p>下载对应操作系统的包并安装，推荐安装到<code>GOROOT</code>的bin目录中</p>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2023-12-29_13-36-21.png" width="80%" height="auto">
+<p>使用<code>gf -v</code>命令查看是否安装成功</p>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2023-12-29_13-37-12.png" width="80%" height="auto">
+<h3 id="项目初始化">项目初始化</h3>
+<p>先修改Go语言开发环境：一次性配置，如果已经设置过可以跳过</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">go <span class="built_in">env</span> -w GO111MODULE=on</span><br><span class="line">go <span class="built_in">env</span> -w GOPROXY=https://goproxy.cn</span><br></pre></td></tr></table></figure>
+<p>初始化项目：<code>-u</code>参数表示获取最新版本的框架依赖，如果之前创建过项目，可省略</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gf init hellogf -u</span><br></pre></td></tr></table></figure>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2023-12-29_13-41-57.png" width="80%" height="auto">
+<h3 id="项目启动">项目启动</h3>
+<p>进入项目中<code>main.go</code>文件的所在目录运行该命令启动项目</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gf run main.go</span><br></pre></td></tr></table></figure>
+<p>成功启动后，在浏览器中输入<code>http://127.0.0.1:8000/hello</code>查看结果</p>
+<h3 id="项目目录结构">项目目录结构</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── api                 请求接口输入/输出数据结构定义</span><br><span class="line">├── hack                项目开发工具、脚本</span><br><span class="line">├── internal            业务逻辑存放目录，核心代码</span><br><span class="line">│   ├── cmd             入口指令与其他命令工具目录</span><br><span class="line">│   ├── consts          常量定义目录</span><br><span class="line">│   ├── controller      控制器目录，接收/解析用户请求</span><br><span class="line">│   ├── dao             数据访问对象目录，用于和底层数据库交互</span><br><span class="line">│   ├── logic           核心业务逻辑代码目录</span><br><span class="line">│   ├── model           数据结构管理模块，管理数据实体对象，以及输入与输出数据结构定义</span><br><span class="line">│   |   ├── do          数据操作中业务模型与实例模型转换，由工具维护，不能手动修改</span><br><span class="line">│   │   └── entity      数据模型是模型与数据集合的一对一关系，由工具维护，不用手动修改。</span><br><span class="line">│   └── service         业务接口定义层。具体的接口实现在logic中进行注入。</span><br><span class="line">├── manifest            包含程序编译、部署、运行、配置的文件</span><br><span class="line">├── resource            静态资源文件</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go             程序入口文件</span><br></pre></td></tr></table></figure>
+<h2 id="路由管理">路由管理</h2>
+<p>路由管理是<code>HTTP Web Server</code>开发的基础</p>
+<h3 id="路由规则">路由规则</h3>
+<p><strong>最基础的</strong>路由绑定方法是<code>BindHandler</code>方法，我们来看一下之前一直使用的<code>BindHandler</code>的原型：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span></span> BindHandler(pattern <span class="type">string</span>, handler <span class="keyword">interface</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>其中<code>pattern</code>参数用于指定路由注册规则的字符串，参数格式如下：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[HTTPMethod:]路由规则[@域名]</span><br></pre></td></tr></table></figure>
+<p><code>HTTPMethod:</code>和<code>@域名</code>为可选参数，如果指定了<code>HTTPMethod</code>，那么路由规则仅会在该请求方式下有效。<code>@域名</code>可以指定生效的域名名称，那么该路由规则仅会在该域名下生效。比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 该路由规则仅会在GET请求及localhost域名下有效</span><br><span class="line">GET:/order/info/&#123;order_id&#125;@localhost</span><br></pre></td></tr></table></figure>
+<p><span class="github-emoji" alias="exclamation" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png?v8">❗</span>    <code>BindHandler</code>是最原生的路由注册方法，在大部分场景中，我们通常使用<strong>分组路由</strong>方式来管理理由，后续会介绍</p>
+<ul>
+<li>其中<code>handler</code>参数用于指定路由函数，这个路由函数只需要满足以下要求，即只要能接收请求对象<code>*ghttp.Request</code>即可</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>让我们先关注<code>internal/cmd</code>目录下的<code>cmd.go</code>文件，cmd层负责引导程序启动，显著的工作是初始化逻辑、<strong>注册路由对象</strong>、启动server监听、阻塞运行程序直至server退出</p>
+<p>了解该文件作用后，我们在<code>cmd.go</code>中为一个函数注册路由：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Main = gcmd.Command&#123;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	Func: <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, parser *gcmd.Parser)</span></span> (err <span class="type">error</span>) &#123;</span><br><span class="line">		s := g.Server()</span><br><span class="line">        s.BindHandler(<span class="string">&quot;POST:/hello&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(r *ghttp.Request)</span></span>&#123;</span><br><span class="line">			r.Response.WriteJson(r.Router)</span><br><span class="line">		&#125;)</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">	&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行项目后，在API测试工具（如Postman、ApiFox等）中输入<code>http://127.0.0.1:8000/hello</code>并以POST方法进行访问测试，结果应当是该函数返回的<code>r.Router</code>，即当前匹配的路由规则信息</p>
+<ul>
+<li>路由规则分为<strong>精准匹配规则</strong>和<strong>动态匹配规则</strong></li>
+</ul>
+<p>精准匹配规则是指已确定名称的规则，比如<code>/user</code>、<code>/article</code>这种。在大多数场景下，我们会同时使用两种匹配规则，比如<code>user/:userId</code>或<code>user/id=&#123;id&#125;</code></p>
+<p>动态匹配规则分为<strong>命名匹配规则</strong>、<strong>模糊匹配规则</strong>、<strong>字段匹配规则</strong>，详细内容在官方文档中写得相当清楚，这里便不再具体展开</p>
+<blockquote>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114257">https://goframe.org/pages/viewpage.action?pageId=1114257</a></p>
+</blockquote>
+<h3 id="路由注册">路由注册</h3>
+<h4 id="函数注册">函数注册</h4>
+<p>函数注册在上文中的例子中已经出现过了，其中<code>handler</code>不单单可以是一个简单函数，它还可以是包方法，也可以是实例化对象的方法，只要这些函数接收<code>*ghttp.Request</code>类型的参数就能作为<code>handler</code></p>
+<blockquote>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114240">https://goframe.org/pages/viewpage.action?pageId=1114240</a></p>
+</blockquote>
+<h4 id="对象注册">对象注册</h4>
+<p><strong>对象注册</strong>是通过一个实例化的对象来执行路由注册，以后每一个请求都交给该对象（同一对象）处理，<strong>该对象常驻内存不释放</strong>。</p>
+<p>相关方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span></span> BindObject(pattern <span class="type">string</span>, object <span class="keyword">interface</span>&#123;&#125;, [methods ...<span class="type">string</span>]) <span class="type">error</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span></span> BindObjectMethod(pattern <span class="type">string</span>, object <span class="keyword">interface</span>&#123;&#125;, method <span class="type">string</span>) <span class="type">error</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *Server)</span></span> BindObjectRest(pattern <span class="type">string</span>, object <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span></span><br></pre></td></tr></table></figure>
+<p>前置约定：需要进行路由注册的方法必须为<strong>公开方法</strong>（即方法名首字母大写），并且方法需接收<code>*ghttp.Request</code>类型的参数</p>
+<h5 id="绑定对象公开方法">绑定对象公开方法</h5>
+<p>通过<code>BindObject</code>方法对实例化对象中的所有方法或指定方法完成注册</p>
+<p>先在<code>/internal/controller/user</code>中准备一个<code>user</code>控制类</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> user</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gogf/gf/v2/net/ghttp&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Controller <span class="keyword">struct</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">New</span><span class="params">()</span></span> *Controller &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;Controller&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> AddUser(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;添加用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> UpdateUser(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;更新用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> DeleteUser(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;删除用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> ListUser(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;用户列表&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> GetUser(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;查询一个用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> Post(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;添加用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> Put(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;更新用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> Delete(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;删除用户&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> Get(r *ghttp.Request) &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;查询一个用户&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们暂时不提供成员属性，先了解如何绑定成员方法。然后在<code>cmd.go</code>中实例化对象，并绑定该对象的所有公共方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">hellogf/internal/controller/user</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">usercontroller := user.New()</span><br><span class="line"><span class="comment">// 绑定user控制器中所有公共方法</span></span><br><span class="line">s.BindObject(<span class="string">&quot;/user&quot;</span>, usercontroller)</span><br></pre></td></tr></table></figure>
+<p>如果在<code>BindObject</code>方法提供了第三个参数，即指定对象里的方法名，表示只注册该对象中的该方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.BindObject(<span class="string">&quot;/user&quot;</span>, userController, <span class="string">&quot;AddUser, UpdateUser&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="绑定对象指定方法">绑定对象指定方法</h5>
+<p>通过<code>BindObjectMethod</code>方法和上文的<code>BindObject</code>方法中提供第三个参数效果是类似的</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">usercontroller := user.New()</span><br><span class="line"><span class="comment">// 绑定user控制器中多个方法</span></span><br><span class="line">s.BindObject(<span class="string">&quot;/user&quot;</span>, usercontroller, <span class="string">&quot;AddUser,UpdateUser&quot;</span>)</span><br><span class="line"><span class="comment">// 绑定单个方法</span></span><br><span class="line">s.BindObjectMethod(<span class="string">&quot;/deluser&quot;</span>, usercontroller, <span class="string">&quot;DeleteUser&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="以RESTFul风格绑定对象方法">以RESTFul风格绑定对象方法</h5>
+<p>通过<code>BindObjectRest</code>方法对对象中的以<code>Get</code>、<code>Post</code>、<code>Delete</code>等命名的方法做绑定</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">usercontroller := user.New()</span><br><span class="line">s.BindObjectRest(<span class="string">&quot;/user&quot;</span>, usercontroller)</span><br></pre></td></tr></table></figure>
+<p>最终路由表的结果是：以<code>/user</code>为路径的路由有四个，但请求方法都不同，而且其他如<code>AddUser</code>命名的方法没有被注册</p>
+<h3 id="分组路由-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">分组路由<span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h3>
+<p>前面我们都是使用类似<code>BindHandler</code>方法的方式进行路由注册，而分组路由才是业务项目中主要使用的路由注册方式</p>
+<p>我们可以给分组路由指定一个<code>prefix</code>前缀（也可以直接给定<code>/</code>前缀，表示注册在根路由下），在该分组下的所有路由注册都将注册在该路由前缀下</p>
+<blockquote>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114517">https://goframe.org/pages/viewpage.action?pageId=1114517</a></p>
+</blockquote>
+<p>比如我们将实例化后的<code>userController</code>绑定到以<code>/user</code>为前缀的路由组里</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">usercontroller := user.New()</span><br><span class="line">s.Group(<span class="string">&quot;/user&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(group *ghttp.RouterGroup)</span></span> &#123;</span><br><span class="line">    group.Middleware(ghttp.MiddlewareHandlerResponse)</span><br><span class="line">    group.Bind(</span><br><span class="line">        usercontroller, <span class="comment">// 绑定到控制器对象</span></span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以用GET POST PUT等定义路由</span></span><br><span class="line">    group.GET(<span class="string">&quot;/get&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(r *ghttp.Request)</span></span> &#123;</span><br><span class="line">        r.Response.Writeln(<span class="string">&quot;/user/get&quot;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="规范路由-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">规范路由<span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h3>
+<p>规范路由是为了解决一些规范化和自动化管理接口的场景，更适用于团队多人协作使用</p>
+<p>规范路由需要使用<code>YAML</code>配置文件：<code>manifest/config/config.yaml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">address:</span>     <span class="string">&quot;:8000&quot;</span></span><br><span class="line">  <span class="attr">openapiPath:</span> <span class="string">&quot;/api.json&quot;</span></span><br><span class="line">  <span class="attr">swaggerPath:</span> <span class="string">&quot;/swagger&quot;</span></span><br></pre></td></tr></table></figure>
+<p>在定义规范路由时使用固定的格式：它不再像前文中只需要接收<code>*ghttp.Request</code>类型参数的函数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Handler</span><span class="params">(ctx context.Context, req *Request)</span></span> (res *Response, err <span class="type">error</span>)</span><br></pre></td></tr></table></figure>
+<p>其中形参和返回值各为两个，并且都是必须的一个都不能少：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>参数</strong></th>
+<th style="text-align:left"><strong>说明</strong></th>
+<th style="text-align:left"><strong>注意事项</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>ctx context.Context</code></td>
+<td style="text-align:left">上下文</td>
+<td style="text-align:left"><code>Server</code>组件会自动从请求中获取并传递给接口方法</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>req *Request</code></td>
+<td style="text-align:left">请求对象</td>
+<td style="text-align:left">就算没有接收参数也要定义，因为<strong>请求结构体</strong>中不仅仅包含请求参数的定义，也包含了接口的请求定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>res *Response</code></td>
+<td style="text-align:left">返回对象</td>
+<td style="text-align:left">就算没有返回参数也要定义，因为<strong>返回结构体</strong>中不仅仅包含返回参数的定义，也可以包含接口返回定义。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>err error	</code></td>
+<td style="text-align:left">错误对象</td>
+<td style="text-align:left"><code>Server</code>通过该参数判断接口执行成功或失败。</td>
+</tr>
+</tbody>
+</table>
+<h4 id="请求-返回结构体">请求 / 返回结构体</h4>
+<p>在规范化路由注册中，非常重要的是请求 / 返回结构体的定义，在该结构体不仅仅包含了输入参数的定义，也包含了接口的定义，特别是路由地址、请求方法、接口描述等信息。为保证命名规范化，输入数据结构以<code>XxxReq</code>方式命名，输出数据结构以<code>XxxRes</code>方式命名。即便输入或者输出参数为空，也需要定义相应的数据结构，这样的目的一个是便于后续扩展，另一个是便于接口信息的管理</p>
+<p><span class="github-emoji" alias="exclamation" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2757.png?v8">❗</span>    <strong>这个<code>Xxx</code>是控制类的方法名</strong>，个人感觉定义结构体类似我们在自定义Spring框架中的注解，比如<code>@PostMapping</code>之类的（当然这个注解是框架提供的，如果看到后文，其实有点<code>@PostMapping</code>、<code>@PathVariable</code>、<code>@RequestParam</code>等等注解混合使用的感觉）</p>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-03_14-49-13.png" width="80%" height="auto">
+<p>其写法参照上图，需要将请求 / 返回结构体封装到<code>/api/xxx</code>目录下的<code>xxx.go</code>文件中</p>
+<p>在请求结构体中一定有<code>g.meta</code>元数据，通过后面打<code>tag</code>的方式定义路由地址、请求方法、接口描述等信息，而结构体其他具体写什么内容会在后文中具体展开</p>
+<p>在控制类中导入请求 / 返回结构体，比如导入<code>user</code>（通常可以自动导入）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> hellogf/api/user<span class="string">&quot;</span></span><br></pre></td></tr></table></figure>
+<p>然后实现控制器方法，比如实现添加用户的方法，注意请求 / 返回结构体的使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Controller)</span></span> AddUser(ctx context.Context, req *user.AddReq) (res *user.AddRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	res = &amp;user.AddRes&#123;</span><br><span class="line">		Name: <span class="string">&quot;张三&quot;</span>,</span><br><span class="line">		Age:  <span class="number">18</span>,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 自定义返回数据</span></span><br><span class="line">	<span class="comment">// g.RequestFromCtx(ctx).Response.Writeln(&quot;Hello&quot;)</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="规范路由注册">规范路由注册</h4>
+<p>推荐使用实例化对象的方式来管理所有路由方法，并通过分组路由的<code>Bind</code>方法执行统一注册</p>
+<p>我们知道，在规范化路由方式下，路由地址以及请求方式将由请求结构体在<code>g.Meta</code>中定义，但我们依然可以通过分组路由定义分组下的所有路由前缀（很像Spring框架中的<code>@RequestMapping</code>注解）</p>
+<p>比如注册<code>user</code>和<code>hello</code>控制类的对象（<code>/internal/cmd/cmd.go</code>）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">userController := user.New()</span><br><span class="line">helloController := hello.NewHello()</span><br><span class="line">s.Group(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(group *ghttp.RouterGroup)</span></span> &#123;</span><br><span class="line">	group.Middleware(ghttp.MiddlewareHandlerResponse)</span><br><span class="line">	group.Bind(</span><br><span class="line">		userController,</span><br><span class="line">		helloController,</span><br><span class="line">	)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><span class="github-emoji" alias="confused" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f615.png?v8">😕</span> 为什么推荐使用规范路由？<br>
+从我对Java语言的Spring框架的理解来对官方文档中所描述的特性进行展开阐述：</p>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 请求 / 返回结构体很类似Java中注解的使用，这在上文中也提到过；</p>
+<ul>
+<li>规范化API按照结构化编程设计</li>
+<li>规范化API接口方法参数风格定义</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 我们通过实例化控制器对象，注册对象中的全部公有方法，另外可以通过分组路由，类似<code>@RequestMapping</code>类注解添加路由前缀；</p>
+<ul>
+<li>更加简化的路由注册与维护</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 返回数据直接是通用返回结果类的形式了，因此不需要再额外定义这个类了；</p>
+<ul>
+<li>统一接口返回数据格式设计</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 不再需要我们手动整合Swagger组件（需要在配置文件中进行配置，但通常初始化项目的时候已经自动配置）；</p>
+<ul>
+<li>保障代码与接口文档同步维护</li>
+<li>自动生成基于标准OpenAPIv3协议的接口文档</li>
+<li>自动生成SwaggerUI页面</li>
+</ul>
+<p><span class="github-emoji" alias="thumbsup" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png?v8">👍</span> 通过打<code>tag</code>的方式实现类似Spring Validation参数校验框架的效果，这个后文会介绍</p>
+<ul>
+<li>自动的API参数对象化接收与校验</li>
+</ul>
+<h2 id="请求与返回">请求与返回</h2>
+<h3 id="请求输入">请求输入</h3>
+<h4 id="基本使用">基本使用</h4>
+<p>如何获取请求参数有很多种API，比如获取<code>Query</code>数据的<code>GetQuery</code>、<code>Form</code>数据的<code>GetForm</code>等等，但这里先仅介绍<code>GetRequest</code>，这个API可以获取客户端提交的所有参数，按照参数优先级进行覆盖，不区分提交方式。（这些API是<code>*ghttp.Request</code>对象的，但如果我们使用规范路由，其实也都不常用）</p>
+<blockquote>
+<p>如果想知道其他API的用法，参照官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114483">https://goframe.org/pages/viewpage.action?pageId=1114483</a></p>
+</blockquote>
+<p>首先，需要知道在<code>Goframe</code>框架中，有以下几种提交类型：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">提交类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Router</code></td>
+<td style="text-align:left">路由参数。来源于路由规则匹配，比如<code>/article/id=&#123;id&#125;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Query</code></td>
+<td style="text-align:left"><code>Query</code>参数。<code>URL</code>中的<code>Query String</code>参数解析，如：<code>http://127.0.0.1/index?id=1&amp;name=john</code>中的<code>id=1&amp;name=john</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Form</code></td>
+<td style="text-align:left">表单参数。最常见的提交方式，提交的<code>Content-Type</code>往往为：<code>application/x-www-form-urlencoded</code>、<code>multipart/form-data</code>、<code>multipart/mixed</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Body</code></td>
+<td style="text-align:left">内容参数。从<code>Body</code>中获取并解析得到的参数，<code>JSON</code>/<code>XML</code>请求往往使用这种方式提交。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Custom</code></td>
+<td style="text-align:left">自定义参数，往往在服务端的中间件、服务函数中通过<code>SetParam/GetParam</code>方法管理。</td>
+</tr>
+</tbody>
+</table>
+<p>如果我们使用<code>GetRequest</code>方法获取请求参数，那么客户端提交什么参数，我们都可以获取到</p>
+<p>另外<code>Get</code>方法是<code>GetRequest</code>的别名，<code>GetRequest</code>方法需要传参，用于指定获取哪个参数，比如<code>GetRequest(&quot;username&quot;)</code>，而<code>GetRequestMap</code>不需要传参，用于获取全部请求参数，其别名是<code>GetMap</code></p>
+<p>我们通过下面的例子来了解<code>GetRequest</code>的使用：</p>
+<ol>
+<li>准备<code>hello</code>的<code>params</code>方法的请求 / 返回结构体</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> hello</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;github.com/gogf/gf/v2/frame/g&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ParamsReq <span class="keyword">struct</span> &#123;</span><br><span class="line">	g.Meta <span class="string">`path:&quot;/params/age=&#123;age&#125;&quot; method:&quot;all&quot;`</span></span><br><span class="line"></span><br><span class="line">	UserName <span class="type">string</span></span><br><span class="line">	Password <span class="type">string</span></span><br><span class="line">	Age      <span class="type">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ParamsRes <span class="keyword">struct</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在<code>hello</code>控制器中实现<code>Params</code>方法</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Hello)</span></span> Params(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	r := g.RequestFromCtx(ctx)</span><br><span class="line"></span><br><span class="line">	data := r.GetMap()</span><br><span class="line">	r.Response.Writeln(data)</span><br><span class="line">	r.Response.Writeln(req)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要知道<code>GetRequest</code>这个方法是<code>*ghttp.Request</code>的API，如果我们使用规范路由，不能直接获取<code>*ghttp.Request</code>对象了，因此我们需要通过<code>g.RequestFromCtx(ctx)</code>来获取，然后调<code>GetMap</code>（或者<code>GetRequestMap</code>）获取客户端的所有请求参数</p>
+<h4 id="对象处理-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">对象处理 <span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h4>
+<p>对象转换在请求处理中非常常见。我们推荐将输入和输出定义为<code>struct</code>结构体对象，以便于结构化的参数输入输出维护</p>
+<p>客户端提交的所有参数（上文提到的任何提交类型）都能转换为指定的<code>struct</code>结构体，并且支持提交参数与<code>struct</code>属性的映射关系维护</p>
+<p>简单来说，客户端无论通过表单还是<code>URL</code>的<code>?</code>后面跟参数等等提交请求参数的形式，只要<code>XxxReq</code>结构体中定义了对应的属性，都能被映射并且维护</p>
+<h5 id="参数映射">参数映射</h5>
+<p>客户端提交的参数如果需要映射到服务端定义的<code>struct</code>属性上，可以采用默认的映射关系，这一点非常方便。默认的转换规则如下：</p>
+<ol>
+<li><code>struct</code>中需要匹配的属性必须为公开属性（首字母大写）</li>
+<li>参数名称会自动按照<strong>不区分大小写</strong>且<strong>忽略<code>-</code>、<code>_</code>、<code>空格</code>符号</strong>的形式与<code>struct</code>属性进行匹配</li>
+<li>如果匹配成功，那么将键值赋值给属性，如果无法匹配，那么忽略该键值</li>
+</ol>
+<p>以下是匹配的示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">map键名    struct属性     是否匹配</span><br><span class="line">name       Name           match</span><br><span class="line">Email      Email          match</span><br><span class="line">nickname   NickName       match</span><br><span class="line">NICKNAME   NickName       match</span><br><span class="line">Nick-Name  NickName       match</span><br><span class="line">nick_name  NickName       match</span><br><span class="line">nick name  NickName       match</span><br><span class="line">NickName   Nick_Name      match</span><br><span class="line">Nick-name  Nick_Name      match</span><br><span class="line">nick_name  Nick_Name      match</span><br><span class="line">nick name  Nick_Name      match</span><br></pre></td></tr></table></figure>
+<p>另外，除了默认规则，我们还可以通过<code>p</code>标签使请求参数映射为指定的<code>struct</code>属性，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ParamsReq <span class="keyword">struct</span> &#123;</span><br><span class="line">	g.Meta <span class="string">`path:&quot;/params&quot; method:&quot;all&quot;`</span></span><br><span class="line"></span><br><span class="line">	Id       <span class="type">string</span></span><br><span class="line">	UserName <span class="type">string</span></span><br><span class="line">	Password <span class="type">string</span> <span class="string">`p:&quot;mima&quot;`</span></span><br><span class="line">	Age      <span class="type">int</span>    <span class="string">`p:&quot;nianling&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到我们定义了四个属性：<code>Id</code>、<code>Username</code>、<code>Password</code>、<code>Age</code>，其中<code>Password</code>和<code>Age</code>追加了自定义规则外，四个属性都遵循默认规则的匹配</p>
+<p>我们在控制器中实现<code>Params</code>方法：结果是输出客户端的全部请求参数和对象映射后的请求参数<code>req</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Hello)</span></span> Params(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	r := g.RequestFromCtx(ctx)</span><br><span class="line">	data := r.GetMap()</span><br><span class="line"></span><br><span class="line">	r.Response.Writeln(data)</span><br><span class="line">	r.Response.Writeln(req)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后在 Postman 中测试接口：<br>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-04_12-26-31.png
+" width="80%" height="auto"></p>
+<p>我们通过<code>query</code>的方式请求<code>id</code>和<code>sex</code>两个参数，并且通过表单的方式请求<code>username</code>、<code>mima</code>、<code>a_ge</code>三个参数</p>
+<p>通过<code>r.Response.Writeln(data)</code>输出的内容来看，服务端能够收到所有请求参数（无论什么请求类型）</p>
+<p>但通过<code>r.Response.Writeln(req)</code>输出的内容来看，所有请求参数中除了<code>sex</code>参数，其他参数都能通过默认规则或者自定义规则实现映射关系</p>
+<h5 id="默认值绑定">默认值绑定</h5>
+<p>支持使用<code>d</code>标签（或者<code>default</code>标签）为属性绑定默认值，例如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ParamsReq <span class="keyword">struct</span> &#123;</span><br><span class="line">	g.Meta <span class="string">`path:&quot;/params&quot; method:&quot;all&quot;`</span></span><br><span class="line"></span><br><span class="line">	Id       <span class="type">string</span></span><br><span class="line">	UserName <span class="type">string</span> <span class="string">`d:&quot;Anonymous&quot;`</span></span><br><span class="line">	Password <span class="type">string</span> <span class="string">`p:&quot;mima&quot; d:&quot;123456&quot;`</span></span><br><span class="line">	Age      <span class="type">int</span>    <span class="string">`p:&quot;nianling&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后使用 Postman 测试接口：</p>
+<p><img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-04_12-45-01.png
+" width="80%" height="auto"></p>
+<h5 id="参数校验">参数校验</h5>
+<h3 id="响应输出">响应输出</h3>
+<h4 id="文本数据返回">文本数据返回</h4>
+<p>除了返回文本外，还能返回<code>HTML</code>模板。但现在基本上都是前后端分离了，大多数场景下返回的是通用返回结果类，因此这里只简单展示如何返回文本数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Hello)</span></span> Respons(ctx context.Context, req *hello.ParamsReq) (res *hello.ParamsRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	r := g.RequestFromCtx(ctx)</span><br><span class="line">	r.Response.Writeln(<span class="string">&quot;你好 GoFrame !&quot;</span>)</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="API数据返回-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">API数据返回 <span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h4>
+<p>在实际的前后端分离开发中，返回的JSON数据通常为以下结构（通用返回结果类）</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;code&quot;</span><span class="punctuation">:</span><span class="number">0</span><span class="punctuation">,</span> <span class="comment">// 自定义编码，用来表示请求成功与失败</span></span><br><span class="line">    <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span><span class="string">&quot;请求成功&quot;</span><span class="punctuation">,</span> <span class="comment">// 提示信息，如果请求出错则为错误信息</span></span><br><span class="line">    <span class="attr">&quot;data&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span>  <span class="comment">// 请求返回数据，请求出错时一般为null</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>GoFrame为前后端分离的API开发提供了很好的支持，只需要借助<code>api</code>模块就可以方便完成类似的返回结构，不需要自行定义</p>
+<ol>
+<li>在<code>/api</code>中定义请求 / 响应结构体，比如在<code>/api/hello/hello.go</code>中定义<code>hello</code>的<code>respons</code>方法的请求 / 响应结构体</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ResponsReq <span class="keyword">struct</span> &#123;</span><br><span class="line">	g.Meta <span class="string">`method:&quot;all&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> ResponsRes <span class="keyword">struct</span> &#123;</span><br><span class="line">	UserName <span class="type">string</span></span><br><span class="line">	Password <span class="type">string</span></span><br><span class="line">	List     g.Array</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果没有定义路径，那么就默认以方法名做路径</p>
+<ol start="2">
+<li>在控制器中定义<code>Respons</code>方法，同时实例化数据并返回</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Hello)</span></span> Respons(ctx context.Context, req *hello.ResponsReq) (res *hello.ResponsRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	res = &amp;hello.ResponsRes&#123;</span><br><span class="line">		UserName: <span class="string">&quot;zhangsan&quot;</span>,</span><br><span class="line">		Password: <span class="string">&quot;123456&quot;</span>,</span><br><span class="line">		List:     g.Array&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;,</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>使用 Postman 测试接口</li>
+</ol>
+<p><img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-04_14-53-48.png
+" width="80%" height="auto"></p>
+<p>如果有错误，定义错误信息并直接返回</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Hello)</span></span> Respons(ctx context.Context, req *hello.ResponsReq) (res *hello.ResponsRes, err <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="comment">// res = &amp;hello.ResponsRes&#123;</span></span><br><span class="line">	<span class="comment">// 	UserName: &quot;zhangsan&quot;,</span></span><br><span class="line">	<span class="comment">// 	Password: &quot;123456&quot;,</span></span><br><span class="line">	<span class="comment">// 	List:     g.Array&#123;1, 2, 3, 4&#125;,</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">	err = gerror.New(<span class="string">&quot;服务器开小差了&quot;</span>)</span><br><span class="line">	<span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 Postman 测试接口</p>
+<p><img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-04_15-03-36.png
+" width="80%" height="auto"></p>
+<h2 id="数据库ORM-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-⭐-span">数据库ORM <span class="github-emoji" alias="star" style="" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/2b50.png?v8">⭐</span></h2>
+<h3 id="准备数据库">准备数据库</h3>
+<p>本教程将以MySQL为例，使用命令行工具或者任意可视化工具创建名为<code>goframe</code>的数据库，字符集为<code>utf8</code>，排序规则为<code>utf8mb4_general_ci</code></p>
+<p>创建完成后，运行以下SQL脚本，创建测试数据表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">USE `goframe`;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Table structure for table `book` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `book`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `book` (</span><br><span class="line">  `id` <span class="type">INT</span>(<span class="number">10</span>) UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  `name` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;书名&#x27;</span>,</span><br><span class="line">  `author` <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;作者&#x27;</span>,</span><br><span class="line">  `price` <span class="keyword">DOUBLE</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;价格&#x27;</span>,</span><br><span class="line">  `publish_time` <span class="type">DATE</span> COMMENT <span class="string">&#x27;出版时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB AUTO_INCREMENT<span class="operator">=</span><span class="number">7</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Data for the table `book` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span>  <span class="keyword">INTO</span> `book`(`id`,`name`,`author`,`price`) <span class="keyword">VALUES</span> </span><br><span class="line">(<span class="number">1</span>,<span class="string">&#x27;MySQL数据库从入门到精通&#x27;</span>,<span class="string">&#x27;王飞飞&#x27;</span>,<span class="number">59.8</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="string">&#x27;设计模式&#x27;</span>,<span class="string">&#x27;刘伟&#x27;</span>,<span class="number">45</span>),</span><br><span class="line">(<span class="number">3</span>,<span class="string">&#x27;数据库原理及应用&#x27;</span>,<span class="string">&#x27;刘亮&#x27;</span>,<span class="number">33</span>),</span><br><span class="line">(<span class="number">4</span>,<span class="string">&#x27;Linux驱动开发入门与实践&#x27;</span>,<span class="string">&#x27;郑强&#x27;</span>,<span class="number">69</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="string">&#x27;Linux驱动开发入门与实践&#x27;</span>,<span class="string">&#x27;郑强&#x27;</span>,<span class="number">69</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="string">&#x27;Linux驱动开发入门与实践&#x27;</span>,<span class="string">&#x27;郑强&#x27;</span>,<span class="number">69</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Table structure for table `dept` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `dept`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `dept` (</span><br><span class="line">  `id` <span class="type">INT</span>(<span class="number">10</span>) UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  `pid` <span class="type">INT</span>(<span class="number">10</span>) UNSIGNED <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;上级部门ID&#x27;</span>,</span><br><span class="line">  `name` <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;部门名称&#x27;</span>,</span><br><span class="line">  `leader` <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;部门领导&#x27;</span>,</span><br><span class="line">  `phone` <span class="type">VARCHAR</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;联系电话&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB AUTO_INCREMENT<span class="operator">=</span><span class="number">108</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Data for the table `dept` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span>  <span class="keyword">INTO</span> `dept`(`id`,`pid`,`name`,`leader`,`phone`) <span class="keyword">VALUES</span> </span><br><span class="line">(<span class="number">100</span>,<span class="number">0</span>,<span class="string">&#x27;哪都通&#x27;</span>,<span class="string">&#x27;赵方旭&#x27;</span>,<span class="string">&#x27;10000000000&#x27;</span>),</span><br><span class="line">(<span class="number">101</span>,<span class="number">100</span>,<span class="string">&#x27;华北大区&#x27;</span>,<span class="string">&#x27;徐四&#x27;</span>,<span class="string">&#x27;10000000001&#x27;</span>),</span><br><span class="line">(<span class="number">102</span>,<span class="number">100</span>,<span class="string">&#x27;东北大区&#x27;</span>,<span class="string">&#x27;高廉&#x27;</span>,<span class="string">&#x27;10000000002&#x27;</span>),</span><br><span class="line">(<span class="number">103</span>,<span class="number">100</span>,<span class="string">&#x27;华东大区&#x27;</span>,<span class="string">&#x27;窦乐&#x27;</span>,<span class="string">&#x27;10000000003&#x27;</span>),</span><br><span class="line">(<span class="number">104</span>,<span class="number">100</span>,<span class="string">&#x27;华中大区&#x27;</span>,<span class="string">&#x27;任菲&#x27;</span>,<span class="string">&#x27;10000000004&#x27;</span>),</span><br><span class="line">(<span class="number">105</span>,<span class="number">100</span>,<span class="string">&#x27;华南大区&#x27;</span>,<span class="keyword">NULL</span>,<span class="keyword">NULL</span>),</span><br><span class="line">(<span class="number">106</span>,<span class="number">100</span>,<span class="string">&#x27;西北大区&#x27;</span>,<span class="string">&#x27;华风&#x27;</span>,<span class="string">&#x27;10000000005&#x27;</span>),</span><br><span class="line">(<span class="number">107</span>,<span class="number">100</span>,<span class="string">&#x27;西南大区&#x27;</span>,<span class="string">&#x27;郝意&#x27;</span>,<span class="string">&#x27;10000000006&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Table structure for table `emp` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `emp`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `emp` (</span><br><span class="line">  `id` <span class="type">INT</span>(<span class="number">10</span>) UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  `dept_id` <span class="type">INT</span>(<span class="number">10</span>) UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;所属部门&#x27;</span>,</span><br><span class="line">  `name` <span class="type">VARCHAR</span>(<span class="number">30</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">  `gender` TINYINT(<span class="number">1</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;性别: 0=男 1=女&#x27;</span>,</span><br><span class="line">  `phone` <span class="type">VARCHAR</span>(<span class="number">11</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;联系电话&#x27;</span>,</span><br><span class="line">  `email` <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;邮箱&#x27;</span>,</span><br><span class="line">  `avatar` <span class="type">VARCHAR</span>(<span class="number">100</span>) <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;照片&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB AUTO_INCREMENT<span class="operator">=</span><span class="number">15</span> <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*Data for the table `emp` */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span>  <span class="keyword">INTO</span> `emp`(`id`,`dept_id`,`name`,`gender`,`phone`,`email`) <span class="keyword">VALUES</span> </span><br><span class="line">(<span class="number">1</span>,<span class="number">100</span>,<span class="string">&#x27;赵方旭&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000000&#x27;</span>,<span class="string">&#x27;zhaofx@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>,<span class="number">100</span>,<span class="string">&#x27;毕游龙&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000007&#x27;</span>,<span class="string">&#x27;biyoulong@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>,<span class="number">100</span>,<span class="string">&#x27;黄伯仁&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000008&#x27;</span>,<span class="string">&#x27;huangboren@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">4</span>,<span class="number">101</span>,<span class="string">&#x27;徐四&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000001&#x27;</span>,<span class="string">&#x27;xusi@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">5</span>,<span class="number">101</span>,<span class="string">&#x27;徐三&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000009&#x27;</span>,<span class="string">&#x27;xusan@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">6</span>,<span class="number">101</span>,<span class="string">&#x27;冯宝宝&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;10000000010&#x27;</span>,<span class="string">&#x27;fengbaobao@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">7</span>,<span class="number">101</span>,<span class="string">&#x27;张楚岚&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000011&#x27;</span>,<span class="string">&#x27;zhangchulan@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">8</span>,<span class="number">102</span>,<span class="string">&#x27;高廉&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000002&#x27;</span>,<span class="string">&#x27;gaolian@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">9</span>,<span class="number">102</span>,<span class="string">&#x27;高二壮&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;10000000012&#x27;</span>,<span class="string">&#x27;gaoerzhuang@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">10</span>,<span class="number">103</span>,<span class="string">&#x27;窦乐&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000003&#x27;</span>,<span class="string">&#x27;doule@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">11</span>,<span class="number">103</span>,<span class="string">&#x27;肖自在&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000013&#x27;</span>,<span class="string">&#x27;xiaozizai@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">12</span>,<span class="number">104</span>,<span class="string">&#x27;任菲&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000004&#x27;</span>,<span class="string">&#x27;renfei@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">13</span>,<span class="number">106</span>,<span class="string">&#x27;华风&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000005&#x27;</span>,<span class="string">&#x27;huafeng@nadoutong.com&#x27;</span>),</span><br><span class="line">(<span class="number">14</span>,<span class="number">107</span>,<span class="string">&#x27;郝意&#x27;</span>,<span class="number">0</span>,<span class="string">&#x27;10000000006&#x27;</span>,<span class="string">&#x27;huafeng@nadoutong.com&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `hobby`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `hobby` (  </span><br><span class="line">  `id` <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  `emp_id` <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;EmpID&#x27;</span>,</span><br><span class="line">  `hobby` <span class="type">VARCHAR</span>(<span class="number">50</span>) COMMENT <span class="string">&#x27;爱好&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) </span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB CHARSET<span class="operator">=</span>utf8 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8_general_ci;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `hobby` (`id`, `emp_id`, `hobby`) <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">6</span>, <span class="string">&#x27;埋人&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>, <span class="number">4</span>, <span class="string">&#x27;看美女&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>, <span class="number">7</span>, <span class="string">&#x27;月下遛鸟&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `<span class="keyword">user</span>`;</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `<span class="keyword">user</span>` (  </span><br><span class="line">  `id` <span class="type">INT</span> UNSIGNED <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT COMMENT <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  `username` <span class="type">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span> COMMENT <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  `nickname` <span class="type">VARCHAR</span>(<span class="number">30</span>) COMMENT <span class="string">&#x27;昵称&#x27;</span>,</span><br><span class="line">  `password` <span class="type">VARCHAR</span>(<span class="number">32</span>) COMMENT <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line">  `avatar` <span class="type">VARCHAR</span>(<span class="number">100</span>) COMMENT <span class="string">&#x27;头像&#x27;</span>,</span><br><span class="line">  `created_at` DATETIME COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`id`) </span><br><span class="line">) ENGINE<span class="operator">=</span>INNODB CHARSET<span class="operator">=</span>utf8 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8_general_ci;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> </span><br><span class="line">`<span class="keyword">user</span>` (`id`, `username`, `nickname`, `password`, `avatar`, `created_at`) <span class="keyword">VALUES</span></span><br><span class="line">(<span class="number">1</span>, <span class="string">&#x27;libai&#x27;</span>, <span class="string">&#x27;李白&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2023-10-08 16:57:24&#x27;</span>),</span><br><span class="line">(<span class="number">2</span>, <span class="string">&#x27;dufu&#x27;</span>, <span class="string">&#x27;杜甫&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2023-10-08 16:57:24&#x27;</span>),</span><br><span class="line">(<span class="number">3</span>, <span class="string">&#x27;baijuyi&#x27;</span>, <span class="string">&#x27;白居易&#x27;</span>, <span class="string">&#x27;123456&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;2023-10-08 16:57:24&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="数据库配置">数据库配置</h3>
+<p>数据库内容完毕后，在配置文件<code>/manifest/config/config.yaml</code>中添加数据库的配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">database:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">&quot;mysql&quot;</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="string">&quot;3306&quot;</span></span><br><span class="line">  <span class="attr">user:</span> <span class="string">&quot;root&quot;</span></span><br><span class="line">  <span class="attr">pass:</span> <span class="string">&quot;root&quot;</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">&quot;goframe&quot;</span></span><br><span class="line">  <span class="attr">timezone:</span> <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line">  <span class="attr">debug:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>各配置项的内容：</p>
+<ul>
+<li><code>type</code>：数据库类型，MySQL、SQLite、SQL Server等等</li>
+<li><code>host</code>：数据库主机</li>
+<li><code>port</code>：数据库端口</li>
+<li><code>user</code>：数据库连接用户名</li>
+<li><code>pass</code>：数据库连接密码</li>
+<li><code>name</code>：需要连接的数据库名</li>
+<li><code>timezone</code>：时区，设置为<code>Asis/Shanghai</code>或者<code>Local</code></li>
+<li><code>debug</code>：是否开启调试，学习开发阶段可以打开，用于查看数据库操作相关信息输出</li>
+</ul>
+<blockquote>
+<p>其他配置项参考官方文档：<a target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=1114245">https://goframe.org/pages/viewpage.action?pageId=1114245</a></p>
+</blockquote>
+<h3 id="驱动添加与导入">驱动添加与导入</h3>
+<ol>
+<li>在<code>main.go</code>中进行MySQL驱动的初始化导入</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">&quot;github.com/gogf/gf/contrib/drivers/mysql/v2&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在<code>go.mod</code>中添加驱动库与版本</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">require (</span><br><span class="line">    github.com/gogf/gf/contrib/drivers/mysql/v2 v2<span class="number">.5</span><span class="number">.3</span></span><br><span class="line">    github.com/gogf/gf/v2 v2<span class="number">.5</span><span class="number">.3</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在命令行中进行依赖更新</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure>
+<p>最后等待依赖的下载更新完成</p>
+<h3 id="数据库基本操作">数据库基本操作</h3>
+<p>在<code>github.com/gogf/gf/v2/frame/g</code>包里的<code>Model</code>函数将返回<code>gdb.Model</code>对象，提供了一系列用于操作数据库的API。<code>Model</code>函数接收一个参数：数据表名</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="基础查询">基础查询</h4>
+<h5 id="查询单个数据One">查询单个数据<code>One</code></h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">book, err := md.One()</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    req.Response.WriteJson(book)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<p>该结果将返回数据表中的第一条数据，查询成功返回的数据为<code>map[string]*gvar.Var</code>类型，所以可以访问该数据的每一个字段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">req.Response.WriteJson(book[<span class="string">&quot;name&quot;</span>])  <span class="comment">// 返回结果中&quot;name&quot;字段</span></span><br></pre></td></tr></table></figure>
+<p>我们也可以通过<code>*gvar.Var</code>提供的API对字符进行类型转换（<code>*gvar.Var</code>是框架提供的泛型）：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">book[<span class="string">&quot;name&quot;</span>].String() <span class="comment">// 转为string类型</span></span><br><span class="line">book[<span class="string">&quot;price&quot;</span>].Float32() <span class="comment">// 转为float32类型</span></span><br><span class="line"><span class="string">``</span><span class="string">``</span></span><br><span class="line"></span><br><span class="line">##### 查询指定字段<span class="string">`Fields`</span></span><br><span class="line">个人感觉这个方法是生成了只有指定字段的新数据表，因此后面还需要链式调用其他API</span><br><span class="line"><span class="string">``</span><span class="string">`go</span></span><br><span class="line"><span class="string">book, err := md.Fields(&quot;name, price&quot;).One() //只查询name price两个字段</span></span><br><span class="line"><span class="string">// 也可以写为</span></span><br><span class="line"><span class="string">book, err := md.Fields(&quot;name&quot;, &quot;price&quot;).One()</span></span><br><span class="line"><span class="string">// 生成的SQL语句</span></span><br><span class="line"><span class="string">// SELECT `</span>name<span class="string">`,`</span>price<span class="string">` FROM `</span>book<span class="string">` LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<p>另外，可以查询除了指定字段的其他字段</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">book, err := md.FieldsEx(<span class="string">&quot;name, price&quot;</span>).One() <span class="comment">//查询除了name price两个字段的其他字段</span></span><br><span class="line"><span class="comment">// 也可以写为</span></span><br><span class="line">book, err := md.FieldsEx(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;price&quot;</span>).One()</span><br></pre></td></tr></table></figure>
+<h5 id="查询所有数据All">查询所有数据<code>All</code></h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">bookList, err := md.All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book`</span></span><br></pre></td></tr></table></figure>
+<p>该方法以切片返回数据表中的所有数据，我们可以通过<code>range</code>关键字来循环操作每一条数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> _, v := <span class="keyword">range</span> bookList &#123;</span><br><span class="line">    req.Response.Writeln(v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="查询单个数据的指定字段值Value">查询单个数据的指定字段值<code>Value</code></h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">name, err := md.Value(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT `name` FROM `book` LIMIT 1</span></span><br></pre></td></tr></table></figure>
+<h5 id="查询所有数据的指定字段值Array">查询所有数据的指定字段值<code>Array</code></h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">name, err := md.Array(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT `name` FROM `book`</span></span><br></pre></td></tr></table></figure>
+<h5 id="聚合函数">聚合函数</h5>
+<p>注意，一个<code>Model</code>只能使用一次查询</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">min, err := g.Model(<span class="string">&quot;book&quot;</span>).Min(<span class="string">&quot;price&quot;</span>)</span><br><span class="line">max, err := g.Model(<span class="string">&quot;book&quot;</span>).Max(<span class="string">&quot;price&quot;</span>)</span><br><span class="line">avg, err := g.Model(<span class="string">&quot;book&quot;</span>).Avg(<span class="string">&quot;price&quot;</span>)</span><br><span class="line">count, err := g.Model(<span class="string">&quot;book&quot;</span>).Count()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">	r.Response.WriteJson(g.Map&#123;</span><br><span class="line">		<span class="string">&quot;min&quot;</span>:   min,</span><br><span class="line">		<span class="string">&quot;max&quot;</span>:   max,</span><br><span class="line">		<span class="string">&quot;avg&quot;</span>:   avg,</span><br><span class="line">		<span class="string">&quot;count&quot;</span>: count,</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT MIN(`price`) FROM `book` LIMIT 1</span></span><br><span class="line"><span class="comment">// SELECT MAX(`price`) FROM `book` LIMIT 1</span></span><br><span class="line"><span class="comment">// SELECT AVG(`price`) FROM `book` LIMIT 1</span></span><br><span class="line"><span class="comment">// SELECT COUNT(1) FROM `book`</span></span><br></pre></td></tr></table></figure>
+<h5 id="条件查询">条件查询</h5>
+<p>查询数据时可以通过<code>Where</code>方法指定条件，如果调用了多个<code>Where</code>，那么多个条件之间会用<code>AND</code>连接</p>
+<ol>
+<li>等于</li>
+</ol>
+<p>默认情况下条件会用<code>=</code>连接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">book, err := md.Where(<span class="string">&quot;id&quot;</span>, <span class="number">3</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` WHERE `id`=3</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>不等<br>
+如果是不等关系，则需要在字段后面加上不等符号</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">book, err := md.Where(<span class="string">&quot;id&gt;&quot;</span>, <span class="number">3</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` WHERE id&gt;3</span></span><br></pre></td></tr></table></figure>
+<p>另一种写法是加上<code>?</code>占位符，效果是一样的</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">book, err := md.Where(<span class="string">&quot;id&gt;?&quot;</span>, <span class="number">3</span>).All()</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>多个条件叠加<br>
+当存在多个条件时可以多个<code>Where</code>函数进行链式调用，条件之间会用<code>AND</code>连接</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, err := md.Where(<span class="string">&quot;id&gt;=?&quot;</span>, <span class="number">2</span>).Where(<span class="string">&quot;id&lt;?&quot;</span>, <span class="number">6</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` WHERE (id&gt;=2) AND (id&lt;6)</span></span><br></pre></td></tr></table></figure>
+<p>以下是<code>Where</code>系列方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">生成的SQL条件表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>WhereLT(column, value)</code></td>
+<td style="text-align:center"><code>column &lt; value</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereLTE(column, value)</code></td>
+<td style="text-align:center"><code>column &lt;= value</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereGT(column, value)</code></td>
+<td style="text-align:center"><code>column &gt; value</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereGTE(column, value)</code></td>
+<td style="text-align:center"><code>column &gt;= value</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereBetween(column, min, max)</code></td>
+<td style="text-align:center"><code>column BETWEEN min AND max</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereNotBetween(column, min, max)</code></td>
+<td style="text-align:center"><code>column NOT BETWEEN min AND max</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereLike(column, like)</code></td>
+<td style="text-align:center"><code>column LIKE like</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereIn(column, in)	</code></td>
+<td style="text-align:center"><code>column IN (in)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereNotIn(column, in)</code></td>
+<td style="text-align:center"><code>column NOT IN (in)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereNot(column, value)</code></td>
+<td style="text-align:center"><code>column != value</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereNull(columns1, columns2... )	</code></td>
+<td style="text-align:center"><code>columns1 IS NULL AND columns2 IS NULL...</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereNotNull(columns1, columns2... )</code></td>
+<td style="text-align:center"><code>columns1 IS NOT NULL AND columns2 IS NOT NULL ...</code></td>
+</tr>
+</tbody>
+</table>
+<p>使用示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, err := md.WhereIn(<span class="string">&quot;id&quot;</span>, g.Array&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;).WhereLike(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;%数据%&quot;</span>).All()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` WHERE (`id` IN (1,2,3)) AND (`name` LIKE &#x27;%数据%&#x27;)</span></span><br></pre></td></tr></table></figure>
+<p>以上方法如果链式调用会生成以<code>AND</code>连接的条件，如果需要生成以<code>OR</code>连接的条件，则需要用到以下方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">生成的SQL条件表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>WhereOrLT(column, value)</code></td>
+<td style="text-align:center"><code>OR (column &lt; value)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrLTE(column, value)</code></td>
+<td style="text-align:center"><code>OR (column &lt;= value)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrGT(column, value)</code></td>
+<td style="text-align:center"><code>OR (column &gt; value)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrGTE(column, value)</code></td>
+<td style="text-align:center"><code>OR (column &gt;= value)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrBetween(column, min, max)</code></td>
+<td style="text-align:center"><code>OR (column BETWEEN min AND max)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrNotBetween(column, min, max)</code></td>
+<td style="text-align:center"><code>OR (column NOT BETWEEN min AND max)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrLike(column, like)</code></td>
+<td style="text-align:center"><code>OR (column LIKE like)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrIn(column, in)</code></td>
+<td style="text-align:center"><code>OR (column IN (in))</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrNotIn(column, in)</code></td>
+<td style="text-align:center"><code>OR (column NOT IN (in))</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrNot(column, value)</code></td>
+<td style="text-align:center"><code>OR (column != value)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrNull(columns1, columns2... )</code></td>
+<td style="text-align:center"><code>OR (columns1 IS NULL AND columns2 IS NULL...)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOrNotNull(columns1, columns2... )</code></td>
+<td style="text-align:center"><code>OR (columns1 IS NOT NULL AND columns2 IS NOT NULL ...)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>WhereOr(column, value)</code></td>
+<td style="text-align:center"><code>OR (column = value)</code></td>
+</tr>
+</tbody>
+</table>
+<p>使用示例：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, err := md.WhereIn(<span class="string">&quot;id&quot;</span>, g.Array&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;).WhereOrLike(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;%数据%&quot;</span>).All()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` WHERE (`id` IN (1,2,3)) OR (`name` LIKE &#x27;%数据%&#x27;)</span></span><br></pre></td></tr></table></figure>
+<h5 id="排序与分组">排序与分组</h5>
+<p>按字段排序：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line"></span><br><span class="line">books, err := md.Order(<span class="string">&quot;price&quot;</span>, <span class="string">&quot;DESC&quot;</span>).All()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多字段排序</span></span><br><span class="line">books, err := md.Order(<span class="string">&quot;price&quot;</span>, <span class="string">&quot;DESC&quot;</span>).Order(<span class="string">&quot;id&quot;</span>, <span class="string">&quot;ASC&quot;</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` ORDER BY `price` DESC,`id` ASC</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 排序封装方法</span></span><br><span class="line">books, err := md.OrderDesc(<span class="string">&quot;price&quot;</span>).OrderAsc(<span class="string">&quot;id&quot;</span>).All()</span><br></pre></td></tr></table></figure>
+<p>按字段分组：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, err := md.Group(<span class="string">&quot;name&quot;</span>).Count()  <span class="comment">// 4</span></span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT COUNT(1) FROM (SELECT COUNT(1) FROM `book` GROUP BY `name`)</span></span><br></pre></td></tr></table></figure>
+<h5 id="分页">分页</h5>
+<p>使用<code>Limit</code>方法用来限制查询条数或者自定义起始位置与数据限制</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line"><span class="comment">// 限制条数</span></span><br><span class="line">books, err := md.Limit(<span class="number">5</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` LIMIT 5</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定起始位置与限制条数：此处指第三条数据开始后面五条数据（本身不算）</span></span><br><span class="line">books, err := md.Limit(<span class="number">3</span>, <span class="number">5</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` LIMIT 3,5</span></span><br></pre></td></tr></table></figure>
+<p>GoFrame 提供了<code>Page</code>方法可以很方便实现分页查询，只需提供两个参数：页数和每页数据数量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, err := md.Page(<span class="number">2</span>, <span class="number">3</span>).All()</span><br><span class="line"><span class="comment">// 生成的SQL语句</span></span><br><span class="line"><span class="comment">// SELECT * FROM `book` LIMIT 3,3</span></span><br></pre></td></tr></table></figure>
+<h5 id="将查询结果转为结构体">将查询结果转为结构体</h5>
+<p>在上文中提到过<code>One</code>和<code>All</code>方法返回的数据是<code>Map</code>或者<code>Map</code>切片，在实际使用中查询到的数据可能需要转换为特定的数据结构方便使用。</p>
+<p><code>Scan</code>方法可以将查询到的数据转为自定义结构体或结构体数组，下面是推荐写法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id          <span class="type">uint</span></span><br><span class="line">    Name        <span class="type">string</span></span><br><span class="line">    Author      <span class="type">string</span></span><br><span class="line">    Price       <span class="type">float64</span></span><br><span class="line">    PublishTime *gtime.Time</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> book *Book</span><br><span class="line"></span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line"><span class="type">error</span> := md.Where(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>).Scan(&amp;book)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> <span class="type">error</span> == <span class="literal">nil</span> &#123;</span><br><span class="line">	r.Response.WriteJson(&amp;book)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">	r.Response.WriteJson(<span class="type">error</span>.Error())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Scan</code>会将数据库字段下划线命名对应到结构体中相应的驼峰命名上，如果对应不上，则该成员为<code>nil</code>或者零值。如果结构体中成员名称与数据表中字段不对应，可以用<code>orm:</code>标签来指定对应字段，比如：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    BookId     <span class="type">uint</span>        <span class="string">`orm:&quot;id&quot;  `</span></span><br><span class="line">    BookName   <span class="type">string</span>      <span class="string">`orm:&quot;name&quot;`</span></span><br><span class="line">    BookAuthor <span class="type">string</span>      <span class="string">`orm:&quot;author&quot;`</span></span><br><span class="line">    BookPrice  <span class="type">float64</span>     <span class="string">`orm:&quot;price&quot;`</span></span><br><span class="line">    PubTime    *gtime.Time <span class="string">`orm:&quot;publish_time&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> book *Book</span><br><span class="line"></span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line"><span class="type">error</span> := md.Scan(&amp;book)</span><br></pre></td></tr></table></figure>
+<p><code>Scan</code>方法可以如上查询单独结构体，也可以查询一个结构体数组，只需要将结构体指针改为结构体切片传入即可</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id          <span class="type">uint</span></span><br><span class="line">    Name        <span class="type">string</span></span><br><span class="line">    Author      <span class="type">string</span></span><br><span class="line">    Price       <span class="type">float64</span></span><br><span class="line">    PublishTime *gtime.Time</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> book []Book</span><br><span class="line"></span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line"><span class="type">error</span> := md.Scan(&amp;book)</span><br></pre></td></tr></table></figure>
+<p>查询结果为一个由<code>Book</code>组成的结构体数组，存放多条数据。</p>
+<h5 id="查询结果为空判断">查询结果为空判断</h5>
+<ul>
+<li><code>All</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">books, _ := md.All()</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(books) == <span class="number">0</span> &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">if</span> books.IsEmpty() &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>One</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">book, _ := md.Where(<span class="string">&quot;id&quot;</span>, <span class="number">100</span>).One()</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(book) == <span class="number">0</span> &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">if</span> book.IsEmpty() &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Value</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">name, _ := md.Where(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>).Value(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> name.IsEmpty() &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Array</code></li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">names, _ := md.WhereLT(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>).Array(<span class="string">&quot;name&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(names) == <span class="number">0</span>&#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Scan</code>结构体对象</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book *Book</span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">md.Scan(&amp;book)</span><br><span class="line"><span class="keyword">if</span> book == <span class="literal">nil</span> &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">md.Save(data)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Scan</code>结构体数组</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> books []Book</span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">md.Scan(&amp;books)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(books) == <span class="number">0</span> &#123;</span><br><span class="line">    r.Response.Writeln(<span class="string">&quot;结果为空&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="插入数据">插入数据</h4>
+<p>有三个方法可以插入数据，分别是<code>Insert</code>、<code>Replace</code>、<code>Save</code>，区别在于当主键字段（或唯一索引）冲突时，处理的方式不同：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法</th>
+<th style="text-align:center">主键（或唯一索引）冲突时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>Insert</code></td>
+<td style="text-align:center">报错：主键（或唯一索引）冲突</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Replace</code></td>
+<td style="text-align:center">用新数据<strong>替换</strong>已存在的同主键（或唯一索引）的数据</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>Save</code></td>
+<td style="text-align:center">用新数据<strong>更新</strong>已存在的同主键（或唯一索引）的数据</td>
+</tr>
+</tbody>
+</table>
+<h5 id="写入单条数据">写入单条数据</h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">data := g.Map&#123;</span><br><span class="line">    <span class="string">&quot;id&quot;</span>:           <span class="number">8</span>,</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">    <span class="string">&quot;price&quot;</span>:        <span class="number">69</span>,</span><br><span class="line">    <span class="string">&quot;publish_time&quot;</span>: <span class="string">&quot;2023-10-10&quot;</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Insert</span></span><br><span class="line">result, err := md.Insert(data)</span><br><span class="line"><span class="comment">// Replace</span></span><br><span class="line">result, err := md.Replace(data)</span><br><span class="line"><span class="comment">// Save</span></span><br><span class="line">result, err := md.Save(data)</span><br></pre></td></tr></table></figure>
+<p><code>result</code>返回结果将会返回影响行数，另外以上方法也可配合<code>Data</code>方法使用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Insert</span></span><br><span class="line">result, err := md.Data(data).Insert()</span><br><span class="line"><span class="comment">// Replace</span></span><br><span class="line">result, err := md.Data(data).Replace()</span><br><span class="line"><span class="comment">// Save</span></span><br><span class="line">result, err := md.Data(data).Save()</span><br></pre></td></tr></table></figure>
+<p>除了使用<code>Map</code>类型之外，还可以用结构体。结构体成员名称与数据表字段名称不对应时，用<code>orm</code>标签指定</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id      <span class="type">uint</span></span><br><span class="line">    Name    <span class="type">string</span></span><br><span class="line">    Author  <span class="type">string</span></span><br><span class="line">    Price   <span class="type">float64</span></span><br><span class="line">    PubTime *gtime.Time <span class="string">`orm:&quot;publish_time&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">md := g.Model(<span class="string">&quot;book&quot;</span>)</span><br><span class="line">data := Book&#123;</span><br><span class="line">    Id:      <span class="number">8</span>,</span><br><span class="line">    Name:    <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    Author:  <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">    Price:   <span class="number">69.3</span>,</span><br><span class="line">    PubTime: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">&#125;</span><br><span class="line">result, err := md.Data(data).Save()</span><br></pre></td></tr></table></figure>
+<h5 id="批量写入数据">批量写入数据</h5>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">data := g.List&#123;</span><br><span class="line">    g.Map&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">        <span class="string">&quot;price&quot;</span>:        <span class="number">69.3</span>,</span><br><span class="line">        <span class="string">&quot;publish_time&quot;</span>: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">    g.Map&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">        <span class="string">&quot;price&quot;</span>:        <span class="number">69.3</span>,</span><br><span class="line">        <span class="string">&quot;publish_time&quot;</span>: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">    g.Map&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">        <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">        <span class="string">&quot;price&quot;</span>:        <span class="number">69.3</span>,</span><br><span class="line">        <span class="string">&quot;publish_time&quot;</span>: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result, err := md.Data(data).Save()</span><br></pre></td></tr></table></figure>
+<p>如果使用的是结构体，将<code>g.List</code>改为<code>g.Array</code>或者<code>g.Slice</code></p>
+<h5 id="InsertAndGetId"><code>InsertAndGetId</code></h5>
+<p>插入数据并返回ID</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data := g.Map&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">    <span class="string">&quot;price&quot;</span>:        <span class="number">69.3</span>,</span><br><span class="line">    <span class="string">&quot;publish_time&quot;</span>: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result, err := md.Data(data).InsertAndGetId()</span><br></pre></td></tr></table></figure>
+<h5 id="gdb-Raw"><code>gdb.Raw</code></h5>
+<p>对于某些字段，可能需要调用SQL里面的操作来获得结果，例如，<code>publish_time</code>字段可以用SQL中的<code>CURRENT_DATE()</code>来获取当前日期，这时就需要用到<code>gdb.Raw</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data := g.Map&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:         <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    <span class="string">&quot;author&quot;</span>:       <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">    <span class="string">&quot;price&quot;</span>:        <span class="number">69.3</span>,</span><br><span class="line">    <span class="string">&quot;publish_time&quot;</span>: gdb.Raw(<span class="string">&quot;CURRENT_DATE()&quot;</span>),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result, err := md.Data(data).InsertAndGetId()</span><br></pre></td></tr></table></figure>
+<h4 id="更新数据">更新数据</h4>
+<p>使用<code>Update</code>方法进行更新数据操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data := g.Map&#123;</span><br><span class="line">    <span class="string">&quot;author&quot;</span>: <span class="string">&quot;郑强强&quot;</span>,</span><br><span class="line">    <span class="string">&quot;price&quot;</span>:  <span class="number">69.333</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result, err := md.Where(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;郑强&quot;</span>).Update(data)</span><br></pre></td></tr></table></figure>
+<p>也可以配合<code>Data</code>使用</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data := g.Map&#123;</span><br><span class="line">    <span class="string">&quot;author&quot;</span>: <span class="string">&quot;郑强强&quot;</span>,</span><br><span class="line">    <span class="string">&quot;price&quot;</span>:  <span class="number">69.333</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">result, err := md.Where(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;郑强&quot;</span>).Data(data).Update()</span><br></pre></td></tr></table></figure>
+<p>使用<code>Increment</code>或<code>Decrement</code>用来给指定字段增加或减少指定值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">result, err := md.WhereBetween(<span class="string">&quot;id&quot;</span>, <span class="number">7</span>, <span class="number">10</span>).Increment(<span class="string">&quot;price&quot;</span>, <span class="number">2.5</span>)</span><br><span class="line">result, err := md.WhereBetween(<span class="string">&quot;id&quot;</span>, <span class="number">7</span>, <span class="number">10</span>).Decrement(<span class="string">&quot;price&quot;</span>, <span class="number">1.5</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="删除数据">删除数据</h4>
+<p>使用<code>Delete</code>方法进行删除数据操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result, err := md.WhereGT(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>).Delete()</span><br></pre></td></tr></table></figure>
+<h3 id="时间维护与逻辑删除">时间维护与逻辑删除</h3>
+<p>在实际应用中，数据表通常会有三个时间字段：创建时间、更新时间、删除时间。GoFrame 支持这三个时间字段的自动填充，这三个字段支持的类型为<code>DATE</code>、<code>DATETIME</code>、<code>TIMESTAMP</code></p>
+<p>比如我们在<code>book</code>表中添加<code>created_at</code>、<code>updated_at</code>、<code>deleted_at</code>三个字段<br>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-15_22-28-27.png" width="80%" height="auto"></p>
+<p>我们使用<code>Insert</code>方法添加数据，注意我们并没有给定创建时间和更新时间的值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data := Book&#123;</span><br><span class="line">	Id:      <span class="number">11</span>,</span><br><span class="line">	Name:    <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">	Author:  <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">	Price:   <span class="number">69.3</span>,</span><br><span class="line">	PubTime: gtime.New(<span class="string">&quot;2023-10-10&quot;</span>),</span><br><span class="line">&#125;</span><br><span class="line">result, err := md.Data(data).Insert()</span><br></pre></td></tr></table></figure>
+<p>得到的结果是：<br>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-15_22-38-34.png" width="80%" height="auto"></p>
+<p>我们发现 GoFrame 框架为我们自动生成了创建时间和更新时间</p>
+<p><code>Update</code>方法也是同理</p>
+<p>删除时间涉及到逻辑删除的概念，我们使用<code>Delete</code>方法删除数据：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">result, err := md.Where(<span class="string">&quot;id&quot;</span>, <span class="number">10</span>).Data(data).Delete()</span><br></pre></td></tr></table></figure>
+<p>得到的结果是：<br>
+<img src="\images\GoFrame框架Web服务开发\PixPin_2024-01-15_22-54-04.png" width="80%" height="auto"></p>
+<p>只要数据的<code>deleted_at</code>字段非空，那么就表示该数据被逻辑删除了，如果这时使用比如<code>All</code>方法查询数据是查不到该数据的。因为查询数据时，会自动加上<code>WHERE deleted_at IS NULL</code>的条件，过滤已被逻辑删除的数据</p>
+<p>如果还是要查询所有数据，需要使用<code>Unscoped</code>方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls, _ := md.Unscoped().All()</span><br></pre></td></tr></table></figure>
+<h3 id="事务">事务</h3>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g.DB().Transaction(context.TODO(), <span class="function"><span class="keyword">func</span><span class="params">(ctx context.Context, tx gdb.TX)</span></span> <span class="type">error</span> &#123;</span><br><span class="line">    _, err := tx.Model(<span class="string">&quot;book&quot;</span>).Ctx(ctx).Save(data)</span><br><span class="line">    <span class="keyword">return</span> err</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="原生SQL">原生SQL</h3>
+<p>由<code>Model</code>提供的方法能组合出绝大多数使用场景所需要的数据操作，但如果需要的操作过于复杂，可能就没法通过已有的方法组合出来，就需要使用写SQL来实现</p>
+<p>首先获取ORM对象</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取默认配置的数据库对象</span></span><br><span class="line">db := g.DB()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或获取配置分组名称为&quot;user-center&quot;的数据库对象</span></span><br><span class="line">db := g.DB(<span class="string">&quot;user-center&quot;</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询数据列表：</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">list, err := db.GetAll(ctx, <span class="string">&quot;select * from user limit 2&quot;</span>)</span><br><span class="line">list, err := db.GetAll(ctx, <span class="string">&quot;select * from user where age &gt; ? and name like ?&quot;</span>, g.Slice&#123;<span class="number">18</span>, <span class="string">&quot;%john%&quot;</span>&#125;)</span><br><span class="line">list, err := db.GetAll(ctx, <span class="string">&quot;select * from user where status= ?&quot;</span>, g.Slice&#123;<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询单条数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">one, err := db.GetOne(ctx, <span class="string">&quot;select * from user where uid=1000&quot;</span>)</span><br><span class="line">one, err := db.GetOne(ctx, <span class="string">&quot;select * from user where uid=?&quot;</span>, <span class="number">1000</span>)</span><br><span class="line">one, err := db.GetOne(ctx, <span class="string">&quot;SELECT * FROM `book` WHERE `id` &gt; ? AND `id` &lt; ?&quot;</span>, g.Array&#123;<span class="number">3</span>, <span class="number">7</span>&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>增删改数据</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql := <span class="string">&quot;INSERT INTO `book` (`name`, `author`, `price`) VALUES (?, ?, ?)&quot;</span></span><br><span class="line">data := g.Array&#123;<span class="string">&quot;Go语言从入门到精通&quot;</span>, <span class="string">&quot;Go语言研讨组&quot;</span>, <span class="number">99.98</span>&#125;</span><br><span class="line">result, err := db.Exec(ctx, sql, data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql := <span class="string">&quot;DELETE FROM `book` WHERE `id` = ?&quot;</span></span><br><span class="line">data := g.Array&#123;<span class="string">&quot;11&quot;</span>&#125;</span><br><span class="line">result, err := db.Exec(ctx, sql, data)</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql := <span class="string">&quot;UPDATE `book` SET author = ? WHERE id = ?&quot;</span></span><br><span class="line">data := g.Array&#123;<span class="string">&quot;郑强强&quot;</span>, <span class="string">&quot;12&quot;</span>&#125;</span><br><span class="line">result, err := db.Exec(ctx, sql, data)</span><br></pre></td></tr></table></figure>
+<p>但是注意，当我们使用原生SQL语句增删改数据时，上文中的三个时间字段（创建时间、更新时间、删除时间）不会被自动填充</p>
+<h3 id="DAO自动生成与使用">DAO自动生成与使用</h3>
+<p>数据库相关的操作与数据结构放在<code>dao</code>与<code>model</code>中，在GoFrame中，<code>dao</code>与<code>model</code>的内容可以自动生成。生成步骤如下：</p>
+<ol>
+<li>在<code>hack/comfig.yaml</code>中配置<code>dao</code></li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">gfcli:</span></span><br><span class="line">  <span class="attr">gen:</span></span><br><span class="line">    <span class="attr">dao:</span></span><br><span class="line">      <span class="attr">link:</span> <span class="string">&quot;mysql:root:2002@tcp(localhost:3306)/goframe?loc=Local&amp;parseTime=True&quot;</span></span><br><span class="line">      <span class="attr">tables:</span> <span class="string">&quot;book,user,emp,dept,hobby&quot;</span></span><br></pre></td></tr></table></figure>
+<p>其中，<code>link</code>表示数据库连接的URL；<code>tables</code>表示需要生成的<code>dao</code>和<code>model</code>的数据表，多个表用逗号隔开</p>
+<ol start="2">
+<li>在命令行中执行该命令生成<code>dao</code>和<code>model</code>的代码</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gf gen dao</span><br></pre></td></tr></table></figure>
+<p>生成成功后，使用各个表对应的<code>Model</code>对象时，不再用<code>g.Model</code>获取，而是使用下面的方式：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">md := dao.Book.Ctx(ctx)</span><br><span class="line">books, err := md.All()</span><br></pre></td></tr></table></figure>
+<p>注意，该<code>Model</code>对象可以通过下面的方式多次叠加方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">md := dao.Book.Ctx(ctx)</span><br><span class="line">md = md.WhereGT(<span class="string">&quot;id&quot;</span>, <span class="number">3</span>)</span><br><span class="line">md = md.WhereLT(<span class="string">&quot;id&quot;</span>, <span class="number">6</span>)</span><br><span class="line">books, err := md.All()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以上代码相当于</span></span><br><span class="line"><span class="comment">// books, err := dao.Book.Ctx(ctx).WhereGT(&quot;id&quot;, 3).WhereLT(&quot;id&quot;, 6).All()</span></span><br></pre></td></tr></table></figure>
+<h3 id="字段过滤">字段过滤</h3>
+<p>使用结构体数据更新数据的时候，有些字段可能不需要更新，因此对应的字段就不进行赋值，例如以下代码</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Book <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id      <span class="type">uint</span></span><br><span class="line">    Name    <span class="type">string</span></span><br><span class="line">    Author  <span class="type">string</span></span><br><span class="line">    Price   <span class="type">float64</span></span><br><span class="line">    PubTime *gtime.Time <span class="string">`orm:&quot;publish_time&quot;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">data := Book&#123;</span><br><span class="line">    Name:    <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    PubTime: gtime.New(<span class="string">&quot;2023-10-11&quot;</span>),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">_, err = dao.Book.Ctx(ctx).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).Data(data).Update()</span><br></pre></td></tr></table></figure>
+<p>如果这样更新，那么<code>id</code>、<code>author</code>、<code>price</code>也会被对应类型的零值更新，分别被更新为<code>0</code>、<code>&quot;&quot;</code>、<code>nil</code></p>
+<p>如果要解决这样的问题，有以下几种解决方案：</p>
+<ul>
+<li>用<code>Fields</code>指定需要更新的字段</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dao.Book.Ctx(ctx).Fields(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;publish_time&quot;</span>).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).Data(data).Update()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用<code>FieldsEx</code>排除不需要更新的字段</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dao.Book.Ctx(ctx).FieldsEx(<span class="string">&quot;id,author,price&quot;</span>).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).Data(data).Update()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用<code>OmitEmpty</code>过滤空值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data := Book&#123;</span><br><span class="line">    Name:    <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    Price:   <span class="number">0</span>,</span><br><span class="line">    PubTime: <span class="literal">nil</span>,</span><br><span class="line">&#125;</span><br><span class="line">dao.Book.Ctx(ctx).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).OmitEmpty().Data(data).Update()</span><br></pre></td></tr></table></figure>
+<p>如果用<code>OmitEmpty</code>方法，即使数据中有零值，也无法更新对应字段的值</p>
+<ul>
+<li>用<code>do</code>对象进行字段过滤<br>
+使用<code>gf gen dao</code>会为每个表生成对应的<code>do</code>对象，使用<code>do</code>对象作为参数传递，将会自动过滤空值</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data := do.Book&#123;</span><br><span class="line">    Name:        <span class="string">&quot;Linux驱动开发入门与实践&quot;</span>,</span><br><span class="line">    Price:       <span class="number">0</span>,</span><br><span class="line">    PublishTime: <span class="literal">nil</span>,</span><br><span class="line">&#125;</span><br><span class="line">dao.Book.Ctx(ctx).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).Data(data).Update()</span><br></pre></td></tr></table></figure>
+<p>如果使用这种方法，**非<code>nil</code>**的零值都可以更新</p>
+<p><code>do</code>对象也可以用于传递查询条件，也会自动过滤空值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">where := do.Book&#123;</span><br><span class="line">    Author:      <span class="string">&quot;郑强&quot;</span>,</span><br><span class="line">    Id:          <span class="number">13</span>,</span><br><span class="line">    PublishTime: <span class="literal">nil</span>,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">books, err := dao.Book.Ctx(ctx).Where(where).All()</span><br><span class="line"><span class="comment">// 相当于</span></span><br><span class="line">books, err := dao.Book.Ctx(ctx).Where(<span class="string">&quot;id&quot;</span>, <span class="number">13</span>).Where(<span class="string">&quot;author&quot;</span>, <span class="string">&quot;郑强&quot;</span>).All()</span><br></pre></td></tr></table></figure>
+<h3 id="关联查询">关联查询</h3>
+<p>多表数据联查时可以用连接，但是数据量大时连接效率不高，GoFrame中提供了模型关联查询，可以简化一些多表联查操作</p>
+<p>以<code>dept</code>、<code>emp</code>、<code>hobby</code>三个表为例，每个部门可以有多个员工，每个员工只有一个部门，每个员工对应一条爱好</p>
+<ul>
+<li>查询所有员工，并关联查询出其所在部门</li>
+</ul>
+<ol>
+<li>在<code>internal/model/entity/emp.go</code>中修改<code>entity.Emp</code>，加入关联信息</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Emp <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id     <span class="type">uint</span>   <span class="string">`json:&quot;id&quot;      `</span> <span class="comment">// ID</span></span><br><span class="line">    DeptId <span class="type">uint</span>   <span class="string">`json:&quot;dept_id&quot; `</span> <span class="comment">// 所属部门</span></span><br><span class="line">    Name   <span class="type">string</span> <span class="string">`json:&quot;name&quot;    `</span> <span class="comment">// 姓名</span></span><br><span class="line">    Gender <span class="type">int</span>    <span class="string">`json:&quot;gender&quot;  `</span> <span class="comment">// 性别: 0=男 1=女</span></span><br><span class="line">    Phone  <span class="type">string</span> <span class="string">`json:&quot;phone&quot;   `</span> <span class="comment">// 联系电话</span></span><br><span class="line">    Email  <span class="type">string</span> <span class="string">`json:&quot;email&quot;   `</span> <span class="comment">// 邮箱</span></span><br><span class="line">    Avatar <span class="type">string</span> <span class="string">`json:&quot;avatar&quot;  `</span> <span class="comment">// 照片</span></span><br><span class="line"></span><br><span class="line">    Dept *Dept    <span class="string">`json:&quot;dept&quot; orm:&quot;with:id=dept_id&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，在<code>with:id=dept_id</code>中前面的字段<code>id</code>必须是<code>Emp</code>表中的字段<code>id</code>，而后面的字段<code>dept_id</code>必须是<code>Dept</code>被关联表中的字段<code>dept_id</code></p>
+<ol start="2">
+<li>使用<code>With</code>方法指定关联模型查询</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> emps []*entity.Emp</span><br><span class="line">err = dao.Emp.Ctx(ctx).With(entity.Dept&#123;&#125;).Scan(&amp;emps)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询所有员工，并关联查询出其所在部门和爱好</li>
+</ul>
+<ol>
+<li>在<code>internal/model/entity/emp.go</code>中修改<code>entity.Emp</code>，加入关联信息</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Emp <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id     <span class="type">uint</span>   <span class="string">`json:&quot;id&quot;      `</span> <span class="comment">// ID</span></span><br><span class="line">    DeptId <span class="type">uint</span>   <span class="string">`json:&quot;dept_id&quot; `</span> <span class="comment">// 所属部门</span></span><br><span class="line">    Name   <span class="type">string</span> <span class="string">`json:&quot;name&quot;    `</span> <span class="comment">// 姓名</span></span><br><span class="line">    Gender <span class="type">int</span>    <span class="string">`json:&quot;gender&quot;  `</span> <span class="comment">// 性别: 0=男 1=女</span></span><br><span class="line">    Phone  <span class="type">string</span> <span class="string">`json:&quot;phone&quot;   `</span> <span class="comment">// 联系电话</span></span><br><span class="line">    Email  <span class="type">string</span> <span class="string">`json:&quot;email&quot;   `</span> <span class="comment">// 邮箱</span></span><br><span class="line">    Avatar <span class="type">string</span> <span class="string">`json:&quot;avatar&quot;  `</span> <span class="comment">// 照片</span></span><br><span class="line"></span><br><span class="line">    Dept *Dept    <span class="string">`json:&quot;dept&quot; orm:&quot;with:id=dept_id&quot; `</span></span><br><span class="line">    Hobby *Hobby  <span class="string">`json:&quot;hobby&quot; orm:&quot;with:emp_id=id&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用<code>With</code>指定需要关联的内容</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> emps []*entity.Emp</span><br><span class="line">err = dao.Emp.Ctx(ctx).With(entity.Dept&#123;&#125;, entity.Hobby&#123;&#125;).Where(<span class="string">&quot;dept_id&quot;</span>, <span class="number">101</span>).Scan(&amp;emps)</span><br></pre></td></tr></table></figure>
+<p>也可以使用<code>WithAll</code>关联所有</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> emps []*entity.Emp</span><br><span class="line">err = dao.Emp.Ctx(ctx).WithAll().Where(<span class="string">&quot;dept_id&quot;</span>, <span class="number">101</span>).Scan(&amp;emps)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询部门，关联查询每个部门的员工</li>
+</ul>
+<ol>
+<li>在<code>internal/model/entity/dept.go</code>修改<code>entity.Dept</code>，加入关联信息</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Dept <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id     <span class="type">uint</span>   <span class="string">`json:&quot;id&quot;     `</span> <span class="comment">// ID</span></span><br><span class="line">    Pid    <span class="type">uint</span>   <span class="string">`json:&quot;pid&quot;    `</span> <span class="comment">// 上级部门ID</span></span><br><span class="line">    Name   <span class="type">string</span> <span class="string">`json:&quot;name&quot;   `</span> <span class="comment">// 部门名称</span></span><br><span class="line">    Leader <span class="type">string</span> <span class="string">`json:&quot;leader&quot; `</span> <span class="comment">// 部门领导</span></span><br><span class="line">    Phone  <span class="type">string</span> <span class="string">`json:&quot;phone&quot;  `</span> <span class="comment">// 联系电话</span></span><br><span class="line"></span><br><span class="line">    Emps []*Emp   <span class="string">`json:&quot;emps&quot; orm:&quot;with:dept_id=id&quot;`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用<code>With</code>指定需要关联的内容</li>
+</ol>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> depts []*entity.Dept</span><br><span class="line">err = dao.Dept.Ctx(ctx).With(entity.Emp&#123;&#125;).Scan(&amp;depts)</span><br></pre></td></tr></table></figure>
+<p>如果不想查询关联表（或被关联表的）所有字段，可以自己重新定义结构体，只需要保留需要查询的字段（用于关联的字段必须存在）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> MyDept <span class="keyword">struct</span> &#123;</span><br><span class="line">    g.Meta <span class="string">`orm:&quot;table:dept&quot;`</span></span><br><span class="line">    Id     <span class="type">uint</span>   <span class="string">`json:&quot;id&quot;     `</span> <span class="comment">// ID</span></span><br><span class="line">    Name   <span class="type">string</span> <span class="string">`json:&quot;name&quot;   `</span> <span class="comment">// 部门名称</span></span><br><span class="line">    Leader <span class="type">string</span> <span class="string">`json:&quot;leader&quot; `</span> <span class="comment">// 部门领导</span></span><br><span class="line">    Phone  <span class="type">string</span> <span class="string">`json:&quot;phone&quot;  `</span> <span class="comment">// 联系电话</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> MyEmp <span class="keyword">struct</span> &#123;</span><br><span class="line">    g.Meta <span class="string">`orm:&quot;table:emp&quot;`</span></span><br><span class="line">    Id     <span class="type">uint</span>   <span class="string">`json:&quot;id&quot;      `</span> <span class="comment">// ID</span></span><br><span class="line">    DeptId <span class="type">uint</span>   <span class="string">`json:&quot;dept_id&quot; `</span> <span class="comment">// 所属部门</span></span><br><span class="line">    Name   <span class="type">string</span> <span class="string">`json:&quot;name&quot;    `</span> <span class="comment">// 姓名</span></span><br><span class="line">    Phone  <span class="type">string</span> <span class="string">`json:&quot;phone&quot;   `</span> <span class="comment">// 联系电话</span></span><br><span class="line"></span><br><span class="line">    Dept *MyDept <span class="string">`json:&quot;dept&quot; orm:&quot;with:id=dept_id&quot; `</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> emps []*MyEmp</span><br><span class="line">err = dao.Emp.Ctx(ctx).With(MyDept&#123;&#125;).Scan(&amp;emps)</span><br></pre></td></tr></table></figure>
+<p>注意，在自定义结构体时，需要用<code>g.Meta</code>和<code>orm</code>标签指定对应的数据表</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>糖泥
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://1354478648.github.io/2024/01/02/GoFrame%E6%A1%86%E6%9E%B6Web%E5%BC%80%E5%8F%91%E6%95%99%E7%A8%8B/" title="GoFrame框架Web开发教程">https://1354478648.github.io/2024/01/02/GoFrame框架Web开发教程/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/Go/" rel="tag"># Go</a>
+              <a href="/tags/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag"># 实习记录</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/12/25/Go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" rel="prev" title="Go语言基础">
+      <i class="fa fa-chevron-left"></i> Go语言基础
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">前置条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">安装框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">项目初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%90%AF%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">项目启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.</span> <span class="nav-text">项目目录结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">路由管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A7%84%E5%88%99"><span class="nav-number">2.1.</span> <span class="nav-text">路由规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.</span> <span class="nav-text">路由注册</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.1.</span> <span class="nav-text">函数注册</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.2.2.</span> <span class="nav-text">对象注册</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E5%85%AC%E5%BC%80%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">绑定对象公开方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%8C%87%E5%AE%9A%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">绑定对象指定方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5RESTFul%E9%A3%8E%E6%A0%BC%E7%BB%91%E5%AE%9A%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">以RESTFul风格绑定对象方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.3.</span> <span class="nav-text">分组路由⭐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%B7%AF%E7%94%B1-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">2.4.</span> <span class="nav-text">规范路由⭐</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82-%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">2.4.1.</span> <span class="nav-text">请求 &#x2F; 返回结构体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E8%B7%AF%E7%94%B1%E6%B3%A8%E5%86%8C"><span class="nav-number">2.4.2.</span> <span class="nav-text">规范路由注册</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%B8%8E%E8%BF%94%E5%9B%9E"><span class="nav-number">3.</span> <span class="nav-text">请求与返回</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%BE%93%E5%85%A5"><span class="nav-number">3.1.</span> <span class="nav-text">请求输入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%A4%84%E7%90%86-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">3.1.2.</span> <span class="nav-text">对象处理 ⭐</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%98%A0%E5%B0%84"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">参数映射</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%80%BC%E7%BB%91%E5%AE%9A"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">默认值绑定</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">参数校验</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%BE%93%E5%87%BA"><span class="nav-number">3.2.</span> <span class="nav-text">响应输出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E"><span class="nav-number">3.2.1.</span> <span class="nav-text">文本数据返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API%E6%95%B0%E6%8D%AE%E8%BF%94%E5%9B%9E-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">3.2.2.</span> <span class="nav-text">API数据返回 ⭐</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93ORM-span-class-github-emoji-alias-star-style-fallback-src-https-github-githubassets-com-images-icons-emoji-unicode-2b50-png-v8-%E2%AD%90-span"><span class="nav-number">4.</span> <span class="nav-text">数据库ORM ⭐</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.1.</span> <span class="nav-text">准备数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">数据库配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E6%B7%BB%E5%8A%A0%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">4.3.</span> <span class="nav-text">驱动添加与导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">4.4.</span> <span class="nav-text">数据库基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.4.1.</span> <span class="nav-text">基础查询</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AEOne"><span class="nav-number">4.4.1.1.</span> <span class="nav-text">查询单个数据One</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AEAll"><span class="nav-number">4.4.1.2.</span> <span class="nav-text">查询所有数据All</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%8D%95%E4%B8%AA%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5%E5%80%BCValue"><span class="nav-number">4.4.1.3.</span> <span class="nav-text">查询单个数据的指定字段值Value</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%89%80%E6%9C%89%E6%95%B0%E6%8D%AE%E7%9A%84%E6%8C%87%E5%AE%9A%E5%AD%97%E6%AE%B5%E5%80%BCArray"><span class="nav-number">4.4.1.4.</span> <span class="nav-text">查询所有数据的指定字段值Array</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-number">4.4.1.5.</span> <span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.4.1.6.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E7%BB%84"><span class="nav-number">4.4.1.7.</span> <span class="nav-text">排序与分组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%86%E9%A1%B5"><span class="nav-number">4.4.1.8.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B0%86%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E8%BD%AC%E4%B8%BA%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">4.4.1.9.</span> <span class="nav-text">将查询结果转为结构体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E4%B8%BA%E7%A9%BA%E5%88%A4%E6%96%AD"><span class="nav-number">4.4.1.10.</span> <span class="nav-text">查询结果为空判断</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">4.4.2.</span> <span class="nav-text">插入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E5%8D%95%E6%9D%A1%E6%95%B0%E6%8D%AE"><span class="nav-number">4.4.2.1.</span> <span class="nav-text">写入单条数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">4.4.2.2.</span> <span class="nav-text">批量写入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#InsertAndGetId"><span class="nav-number">4.4.2.3.</span> <span class="nav-text">InsertAndGetId</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gdb-Raw"><span class="nav-number">4.4.2.4.</span> <span class="nav-text">gdb.Raw</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">4.4.3.</span> <span class="nav-text">更新数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">4.4.4.</span> <span class="nav-text">删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E7%BB%B4%E6%8A%A4%E4%B8%8E%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4"><span class="nav-number">4.5.</span> <span class="nav-text">时间维护与逻辑删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E5%8A%A1"><span class="nav-number">4.6.</span> <span class="nav-text">事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E7%94%9FSQL"><span class="nav-number">4.7.</span> <span class="nav-text">原生SQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DAO%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E4%B8%8E%E4%BD%BF%E7%94%A8"><span class="nav-number">4.8.</span> <span class="nav-text">DAO自动生成与使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E8%BF%87%E6%BB%A4"><span class="nav-number">4.9.</span> <span class="nav-text">字段过滤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E8%81%94%E6%9F%A5%E8%AF%A2"><span class="nav-number">4.10.</span> <span class="nav-text">关联查询</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Downey"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Downey</p>
+  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Downey</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">688k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:52</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

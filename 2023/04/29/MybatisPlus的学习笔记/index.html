@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="MyBatisPlus（简称MP）是基于MyBatis框架上开发的增强型工具，旨在简化开发、提高效率">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MybatisPlus的学习笔记">
+<meta property="og:url" content="https://1354478648.github.io/2023/04/29/MybatisPlus%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="糖泥的个人博客">
+<meta property="og:description" content="MyBatisPlus（简称MP）是基于MyBatis框架上开发的增强型工具，旨在简化开发、提高效率">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-29T07:55:01.000Z">
+<meta property="article:modified_time" content="2023-10-10T14:55:11.283Z">
+<meta property="article:author" content="Downey">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="后端">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="Mybatis">
+<meta property="article:tag" content="MybatisPlus">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://1354478648.github.io/2023/04/29/MybatisPlus%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MybatisPlus的学习笔记 | 糖泥的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">糖泥的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1354478648.github.io/2023/04/29/MybatisPlus%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Downey">
+      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="糖泥的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MybatisPlus的学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-29 15:55:01" itemprop="dateCreated datePublished" datetime="2023-04-29T15:55:01+08:00">2023-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-10 22:55:11" itemprop="dateModified" datetime="2023-10-10T22:55:11+08:00">2023-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">后端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>26 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>MyBatisPlus（简称MP）是基于MyBatis框架上开发的增强型工具，旨在简化开发、提高效率</p>
+<span id="more"></span>
+<h3 id="MP简介">MP简介</h3>
+<h4 id="入门案例">入门案例</h4>
+<ol start="0">
+<li>在MySQL中创建表并插入数据用作示例</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> database mybatisplus_db <span class="keyword">default</span> charset utf8 <span class="keyword">collate</span> utf8_general_ci;</span><br><span class="line">use mybatisplus_db;</span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line">	id <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key auto_increment,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    tel <span class="type">varchar</span>(<span class="number">32</span>)</span><br><span class="line">);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">&#x27;Tom&#x27;</span>,<span class="string">&#x27;tom&#x27;</span>,<span class="number">3</span>,<span class="string">&#x27;18866668888&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">&#x27;Jerry&#x27;</span>,<span class="string">&#x27;jerry&#x27;</span>,<span class="number">4</span>,<span class="string">&#x27;16688886666&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">&#x27;Jock&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="number">41</span>,<span class="string">&#x27;18812345678&#x27;</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">user</span> <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">&#x27;测试&#x27;</span>,<span class="string">&#x27;测试&#x27;</span>,<span class="number">14</span>,<span class="string">&#x27;400618400&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建新项目，修改设置，并在依赖中只选择MySQL Driver</li>
+<li>在pom.xml中手动添加MP起步依赖（由于MP并未被收录到Idea的系统内置配置，因此无法直接勾选加入）</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>添加Druid依赖，并在application.yml中设置JDBC参数</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>druid<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.16<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">type:</span> <span class="string">com.alibaba.druid.pool.DruidDataSource</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://localhost:3306/mybatisplus_db</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">2002</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>创建实体类（注意类名与表名对应，属性名与字段名对应）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>创建DAO接口，继承**<code>BaseMapper&lt;User&gt;</code>**</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserDao</span> <span class="keyword">extends</span> <span class="title class_">BaseMapper</span>&lt;User&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>在测试类中注入DAO接口，测试功能</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyBatisPlusDemo01ApplicationTests</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetAll</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;User&gt; userList = userDao.selectList(<span class="literal">null</span>);</span><br><span class="line">        System.out.println(userList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="简介">简介</h4>
+<p>官网：<a target="_blank" rel="noopener" href="https://www.baomidou.com/">https://www.baomidou.com/</a></p>
+<h3 id="标准数据层开发">标准数据层开发</h3>
+<h4 id="标准数据层CRUD操作">标准数据层CRUD操作</h4>
+<ul>
+<li>添加操作<code>insert()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testSave</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setName(<span class="string">&quot;小王&quot;</span>);</span><br><span class="line">    user.setPassword(<span class="string">&quot;123456&quot;</span>);</span><br><span class="line">    user.setAge(<span class="number">12</span>);</span><br><span class="line">    user.setTel(<span class="string">&quot;4000123456&quot;</span>);</span><br><span class="line">    userDao.insert(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除操作<code>deleteById()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span>&#123;</span><br><span class="line">    userDao.deleteById(<span class="number">1652561302201630722L</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于在实体类中<code>id</code>的数据类型是<code>Long</code>，所以需要在后面添上“L”，下同</p>
+<ul>
+<li>修改操作<code>updateById()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testUpdate</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>();</span><br><span class="line">    user.setId(<span class="number">1L</span>);</span><br><span class="line">    user.setName(<span class="string">&quot;tom666&quot;</span>);</span><br><span class="line">    userDao.updateById(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们无需传入全部属性也能完成对个别属性的修改</p>
+<ul>
+<li>查询单个操作<code>selectById()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetById</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userDao.selectById(<span class="number">2L</span>);</span><br><span class="line">    System.out.println(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询所有操作<code>selectList()</code><br>
+在上述入门案例里</li>
+</ul>
+<h4 id="Lombok">Lombok</h4>
+<p>Lombok是一个Java类库，提供了一组注解，用于简化POJO实体类的开发</p>
+<ul>
+<li>导入依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.22<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>常用注解：<code>@Data</code>，为当前实体类在编译器设置对应的<code>get/set</code>方法，<code>toString</code>方法，<code>hashCode</code>方法，<code>equals</code>方法，注意并没有包含“有参构造方法”</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="分页查询功能">分页查询功能</h4>
+<ol>
+<li>设置分页拦截器作为Spring管理的Bean<br>
+创建config文件夹，并添加如下配置类</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MPConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">// 1. 定义MP拦截器</span></span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">mybatisPlusInterceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">// 2. 添加具体的拦截器</span></span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>());</span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>执行分页查询<br>
+<code>Page</code>类设置两个属性，第一个是当前页，第二个是每页查询的行数</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetByPage</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">IPage</span> <span class="variable">page</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Page</span>(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">    userDao.selectPage(page, <span class="literal">null</span>);</span><br><span class="line">    System.out.println(<span class="string">&quot;当前页码值：&quot;</span> + page.getCurrent());</span><br><span class="line">    System.out.println(<span class="string">&quot;每页显示数：&quot;</span> + page.getSize());</span><br><span class="line">    System.out.println(<span class="string">&quot;一共多少页：&quot;</span> + page.getPages());</span><br><span class="line">    System.out.println(<span class="string">&quot;一共多少条：&quot;</span> + page.getTotal());</span><br><span class="line">    System.out.println(<span class="string">&quot;数据：&quot;</span> + page.getRecords());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>开启MP日志</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#开启MP的日志（输出到控制台）</span></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">log-impl:</span> <span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br></pre></td></tr></table></figure>
+<h3 id="DQL编程控制">DQL编程控制</h3>
+<h4 id="条件查询">条件查询</h4>
+<p>MP将书写复杂的SQL查询条件进行了封装（<code>wrapper</code>），使用编程的形式完成查询条件的组合<br>
+一些小技巧：关闭冗长的调试信息和logo</p>
+<ul>
+<li>创建logback.xml，里面输入以下代码关闭调试信息：</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>在application.yml中关闭logo的显示</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">  <span class="attr">main:</span></span><br><span class="line">    <span class="attr">banner-mode:</span> <span class="string">off</span></span><br><span class="line"></span><br><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">banner:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p><strong>条件查询的三种格式写法：</strong></p>
+<ol>
+<li>常规格式</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">QueryWrapper</span> <span class="variable">wrapper</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>();</span><br><span class="line">wrapper.lt(<span class="string">&quot;age&quot;</span>, <span class="number">18</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(wrapper);</span><br><span class="line">System.out.println(userList);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>lambda格式（推荐）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">QueryWrapper&lt;User&gt; wrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;User&gt;();</span><br><span class="line">wrapper.lambda().lt(User::getAge, <span class="number">10</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(wrapper);</span><br><span class="line">System.out.println(userList);</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>lambda格式（推荐）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LambdaQueryWrapper&lt;User&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lambdaQueryWrapper.lt(User::getAge, <span class="number">10</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br><span class="line">System.out.println(userList);</span><br></pre></td></tr></table></figure>
+<p><strong>设置条件的两种格式：</strong></p>
+<ol>
+<li>常规格式</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 10到30岁之间</span></span><br><span class="line">lambdaQueryWrapper.lt(User::getAge, <span class="number">30</span>);</span><br><span class="line">lambdaQueryWrapper.gt(User::getAge, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>链式编程格式</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 10到30岁之外</span></span><br><span class="line">lambdaQueryWrapper.lt(User::getAge, <span class="number">10</span>).or().gt(User::getAge, <span class="number">30</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br></pre></td></tr></table></figure>
+<p><strong>NULL值处理：</strong><br>
+假如要制作个商品页面，用户想要输入价格来筛选商品，在大部分情况下并不会同时给出大小值，那么也就意味着会至少有一个值为NULL</p>
+<ol>
+<li>创建<code>UserQuery</code>实体类，先继承<code>User</code>类，再定义可能出现大小值的参数</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserQuery</span> <span class="keyword">extends</span> <span class="title class_">User</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer age2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在测试类中进行条件参数控制</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testGetAll</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="comment">//以下模拟从页面中传进来的查询数据</span></span><br><span class="line">    <span class="type">UserQuery</span> <span class="variable">userQuery</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserQuery</span>();</span><br><span class="line">    userQuery.setAge(<span class="number">10</span>);</span><br><span class="line">    userQuery.setAge2(<span class="number">30</span>);</span><br><span class="line"></span><br><span class="line">    LambdaQueryWrapper&lt;User&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">    lambdaQueryWrapper.lt(<span class="literal">null</span> != userQuery.getAge2(), User::getAge, userQuery.getAge2())</span><br><span class="line">                      .gt(<span class="literal">null</span> != userQuery.getAge(), User::getAge, userQuery.getAge());</span><br><span class="line">    List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br><span class="line">    System.out.println(userList);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>lambdaQueryWrapper.lt(null != userQuery.getAge2(), User::getAge, userQuery.getAge2())</code>实现的逻辑和以下代码一样</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">null</span> != userQuery.getAge2())</span><br><span class="line">  lambdaQueryWrapper.lt(User::getAge, userQuery.getAge2())</span><br></pre></td></tr></table></figure>
+<p>因此可以通过判断是否参数是否存在（是否为NULL）来决定该条件是否加入SQL查询语句</p>
+<h4 id="查询投影">查询投影</h4>
+<p>查询投影是查询操作后显示的结果返回某些列，或者其他结果（其实就是<code>select</code>和<code>from</code>之间的SQL语句）</p>
+<ul>
+<li>查询结果包含实体类中部分属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 只查询Id、Name、Age字段（lambda写法）</span></span><br><span class="line">LambdaQueryWrapper&lt;User&gt; lambdaQueryWrapper = <span class="keyword">new</span> <span class="title class_">LambdaQueryWrapper</span>&lt;User&gt;();</span><br><span class="line">lambdaQueryWrapper.select(User::getId, User::getName, User::getAge);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 只查询Id、Name、Age字段（常规写法）</span></span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;User&gt;();</span><br><span class="line">queryWrapper.select(<span class="string">&quot;Id&quot;</span>, <span class="string">&quot;Name&quot;</span>, <span class="string">&quot;Age&quot;</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(queryWrapper);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查询结果包含实体类中未定义的属性（此时lambda写法就不适用了）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2. 聚合函数</span></span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;User&gt;();</span><br><span class="line">queryWrapper.select(<span class="string">&quot;count(*) as count&quot;</span>);</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; userList = userDao.selectMaps(queryWrapper);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3. 聚合函数&amp;分组查询</span></span><br><span class="line">QueryWrapper&lt;User&gt; queryWrapper = <span class="keyword">new</span> <span class="title class_">QueryWrapper</span>&lt;User&gt;();</span><br><span class="line">queryWrapper.select(<span class="string">&quot;count(*) as count, tel&quot;</span>);</span><br><span class="line">queryWrapper.groupBy(<span class="string">&quot;tel&quot;</span>);</span><br><span class="line">List&lt;Map&lt;String, Object&gt;&gt; userList = userDao.selectMaps(queryWrapper);</span><br></pre></td></tr></table></figure>
+<h4 id="查询条件">查询条件</h4>
+<ul>
+<li>用户登录（<code>eq</code>匹配）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 等同（模拟登录操作）</span></span><br><span class="line">lambdaQueryWrapper.eq(User::getName, <span class="string">&quot;Jerry&quot;</span>).eq(User::getPassword, <span class="string">&quot;jerry&quot;</span>);</span><br><span class="line"><span class="type">User</span> <span class="variable">loginUser</span> <span class="operator">=</span> userDao.selectOne(lambdaQueryWrapper);</span><br><span class="line">System.out.println(loginUser);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设定数字的区间（<code>le``ge</code>匹配或<code>between</code>匹配）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2. 范围查询</span></span><br><span class="line">lambdaQueryWrapper.between(User::getAge, <span class="number">10</span> ,<span class="number">30</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br><span class="line">System.out.println(userList);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>匹配查询（<code>like</code>匹配）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3. 模糊匹配</span></span><br><span class="line">lambdaQueryWrapper.like(User::getName, <span class="string">&quot;J&quot;</span>);</span><br><span class="line">List&lt;User&gt; userList = userDao.selectList(lambdaQueryWrapper);</span><br></pre></td></tr></table></figure>
+<p>除了<code>like</code>，还有<code>likeLeft</code>和<code>likeRight</code>，其效果与<code>%J</code>和<code>J%</code>一样</p>
+<h4 id="映射匹配">映射匹配</h4>
+<ul>
+<li>问题一：表字段与类属性设计不同步<br>
+比如表定义了<code>pwd varchar(32)</code>，而在类中定义了<code>private String password</code>，那么需要使用<code>@TableField</code>注解与它的<code>value</code>属性使他们关联起来</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(value=&quot;pwd&quot;)</span></span><br><span class="line"><span class="keyword">private</span> String password;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>问题二：类添加了数据库中未定义的属性<br>
+比如类中定义了<code>private Integer online;</code>，这个属性在表中并没有被定义，那么需要使用<code>@TableField</code>注解与它的<code>exist</code>属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(exist=false)</span></span><br><span class="line"><span class="keyword">private</span> Integer online;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>问题三：采用默认查询开放了更多的字段查看权限，使用<code>select</code>属性设置该字段是否参与查询</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableField(value=&quot;pwd&quot;, select=false)</span></span><br><span class="line"><span class="keyword">private</span> String password;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>问题四：表名和类名设计不同步<br>
+比如表名叫<code>tb1_User</code>，类名叫<code>User</code>，使用<code>@TableName</code>注解设置数据库表名称</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableName(&quot;tb1_User&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span></span><br></pre></td></tr></table></figure>
+<h3 id="DML编程控制">DML编程控制</h3>
+<h4 id="ID生成策略">ID生成策略</h4>
+<ul>
+<li>
+<p>不同的表应用不同的ID生成策略，比如：<br>
+日志：自增（1，2，3，4）<br>
+购物订单：特殊规则（FQ23958AK29348）<br>
+外卖单：关联地区日期等信息（10 04 20200101 34 91）<br>
+关系表：可省略ID</p>
+</li>
+<li>
+<p>使用<code>@TableId</code>注解来设置当前类中主键属性的生成策略</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="meta">@TableId(type = IdType.ASSIGN_ID)</span></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@TableId</code>注解有两个相关属性：<code>value</code>用于设置数据库主键名称，<code>type</code>用于设置主键属性的生成策略，值参照<code>IdType</code>枚举值</p>
+<ol>
+<li><code>AUTO</code>：使用数据库id自增策略控制id生成（前提需要表主键有<code>auto_increment</code>属性）</li>
+<li><code>NONE</code>：不设置id生成策略</li>
+<li><code>INPUT</code>：用户手工输入id</li>
+<li><code>ASSIGN_ID</code>：<strong>雪花算法</strong>生成id（可兼容数值型与字符串型，需要使用**<code>Long</code>**类型定义主键属性）</li>
+<li><code>ASSIGN_UUID</code>：以UUID生成算法作为id生成策略</li>
+</ol>
+<blockquote>
+<p>雪花算法由1位占位符0、41位时间戳、5+5位机器码（前五位表示服务器群组，后五位表示群组内的某台机器）、12位序列号组成。雪花算法有以下几个优点：1. 高并发分布式环境下生成不重复 id，每秒可生成百万个不重复 id；2. 基于时间戳，以及同一时间戳下序列号自增，基本保证 id 有序递增；3. 不依赖第三方库或者中间件；4. 算法简单，在内存中进行，效率高。</p>
+</blockquote>
+<h4 id="全局配置">全局配置</h4>
+<ul>
+<li>全局配置ID生成策略：假如所有实体类的主键属性都是同一种ID生成策略，那么可以在application.yml进行全局配置：</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">id-type:</span> <span class="string">assign_id</span></span><br></pre></td></tr></table></figure>
+<p>比如上述这个例子，使所有实体类主键属性使用雪花算法生成ID</p>
+<ul>
+<li>全局配置表名前缀：假如所有表名是以<code>tbl_XXX</code>命名的，而实体类是以<code>XXX</code>命名的，那么也可以在application.yml进行全局配置</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">table-prefix:</span> <span class="string">tbl_</span></span><br></pre></td></tr></table></figure>
+<p>那么在<code>@TableName</code>注解中就可以省略掉<code>tbl_</code>了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@TableName(&quot;user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span></span><br></pre></td></tr></table></figure>
+<h4 id="多记录操作">多记录操作</h4>
+<ul>
+<li>按照主键删除多条记录</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Long&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">list.add(<span class="number">1652886394031386625L</span>);</span><br><span class="line">list.add(<span class="number">1652887554129735681L</span>);</span><br><span class="line">list.add(<span class="number">1652894592599691266L</span>);</span><br><span class="line">userDao.deleteBatchIds(list);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按照主键查询多条记录</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">userDao.selectBatchIds(list);</span><br></pre></td></tr></table></figure>
+<h4 id="逻辑删除">逻辑删除</h4>
+<p>逻辑删除是指数据没有被真正的删除，只不过通过引入删除标记字段的方式进行假删除</p>
+<ol>
+<li>在数据库表中添加逻辑删除标记字段</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line">	id <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    tel <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">    deleted <span class="type">int</span>(<span class="number">1</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="number">0</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>这里使用<code>deleted</code>字段用于标记是否被删除，默认0表示未被删除，1表示被删除<br>
+2. 在实体类中添加对应字段，并使用<code>@TableLogic</code>字段设定当前字段为逻辑删除标记字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">    <span class="meta">@TableLogic(value = &quot;0&quot;, delval = &quot;1&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer deleted;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<code>value</code>属性表示表示未被删除的值（需要和数据库表的默认值保持一致），<code>delval</code>表示被删除的值<br>
+3. 在测试类中测试功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">testDelete</span><span class="params">()</span>&#123;</span><br><span class="line">    userDao.deleteById(<span class="number">1L</span>);</span><br><span class="line">    System.out.println(userDao.selectList(<span class="literal">null</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过MP日志我们可以看到<code>deleteById()</code>方法实际上用的是<code>update</code>修改语句，<code>selectList()</code>方法的查询语句增加了<code>where deleted = 0</code>的条件。因此，逻辑删除并不会使数据真正地被删除了，我们依然可以通过自己写SQL语句查找到这些数据</p>
+<ul>
+<li>使用全局配置来设置逻辑删除字段和标记值</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis-plus:</span></span><br><span class="line">  <span class="attr">global-config:</span></span><br><span class="line">    <span class="attr">db-config:</span></span><br><span class="line">      <span class="attr">logic-delete-field:</span> <span class="string">deleted</span></span><br><span class="line">      <span class="attr">logic-delete-value:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">logic-not-delete-value:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="乐观锁">乐观锁</h4>
+<p>乐观锁是基于数据版本（version）记录机制实现的。通过为数据增加一个版本标识，读取出数据时，将此版本号一同读出，之后更新时，对此版本号加一。此时，将提交数据的版本数据与数据库表对应记录的当前版本信息进行比对，如果提交的数据版本号等于数据库表当前版本号，则予以更新，否则认为是过期数据。</p>
+<ol>
+<li>数据表中添加锁标记字段</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span>(</span><br><span class="line">	id <span class="type">bigint</span> <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">primary</span> key,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    password <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    age <span class="type">int</span> <span class="keyword">not</span> <span class="keyword">null</span>,</span><br><span class="line">    tel <span class="type">varchar</span>(<span class="number">32</span>),</span><br><span class="line">    deleted <span class="type">int</span>(<span class="number">1</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="number">0</span>,</span><br><span class="line">    version <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">default</span> <span class="number">1</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>添加<code>version</code>字段表示数据的当前版本<br>
+2. 在实体类中使用<code>@Version</code>注解把对应字段设定为版本字段</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> Integer age;</span><br><span class="line">    <span class="keyword">private</span> String tel;</span><br><span class="line">    <span class="keyword">private</span> Integer deleted;</span><br><span class="line">    <span class="meta">@Version</span></span><br><span class="line">    <span class="keyword">private</span> Integer version;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>配置乐观锁拦截器实现锁机制对应的动态SQL语句拼装</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MPConfig</span> &#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> MybatisPlusInterceptor <span class="title function_">mybatisPlusInterceptor</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="comment">// 1. 定义MP拦截器</span></span><br><span class="line">        <span class="type">MybatisPlusInterceptor</span> <span class="variable">mybatisPlusInterceptor</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">MybatisPlusInterceptor</span>();</span><br><span class="line">        <span class="comment">// 2. 添加分页拦截器</span></span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">PaginationInnerInterceptor</span>());</span><br><span class="line">        <span class="comment">// 3. 添加乐观锁拦截器</span></span><br><span class="line">        mybatisPlusInterceptor.addInnerInterceptor(<span class="keyword">new</span> <span class="title class_">OptimisticLockerInnerInterceptor</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> mybatisPlusInterceptor;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>使用乐观锁机制在修改前必须先获取到对应数据的version才能正常进行</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 先查询数据，获取到version数据</span></span><br><span class="line"><span class="type">User</span> <span class="variable">user1</span> <span class="operator">=</span> userDao.selectById(<span class="number">1L</span>);</span><br><span class="line"><span class="type">User</span> <span class="variable">user2</span> <span class="operator">=</span> userDao.selectById(<span class="number">1L</span>);</span><br><span class="line"><span class="comment">//执行数据修改操作</span></span><br><span class="line">user1.setName(<span class="string">&quot;tom666&quot;</span>);</span><br><span class="line">userDao.updateById(user1);</span><br><span class="line"></span><br><span class="line">user2.setName(<span class="string">&quot;tom888&quot;</span>);</span><br><span class="line">userDao.updateById(user2);</span><br></pre></td></tr></table></figure>
+<p>我们这里演示两个人同时想要对同一数据进行修改，模拟并发操作的情况。运行后可以看到只有用户1的操作成功执行了，因为用户1先执行了修改操作，使得version加一，用户2依然拿着原来的version就无法进行修改操作了</p>
+<ul>
+<li>执行修改前先执行查询语句：</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ...,version <span class="keyword">FROM</span> <span class="keyword">user</span> <span class="keyword">WHERE</span> id <span class="operator">=</span> ?</span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行修改时使用version字段作为乐观锁检查依据</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> <span class="keyword">user</span> <span class="keyword">SET</span> ...,version <span class="operator">=</span> ? <span class="keyword">WHERE</span> id <span class="operator">=</span> ? <span class="keyword">AND</span> version <span class="operator">=</span> ?</span><br></pre></td></tr></table></figure>
+<h3 id="快速开发：代码生成器">快速开发：代码生成器</h3>
+<p>代码生成器通过我们预设的模板和配置自动生成实体类、数据层、业务层等代码，底层原理就是IO操作</p>
+<ol>
+<li>在pom.xml中导入依赖</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 代码生成器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.baomidou<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-plus-generator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- velocity模板引擎 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.velocity<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>velocity-engine-core<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在java目录下创建<code>Generator</code>类，输入以下代码：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Generator</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 获取代码生成器的对象</span></span><br><span class="line">        <span class="type">AutoGenerator</span> <span class="variable">autoGenerator</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AutoGenerator</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 2. 设置数据库相关配置</span></span><br><span class="line">        <span class="type">DataSourceConfig</span> <span class="variable">dataSourceConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DataSourceConfig</span>();</span><br><span class="line">        dataSourceConfig.setDriverName(<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);</span><br><span class="line">        dataSourceConfig.setUrl(<span class="string">&quot;jdbc:mysql://localhost:3306/mybatisplus_db&quot;</span>);</span><br><span class="line">        dataSourceConfig.setUsername(<span class="string">&quot;root&quot;</span>);</span><br><span class="line">        dataSourceConfig.setPassword(<span class="string">&quot;2002&quot;</span>);</span><br><span class="line">        autoGenerator.setDataSource(dataSourceConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 3. 设置全局配置</span></span><br><span class="line">        <span class="type">GlobalConfig</span> <span class="variable">globalConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">GlobalConfig</span>();</span><br><span class="line">        globalConfig.setOutputDir(<span class="string">&quot;D:\\IntelliJ IDEA 2022.3.1\\IdeaProjects\\MyBatisPlusDemo01\\src\\main&quot;</span>); <span class="comment">// 设置代码生成的位置</span></span><br><span class="line">        globalConfig.setOpen(<span class="literal">false</span>); <span class="comment">// 设置生成完毕后是否打开生成代码所在的目录</span></span><br><span class="line">        globalConfig.setAuthor(<span class="string">&quot;糖泥&quot;</span>); <span class="comment">// 设置作者</span></span><br><span class="line">        globalConfig.setFileOverride(<span class="literal">true</span>); <span class="comment">// 设置是否覆盖原始生成的文件</span></span><br><span class="line">        globalConfig.setMapperName(<span class="string">&quot;%sDao&quot;</span>); <span class="comment">// 设置数据层接口名，%s为占位符，指代模块名称</span></span><br><span class="line">        globalConfig.setIdType(IdType.ASSIGN_ID); <span class="comment">// 设置id生成策略</span></span><br><span class="line">        autoGenerator.setGlobalConfig(globalConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 4. 设置包名相关配置</span></span><br><span class="line">        <span class="type">PackageConfig</span> <span class="variable">packageConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PackageConfig</span>();</span><br><span class="line">        packageConfig.setParent(<span class="string">&quot;com.aaa&quot;</span>);  <span class="comment">// 设置生成的包名，与代码所在位置不冲突，二者叠加组成完整路径</span></span><br><span class="line">        packageConfig.setEntity(<span class="string">&quot;domain&quot;</span>); <span class="comment">// 设置实体类包名</span></span><br><span class="line">        packageConfig.setMapper(<span class="string">&quot;dao&quot;</span>); <span class="comment">// 设置数据层包名</span></span><br><span class="line">        autoGenerator.setPackageInfo(packageConfig);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 5. 策略设置</span></span><br><span class="line">        <span class="type">StrategyConfig</span> <span class="variable">strategyConfig</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StrategyConfig</span>();</span><br><span class="line">        strategyConfig.setInclude(<span class="string">&quot;tbl_user&quot;</span>); <span class="comment">// 设置当前参与生成的表名，参数为可变参数</span></span><br><span class="line">        strategyConfig.setTablePrefix(<span class="string">&quot;tbl_&quot;</span>); <span class="comment">// 设置数据库表的前缀名称，实体类名 = 数据库表名 - 前缀名</span></span><br><span class="line">        strategyConfig.setRestControllerStyle(<span class="literal">true</span>); <span class="comment">// 设置是否启用Rest风格</span></span><br><span class="line">        strategyConfig.setVersionFieldName(<span class="string">&quot;version&quot;</span>); <span class="comment">// 设置乐观锁字段名</span></span><br><span class="line">        strategyConfig.setLogicDeleteFieldName(<span class="string">&quot;deleted&quot;</span>); <span class="comment">// 设置逻辑删除字段名</span></span><br><span class="line">        strategyConfig.setEntityLombokModel(<span class="literal">true</span>); <span class="comment">// 设置是否启用lombok</span></span><br><span class="line">        autoGenerator.setStrategy(strategyConfig);</span><br><span class="line"></span><br><span class="line">        autoGenerator.execute();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>糖泥
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://1354478648.github.io/2023/04/29/MybatisPlus%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="MybatisPlus的学习笔记">https://1354478648.github.io/2023/04/29/MybatisPlus的学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag"># 后端</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag"># 数据库</a>
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+              <a href="/tags/MybatisPlus/" rel="tag"># MybatisPlus</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/04/27/SpringBoot%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="SpringBoot的学习笔记">
+      <i class="fa fa-chevron-left"></i> SpringBoot的学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/05/01/Linux%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="Linux的学习笔记">
+      Linux的学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MP%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">MP简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A5%E9%97%A8%E6%A1%88%E4%BE%8B"><span class="nav-number">1.1.</span> <span class="nav-text">入门案例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.</span> <span class="nav-text">简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E5%B1%82%E5%BC%80%E5%8F%91"><span class="nav-number">2.</span> <span class="nav-text">标准数据层开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E5%87%86%E6%95%B0%E6%8D%AE%E5%B1%82CRUD%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.</span> <span class="nav-text">标准数据层CRUD操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Lombok"><span class="nav-number">2.2.</span> <span class="nav-text">Lombok</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">分页查询功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DQL%E7%BC%96%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">DQL编程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.1.</span> <span class="nav-text">条件查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%8A%95%E5%BD%B1"><span class="nav-number">3.2.</span> <span class="nav-text">查询投影</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">查询条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%98%A0%E5%B0%84%E5%8C%B9%E9%85%8D"><span class="nav-number">3.4.</span> <span class="nav-text">映射匹配</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DML%E7%BC%96%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">DML编程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID%E7%94%9F%E6%88%90%E7%AD%96%E7%95%A5"><span class="nav-number">4.1.</span> <span class="nav-text">ID生成策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="nav-number">4.2.</span> <span class="nav-text">全局配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%AE%B0%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">4.3.</span> <span class="nav-text">多记录操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4"><span class="nav-number">4.4.</span> <span class="nav-text">逻辑删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%90%E8%A7%82%E9%94%81"><span class="nav-number">4.5.</span> <span class="nav-text">乐观锁</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%8F%91%EF%BC%9A%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">5.</span> <span class="nav-text">快速开发：代码生成器</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Downey"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Downey</p>
+  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Downey</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">688k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:52</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

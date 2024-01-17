@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="AJAX是浏览器与服务器进行数据通信的技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax的学习笔记">
+<meta property="og:url" content="https://1354478648.github.io/2023/07/18/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="糖泥的个人博客">
+<meta property="og:description" content="AJAX是浏览器与服务器进行数据通信的技术">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-18T05:16:20.000Z">
+<meta property="article:modified_time" content="2023-10-10T06:02:46.479Z">
+<meta property="article:author" content="Downey">
+<meta property="article:tag" content="学习笔记">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Ajax">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://1354478648.github.io/2023/07/18/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ajax的学习笔记 | 糖泥的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">糖泥的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://1354478648.github.io/2023/07/18/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Downey">
+      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="糖泥的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ajax的学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-18 13:16:20" itemprop="dateCreated datePublished" datetime="2023-07-18T13:16:20+08:00">2023-07-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-10 14:02:46" itemprop="dateModified" datetime="2023-10-10T14:02:46+08:00">2023-10-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>30 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>AJAX是浏览器与服务器进行<strong>数据通信</strong>的技术</p>
+<span id="more"></span>
+<h3 id="AJAX入门">AJAX入门</h3>
+<p>AJAX是浏览器与服务器进行<strong>数据通信</strong>的技术</p>
+<h4 id="axios使用">axios使用</h4>
+<p>语法：</p>
+<ol>
+<li>引入axios.js：<a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js">https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js</a></li>
+<li>使用axios函数：传入配置对象；再用<code>.then</code>回调函数接收结果，并做后续处理</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;目标资源地址&#x27;</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//对服务器返回的数据做后续处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：请求目标资源地址，得到省份列表数据</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.引入axios库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.使用axios函数--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>.<span class="property">list</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="查询参数">查询参数</h4>
+<p>定义：浏览器提供给服务器的<strong>额外信息</strong>，让服务器返回浏览器想要的数据<code>http://xxx.com/xxx/xxx?参数名1=值1&amp;参数名2=值2</code><br>
+语法：使用axios提供的<code>params</code>选项（注意：axios在运行时把参数名和值，会拼接到<code>url?参数名=值</code>）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;目标资源地址&#x27;</span>,</span><br><span class="line">    <span class="attr">params</span>: &#123;</span><br><span class="line">        参数名: 值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//对服务器返回的数据做后续处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：携带参数请求目标资源地址，得到城市列表数据</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.引入axios库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.使用axios函数--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/city&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">params</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">pname</span>: <span class="string">&#x27;河北省&#x27;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result.<span class="property">data</span>.<span class="property">list</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="请求方法和数据提交">请求方法和数据提交</h4>
+<p>请求方法：对服务器资源要执行的操作</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">请求方法</th>
+<th style="text-align:center">操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">GET</td>
+<td style="text-align:center">获取数据</td>
+</tr>
+<tr>
+<td style="text-align:center">POST</td>
+<td style="text-align:center">提交数据</td>
+</tr>
+<tr>
+<td style="text-align:center">PUT</td>
+<td style="text-align:center">修改数据（全部）</td>
+</tr>
+<tr>
+<td style="text-align:center">DELETE</td>
+<td style="text-align:center">删除数据</td>
+</tr>
+<tr>
+<td style="text-align:center">PATCH</td>
+<td style="text-align:center">修改数据（部分）</td>
+</tr>
+<tr>
+<td style="text-align:center">语法：axios请求配置：<code>url</code>：请求的URL网址，<code>method</code>：请求的方法，GET可以省略，<code>data</code>：提交数据</td>
+<td style="text-align:center"></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;目标资源地址&#x27;</span>,</span><br><span class="line">    <span class="attr">method</span>: <span class="string">&#x27;请求方法&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        参数名: 值</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//对服务器返回的数据做后续处理</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：通过axios提交用户名和密码，完成注册功能</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>注册用户<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.引入axios库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.使用axios函数--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span>&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/register&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">username</span>: <span class="string">&#x27;downey11&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="错误处理">错误处理</h4>
+<p>语法：在<code>then</code>方法的后面，通过点语法调用<code>catch</code>方法，传入回调函数并定义形参</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">axios</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: <span class="string">&#x27;目标资源地址&#x27;</span></span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//对服务器返回的数据做后续处理</span></span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//处理错误</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：注册案例，重复注册时通过弹框提示用户错误原因</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span>&gt;</span>注册用户<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.引入axios库--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.使用axios函数--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span>&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">axios</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/register&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">username</span>: <span class="string">&#x27;downey11&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">                <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span></span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">        &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">alert</span>(error.<span class="property">response</span>.<span class="property">data</span>.<span class="property">message</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="form-serialize插件">form-serialize插件</h3>
+<p>作用：快速收集表单元素的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.example-form&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> data = <span class="title function_">serialize</span>(form, &#123;<span class="attr">hash</span>: <span class="literal">true</span>, <span class="attr">empty</span>: <span class="literal">true</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>使用<code>serialize</code>函数，快速收集表单元素的值：</p>
+<ol>
+<li>参数1：要获取哪个表单的数据。表单元素设置<code>name</code>属性，值会作为对象的属性名。建议<code>name</code>属性的值，最好和接口文档参数名一致</li>
+<li>参数2：配置对象。<code>hash</code>用于设置获取数据的数据结构，<code>true</code>为js对象，一般请求体里提交给服务器，<code>false</code>为查询字符串；<code>empty</code>用于设置是否获取空值，<code>true</code>获取空值，<code>false</code>不获取空值</li>
+</ol>
+<ul>
+<li>例：快速获取表单数据</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;javascript:;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;example-form&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;uname&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;pwd&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">value</span>=<span class="string">&quot;提交&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--1.将插件引入到自己网页中--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./lib/form-serialize.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--2.使用serialize函数，快速收集表单元素的值--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> form = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.example-form&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> data = <span class="title function_">serialize</span>(form, &#123;<span class="attr">hash</span>: <span class="literal">true</span>, <span class="attr">empty</span>: <span class="literal">true</span>&#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(data)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Bootstrap弹框">Bootstrap弹框</h3>
+<h4 id="属性控制显示和隐藏">属性控制显示和隐藏</h4>
+<p>功能：不离开当前页面，显示单独内容供用户操作<br>
+步骤：</p>
+<ol>
+<li>引入<code>bootstrap.css</code>和<code>bootstrap.js</code></li>
+<li>准备弹框标签，确认结构</li>
+<li>通过自定义属性，控制弹框的显示和隐藏</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入bootstrap.css --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入bootstrap.js --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      目标：使用Bootstrap弹框</span></span><br><span class="line"><span class="comment">      1. 引入bootstrap.css 和 bootstrap.js</span></span><br><span class="line"><span class="comment">      2. 准备弹框标签，确认结构</span></span><br><span class="line"><span class="comment">      3. 通过自定义属性，控制弹框的显示和隐藏</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span> <span class="attr">data-bs-toggle</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">data-bs-target</span>=<span class="string">&quot;.my-box&quot;</span>&gt;</span></span><br><span class="line">      显示弹框</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      弹框标签</span></span><br><span class="line"><span class="comment">      bootstrap的modal弹框，添加modal类名（默认隐藏）</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal my-box&quot;</span> <span class="attr">tabindex</span>=<span class="string">&quot;-1&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 弹框-内容 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-头部 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">&quot;modal-title&quot;</span>&gt;</span>Modal title<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn-close&quot;</span> <span class="attr">data-bs-dismiss</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">aria-label</span>=<span class="string">&quot;Close&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-身体 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span>Modal body text goes here.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-底部 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-secondary&quot;</span> <span class="attr">data-bs-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>Close<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary&quot;</span>&gt;</span>Save changes<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="js控制显示和隐藏">js控制显示和隐藏</h4>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入bootstrap.css --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入bootstrap.js --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      目标：使用Bootstrap弹框</span></span><br><span class="line"><span class="comment">      1. 引入bootstrap.css 和 bootstrap.js</span></span><br><span class="line"><span class="comment">      2. 准备弹框标签，确认结构</span></span><br><span class="line"><span class="comment">      3. 通过自定义属性，控制弹框的显示和隐藏</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary edit-btn&quot;</span>&gt;</span></span><br><span class="line">      编辑姓名</span><br><span class="line">    <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">      弹框标签</span></span><br><span class="line"><span class="comment">      bootstrap的modal弹框，添加modal类名（默认隐藏）</span></span><br><span class="line"><span class="comment">     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal my-box&quot;</span> <span class="attr">tabindex</span>=<span class="string">&quot;-1&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-dialog&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 弹框-内容 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-content&quot;</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-头部 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-header&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">&quot;modal-title&quot;</span>&gt;</span>请输入姓名<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn-close&quot;</span> <span class="attr">data-bs-dismiss</span>=<span class="string">&quot;modal&quot;</span> <span class="attr">aria-label</span>=<span class="string">&quot;Close&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-身体 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-body&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">span</span>&gt;</span>姓名：<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">class</span>=<span class="string">&quot;username&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">          <span class="comment">&lt;!-- 弹框-底部 --&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;modal-footer&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-secondary&quot;</span> <span class="attr">data-bs-dismiss</span>=<span class="string">&quot;modal&quot;</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-primary save-btn&quot;</span>&gt;</span>保存<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.创建弹框对象</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> modalDom = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.my-box&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> modal = <span class="keyword">new</span> bootstrap.<span class="title class_">Modal</span>(modalDom)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//编辑姓名-&gt;点击-&gt;弹框显示</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.edit-btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.username&#x27;</span>).<span class="property">value</span> = <span class="string">&#x27;默认姓名&#x27;</span></span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//显示弹框</span></span></span><br><span class="line"><span class="language-javascript">            modal.<span class="title function_">show</span>()</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//保存-&gt;点击-&gt;获取姓名-&gt;弹框隐藏</span></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.save-btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> username = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.username&#x27;</span>).<span class="property">value</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;把姓名发服务器上&#x27;</span>, username)</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//axios(&#123;&#125;)</span></span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//隐藏弹框</span></span></span><br><span class="line"><span class="language-javascript">            modal.<span class="title function_">hide</span>()</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="XMLHttpRequest">XMLHttpRequest</h3>
+<h4 id="基本使用">基本使用</h4>
+<p>axios内部采用XMLHttpRequest与服务器交互，XHR的使用步骤：</p>
+<ol>
+<li>创建XHR对象</li>
+<li>调用<code>open</code>方法，设置URL和请求方法</li>
+<li>监听<code>loadend</code>事件，接收结果</li>
+<li>调用<code>send</code>方法，发起请求</li>
+</ol>
+<ul>
+<li>例：使用XHR获取省份信息</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.创建XMLHttpRequest对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.配置请求方法和请求URL地址</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//3.监听loadend事件，接收响应结果</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> object = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(object)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//4.发起请求</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">send</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="查询参数-2">查询参数</h4>
+<p>在请求URL地址中手动拼接查询参数</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.创建XMLHttpRequest对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.配置请求方法和请求URL地址</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;http://hmajax.itheima.net/api/city?pname=辽宁省&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//3.监听loadend事件，接收响应结果</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> object = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(object)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//4.发起请求</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">send</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>也可以使用<code>URLSearchParams</code>进行动态地拼接URL地址字符串</p>
+<ul>
+<li>用法：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.创建URLSearchParams对象</span></span><br><span class="line"><span class="keyword">const</span> paramsObj = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(&#123;</span><br><span class="line">    参数名<span class="number">1</span>: 值<span class="number">1</span></span><br><span class="line">    参数名<span class="number">2</span>: 值<span class="number">2</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//2.生成指定格式查询参数字符串</span></span><br><span class="line"><span class="keyword">const</span> queryString = paramsObj.<span class="title function_">toString</span>()</span><br><span class="line"><span class="comment">//结果：参数名1=值1&amp;参数名2=值2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：输入省份和城市名字，使用XHR查询地区列表</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.模拟从控件中获取参数值</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> pname = <span class="string">&#x27;辽宁省&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> cname = <span class="string">&#x27;大连市&#x27;</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.组织查询参数对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> qObj = &#123;</span></span><br><span class="line"><span class="language-javascript">        pname,</span></span><br><span class="line"><span class="language-javascript">        cname</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> paramsObj = <span class="keyword">new</span> <span class="title class_">URLSearchParams</span>(qObj)</span></span><br><span class="line"><span class="language-javascript">    </span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//查询参数对象 -&gt; 查询参数字符串</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> queryString = paramsObj.<span class="title function_">toString</span>()</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//结果：参数名1=值1&amp;参数名2=值2</span></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">console</span>.<span class="title function_">log</span>(queryString)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.创建XMLHttpRequest对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.配置请求方法和请求URL地址</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">open</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">`http://hmajax.itheima.net/api/area?<span class="subst">$&#123;queryString&#125;</span>`</span>)</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//3.监听loadend事件，接收响应结果</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> object = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(object)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//4.发起请求</span></span></span><br><span class="line"><span class="language-javascript">    xhr.<span class="title function_">send</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="数据提交">数据提交</h4>
+<p>需要使用<code>setRequestHeader</code>方法将请求头设置为<code>Content-type: application/json</code>，另外在发送请求时使用<code>send</code>方法使请求体携带JSON字符串</p>
+<ul>
+<li>例：通过XHR提交用户名和密码，完成注册功能</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;my-btn&quot;</span>&gt;</span>注册用户<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.my-btn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>()</span></span><br><span class="line"><span class="language-javascript">        xhr.<span class="title function_">open</span>(<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;http://hmajax.itheima.net/api/register&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">        xhr.<span class="title function_">addEventListener</span>(<span class="string">&#x27;loadend&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(xhr.<span class="property">response</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//设置请求头：告诉服务器内容类型是JSON字符串</span></span></span><br><span class="line"><span class="language-javascript">        xhr.<span class="title function_">setRequestHeader</span>(<span class="string">&#x27;Content-type&#x27;</span>, <span class="string">&#x27;application/json&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//准备提交的数据</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> userObj = &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">username</span>: <span class="string">&#x27;downey666&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">password</span>: <span class="string">&#x27;123456&#x27;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> userStr = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(userObj)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//设置请求体，发起请求</span></span></span><br><span class="line"><span class="language-javascript">        xhr.<span class="title function_">send</span>(userStr)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Promise">Promise</h3>
+<p><code>Promise</code>对象用于表示一个异步操作的最终完成（或失败）及其结果值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.创建Promise对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//2.执行异步代码，并传递结果</span></span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            </span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//成功则调用`resolve(值)`：触发then()执行</span></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//resolve(&#x27;模拟AJAX请求成功的结果&#x27;)</span></span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//失败则调用`reject(值)`：触发catch()执行</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">reject</span>(<span class="string">&#x27;模拟AJAX请求失败的结果&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;, <span class="number">2000</span>)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//3.获取结果</span></span></span><br><span class="line"><span class="language-javascript">    p.<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>一个<code>Promise</code>对象，必然处于以下三种状态之一：</p>
+<ol>
+<li>待定（pending）：初始状态，既没有被兑现，也没有被拒绝</li>
+<li>已兑现（fulfilled）：操作成功完成</li>
+<li>已拒绝（rejected）：操作失败</li>
+</ol>
+<p>注意：<code>Promise</code>对象一旦被兑现或拒绝，就是已敲定了，状态无法再被改变。一旦状态改变，就会调用其关联的处理函数<code>then()</code>或<code>catch()</code></p>
+<h4 id="链式调用">链式调用</h4>
+<blockquote>
+<p>同步代码：逐行执行，需<strong>原地等待结果</strong>后，才继续向下执行；异步代码：调用后<strong>耗时</strong>，不阻塞代码继续执行（不必原地等待），在将来完成后触发一个<strong>回调函数</strong></p>
+</blockquote>
+<p>回调函数地狱：在回调函数中一直向下嵌套回调函数，形成回调函数地狱，将会导致可读性差、异常捕获困难、耦合性严重等问题</p>
+<p>使用<code>Promise</code>链式调用可以解决回调函数地狱问题，解决办法是：使用<code>then()</code>方法返回新<code>Promise</code>对象的特性并传给生成的新<code>Promise</code>对象，一直串联下去</p>
+<ul>
+<li>例：通过<code>then()</code>方法返回新<code>Promise</code>对象继续嵌套<code>then()</code>方法</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.创建Promise对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//模拟请求省份名</span></span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">resolve</span>(<span class="string">&#x27;浙江省&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;, <span class="number">2000</span>)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.获取省份名字</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> p2 = p.<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//3.创建Promise对象</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//return Promise对象最终状态和结果，会影响新的Promise对象</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">resolve</span>(result + <span class="string">&#x27;---杭州市&#x27;</span>)</span></span><br><span class="line"><span class="language-javascript">            &#125;, <span class="number">2000</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    p2.<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>then()</code>方法返回新的axios请求，继续嵌套<code>then()</code>方法</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入axios库--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">let</span> pname = <span class="string">&#x27;&#x27;</span></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span>&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        pname = result.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(pname)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/city&#x27;</span>, <span class="attr">params</span>: &#123;pname&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> cname = result.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(cname)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">return</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/area&#x27;</span>, <span class="attr">params</span>: &#123;pname, cname&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> aname = result.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(aname)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="async函数和await"><code>async</code>函数和<code>await</code></h4>
+<p><code>async</code>函数和<code>await</code>关键字可以用一种更简洁的方式写出基于<code>Promise</code>的异步行为，而无需可以地链式调用<code>promise</code></p>
+<ul>
+<li>在<code>async</code>函数内，使用<code>await</code>关键字取代<code>then</code>函数，等待获取<code>Promise</code>对象成功状态的结果值</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入axios库--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.定义由async修饰的函数</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//2.await等待Promise对象成功的结果</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> pObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span>&#125;)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> pname = pObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript">        </span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> cObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/city&#x27;</span>, <span class="attr">params</span>: &#123;pname&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> cname = cObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> aObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/area&#x27;</span>, <span class="attr">params</span>: &#123;pname, cname&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">const</span> aname = aObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(pname)</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(cname)</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(aname)</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//3.执行函数</span></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">getData</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用<code>try...catch</code>捕获错误</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入axios库--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//1.try包裹可能产生错误的代码</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">try</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> pObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123; <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/province&#x27;</span> &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> pname = pObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> cObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123; <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/city&#x27;</span>, <span class="attr">params</span>: &#123; pname &#125; &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> cname = cObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> aObj = <span class="keyword">await</span> <span class="title function_">axios</span>(&#123; <span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/areaXXXXXX&#x27;</span>, <span class="attr">params</span>: &#123; pname, cname &#125; &#125;)</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">const</span> aname = aObj.<span class="property">data</span>.<span class="property">list</span>[<span class="number">0</span>]</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(pname)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(cname)</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(aname)</span></span><br><span class="line"><span class="language-javascript">        &#125; <span class="keyword">catch</span> (error) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//2.调用catch块，接收错误信息</span></span></span><br><span class="line"><span class="language-javascript">            <span class="comment">//如果try块中某行代码报错后，try中剩余的代码将不会执行</span></span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(error.<span class="property">response</span>.<span class="property">data</span>.<span class="property">message</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">getData</span>()</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="all-方法"><code>.all()</code>方法</h4>
+<p>合并多个<code>Promise</code>对象，等待所有<strong>同时成功</strong>完成（或某一个失败），做后续逻辑</p>
+<ul>
+<li>语法：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([<span class="title class_">Promise</span>对象<span class="number">1</span>, <span class="title class_">Promise</span>对象<span class="number">2</span>, <span class="title class_">Promise</span>对象<span class="number">3</span>])</span><br><span class="line">p.<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//result结果：[Promise对象成功结果, Promise对象成功结果]</span></span><br><span class="line">&#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//抛出第一个失败的Promise对象的异常</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>例：同时请求北京、上海、广州、深圳的天气</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//1.请求城市天气，得到Promise对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> bjPromise = <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/weather&#x27;</span>, <span class="attr">params</span>: &#123;<span class="attr">city</span>: <span class="string">&#x27;110100&#x27;</span>&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> shPromise = <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/weather&#x27;</span>, <span class="attr">params</span>: &#123;<span class="attr">city</span>: <span class="string">&#x27;310100&#x27;</span>&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> gzPromise = <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/weather&#x27;</span>, <span class="attr">params</span>: &#123;<span class="attr">city</span>: <span class="string">&#x27;440100&#x27;</span>&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> szPromise = <span class="title function_">axios</span>(&#123;<span class="attr">url</span>: <span class="string">&#x27;http://hmajax.itheima.net/api/weather&#x27;</span>, <span class="attr">params</span>: &#123;<span class="attr">city</span>: <span class="string">&#x27;440300&#x27;</span>&#125;&#125;)</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//2.使用Promise.all，合并多个Promise对象</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> p = <span class="title class_">Promise</span>.<span class="title function_">all</span>([bjPromise, shPromise, gzPromise, szPromise])</span></span><br><span class="line"><span class="language-javascript">    p.<span class="title function_">then</span>(<span class="function"><span class="params">result</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(result)</span></span><br><span class="line"><span class="language-javascript">        result.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="variable language_">console</span>.<span class="title function_">log</span>(item.<span class="property">data</span>.<span class="property">data</span>.<span class="property">area</span> + <span class="string">&#x27;---&#x27;</span> + item.<span class="property">data</span>.<span class="property">data</span>.<span class="property">weather</span>)</span></span><br><span class="line"><span class="language-javascript">        &#125;)</span></span><br><span class="line"><span class="language-javascript">    &#125;).<span class="title function_">catch</span>(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="variable language_">console</span>.<span class="title function_">log</span>(error)</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="事件循环">事件循环</h3>
+<p>事件循环：执行代码和收集异步任务，在调用栈空闲时，反复调用任务队列里回调函数执行机制</p>
+<ul>
+<li>为什么有事件循环？<br>
+因为js是单线程的，为了<strong>不阻塞</strong>js引擎，设计执行代码的模型。</li>
+<li>js内代码如何执行？<br>
+执行同步代码，遇到<strong>异步代码</strong>交给<strong>宿主</strong>浏览器环境执行<br>
+异步有了结果后，把回调函数放入<strong>任务队列排队</strong><br>
+当调用栈<strong>空闲</strong>后，反复调用任务队列里的回调函数</li>
+</ul>
+<h4 id="宏任务和微任务">宏任务和微任务</h4>
+<ul>
+<li>什么是宏任务？<br>
+<strong>浏览器</strong>执行的异步代码，例如：js执行脚本事件、<code>setTimeout</code>、<code>setInterval</code>、AJAX请求完成事件、用户交互事件等</li>
+<li>什么是微任务？<br>
+<strong>js引擎</strong>执行的异步代码，例如：<code>Promise</code>对象<code>.then()</code>的回调</li>
+</ul>
+<p>js内代码如何执行？</p>
+<ol>
+<li>执行第一个<code>&lt;script&gt;</code>标签的脚本事件宏任务里面的<strong>同步代码</strong></li>
+<li>遇到宏任务或微任务交给宿主环境，有结果回调函数进入对应队列</li>
+<li>当执行栈空闲时，<strong>清空微任务</strong>队列，再执行<strong>下一个宏任务</strong>，从1再来</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>糖泥
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://1354478648.github.io/2023/07/18/Ajax%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="Ajax的学习笔记">https://1354478648.github.io/2023/07/18/Ajax的学习笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+              <a href="/tags/Ajax/" rel="tag"># Ajax</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/19/Redis%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="Redis的学习笔记">
+      <i class="fa fa-chevron-left"></i> Redis的学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/07/25/Vue%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="Vue的学习笔记">
+      Vue的学习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#AJAX%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">AJAX入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#axios%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">axios使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%8F%82%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">查询参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E6%8F%90%E4%BA%A4"><span class="nav-number">1.3.</span> <span class="nav-text">请求方法和数据提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">1.4.</span> <span class="nav-text">错误处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#form-serialize%E6%8F%92%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">form-serialize插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bootstrap%E5%BC%B9%E6%A1%86"><span class="nav-number">3.</span> <span class="nav-text">Bootstrap弹框</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%9E%E6%80%A7%E6%8E%A7%E5%88%B6%E6%98%BE%E7%A4%BA%E5%92%8C%E9%9A%90%E8%97%8F"><span class="nav-number">3.1.</span> <span class="nav-text">属性控制显示和隐藏</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#js%E6%8E%A7%E5%88%B6%E6%98%BE%E7%A4%BA%E5%92%8C%E9%9A%90%E8%97%8F"><span class="nav-number">3.2.</span> <span class="nav-text">js控制显示和隐藏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XMLHttpRequest"><span class="nav-number">4.</span> <span class="nav-text">XMLHttpRequest</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">4.1.</span> <span class="nav-text">基本使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E8%AF%A2%E5%8F%82%E6%95%B0-2"><span class="nav-number">4.2.</span> <span class="nav-text">查询参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%8F%90%E4%BA%A4"><span class="nav-number">4.3.</span> <span class="nav-text">数据提交</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise"><span class="nav-number">5.</span> <span class="nav-text">Promise</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8"><span class="nav-number">5.1.</span> <span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#async%E5%87%BD%E6%95%B0%E5%92%8Cawait"><span class="nav-number">5.2.</span> <span class="nav-text">async函数和await</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#all-%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">.all()方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF"><span class="nav-number">6.</span> <span class="nav-text">事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%8F%E4%BB%BB%E5%8A%A1%E5%92%8C%E5%BE%AE%E4%BB%BB%E5%8A%A1"><span class="nav-number">6.1.</span> <span class="nav-text">宏任务和微任务</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Downey"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Downey</p>
+  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">44</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Downey</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">688k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">20:52</span>
+</div>
+  <div class="powered-by">
+    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
+  </div>
+
+<!-- 网站运行时间的设置 -->
+<span id="timeDate">载入天数...</span>
+<span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
+    }
+setInterval("createtime()",250);
+</script>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
