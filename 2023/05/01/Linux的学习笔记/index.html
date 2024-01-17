@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Linux安装  安装VMWare 除了修改安装位置，其他一律无脑下一步 安装CentOS镜像 选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD&#x2F;DVD，选择”使用ISO映像文件“，选择Ce">
+  <meta name="description" content="Linux安装  安装VMWare 除了修改安装位置，其他一律无脑下一步 安装CentOS镜像 选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD&#x2F;DVD，选择”使用ISO映像文件“">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux的学习笔记">
 <meta property="og:url" content="http://1354478648.github.io/2023/05/01/Linux%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="糖泥的个人博客">
-<meta property="og:description" content="Linux安装  安装VMWare 除了修改安装位置，其他一律无脑下一步 安装CentOS镜像 选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD&#x2F;DVD，选择”使用ISO映像文件“，选择Ce">
+<meta property="og:description" content="Linux安装  安装VMWare 除了修改安装位置，其他一律无脑下一步 安装CentOS镜像 选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD&#x2F;DVD，选择”使用ISO映像文件“">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-05-01T07:55:29.000Z">
 <meta property="article:modified_time" content="2023-10-10T14:53:00.260Z">
@@ -275,260 +275,221 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="Linux安装">Linux安装</h3>
-<ol>
-<li>安装VMWare<br>
-除了修改安装位置，其他一律无脑下一步</li>
-<li>安装CentOS镜像<br>
-选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD/DVD，选择”使用ISO映像文件“，选择CentOS镜像的文件路径-完成<br>
-进入系统-选择”Install CentOS 7“-选择语言-确认安装信息摘要，开始安装<br>
+        <h3 id="linux安装">Linux安装</h3>
+<ol type="1">
+<li>安装VMWare 除了修改安装位置，其他一律无脑下一步</li>
+<li>安装CentOS镜像
+选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7
+64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD/DVD，选择”使用ISO映像文件“，选择CentOS镜像的文件路径-完成
+进入系统-选择”Install CentOS 7“-选择语言-确认安装信息摘要，开始安装
 设置Root密码</li>
-<li>网卡设置<br>
-输入以下命令修改网络初始化配置，设定网卡在系统启动时初始化</li>
-</ol>
+<li>网卡设置 输入以下命令修改网络初始化配置，设定网卡在系统启动时初始化
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">cd etc</span><br><span class="line">cd sysconfig</span><br><span class="line">cd network-scripts</span><br><span class="line">vi ifcfg-ens33</span><br></pre></td></tr></table></figure>
-<p>进入编辑页面后，敲击i键进入编辑状态，把<code>ONBOOT=no</code>修改为<code>ONBOOT=yes</code>，敲击ESC键，输入<code>:wq</code>保存退出<br>
-4. 安装SSH连接工具<br>
-输入<code>ip addr</code>命令获取ip地址<br>
-安装FinalShell，除了安装位置，其他一律无脑下一步<br>
-点击左上角“文件夹”图标-点击左上角白色带加号文件夹，选择“SSH连接”-设置名称，输入刚才获取到的ip地址，输入用户名密码<br>
-点击快速连接进入系统-选择保存密码</p>
+进入编辑页面后，敲击i键进入编辑状态，把<code>ONBOOT=no</code>修改为<code>ONBOOT=yes</code>，敲击ESC键，输入<code>:wq</code>保存退出</li>
+<li>安装SSH连接工具 输入<code>ip addr</code>命令获取ip地址
+安装FinalShell，除了安装位置，其他一律无脑下一步
+点击左上角“文件夹”图标-点击左上角白色带加号文件夹，选择“SSH连接”-设置名称，输入刚才获取到的ip地址，输入用户名密码
+点击快速连接进入系统-选择保存密码</li>
+</ol>
 <span id="more"></span>
 <h3 id="常用命令">常用命令</h3>
 <h4 id="简单命令">简单命令</h4>
 <table>
 <thead>
-<tr>
-<th style="text-align:center">命令</th>
-<th style="text-align:center">对应英文</th>
-<th style="text-align:center">作用</th>
+<tr class="header">
+<th style="text-align: center;">命令</th>
+<th style="text-align: center;">对应英文</th>
+<th style="text-align: center;">作用</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:center">ls</td>
-<td style="text-align:center">list</td>
-<td style="text-align:center">查看当前目录下的内容</td>
+<tr class="odd">
+<td style="text-align: center;">ls</td>
+<td style="text-align: center;">list</td>
+<td style="text-align: center;">查看当前目录下的内容</td>
 </tr>
-<tr>
-<td style="text-align:center">pwd</td>
-<td style="text-align:center">print work directory</td>
-<td style="text-align:center">查看当前所在目录</td>
+<tr class="even">
+<td style="text-align: center;">pwd</td>
+<td style="text-align: center;">print work directory</td>
+<td style="text-align: center;">查看当前所在目录</td>
 </tr>
-<tr>
-<td style="text-align:center">cd [目录名]</td>
-<td style="text-align:center">change directory</td>
-<td style="text-align:center">切换目录</td>
+<tr class="odd">
+<td style="text-align: center;">cd [目录名]</td>
+<td style="text-align: center;">change directory</td>
+<td style="text-align: center;">切换目录</td>
 </tr>
-<tr>
-<td style="text-align:center">touch [文件名]</td>
-<td style="text-align:center">touch</td>
-<td style="text-align:center">如果文件不存在，新建文件</td>
+<tr class="even">
+<td style="text-align: center;">touch [文件名]</td>
+<td style="text-align: center;">touch</td>
+<td style="text-align: center;">如果文件不存在，新建文件</td>
 </tr>
-<tr>
-<td style="text-align:center">mkdir [目录名]</td>
-<td style="text-align:center">make directory</td>
-<td style="text-align:center">创建目录</td>
+<tr class="odd">
+<td style="text-align: center;">mkdir [目录名]</td>
+<td style="text-align: center;">make directory</td>
+<td style="text-align: center;">创建目录</td>
 </tr>
-<tr>
-<td style="text-align:center">rm [文件名]</td>
-<td style="text-align:center">remove</td>
-<td style="text-align:center">删除指定文件</td>
+<tr class="even">
+<td style="text-align: center;">rm [文件名]</td>
+<td style="text-align: center;">remove</td>
+<td style="text-align: center;">删除指定文件</td>
 </tr>
 </tbody>
 </table>
 <p><strong>命令使用技巧：</strong></p>
-<ol>
+<ol type="1">
 <li>Tab键自动补全</li>
 <li>连续两次Tab键，给出操作提示</li>
 <li>使用上下箭头键快速调出曾经使用过的命令</li>
 <li>使用<code>clear</code>命令或者Ctrl+l快捷键实现清屏</li>
 </ol>
-<p><strong>命令格式：</strong><br>
-<code>command [-options] [parameter]</code></p>
-<ol>
-<li><code>command</code>：命令名</li>
-<li><code>[-options]</code>：选项，可用来对命令进行控制，也可以省略</li>
-<li><code>[parameter]</code>：传给命令的参数，可以是零个、一个或者多个</li>
-</ol>
+<p><strong>命令格式：</strong>
+<code>command [-options] [parameter]</code> 1.
+<code>command</code>：命令名 2.
+<code>[-options]</code>：选项，可用来对命令进行控制，也可以省略 3.
+<code>[parameter]</code>：传给命令的参数，可以是零个、一个或者多个</p>
 <h4 id="文件目录操作命令">文件目录操作命令</h4>
 <h5 id="ls">ls</h5>
-<p>**作用：**显示指定目录下的内容<br>
-<strong>语法：</strong><code>ls [-al] [dir]</code><br>
-<strong>说明：</strong><br>
-<code>-a</code>：显示所有文件及目录（.开头的隐藏文件也会列出）<br>
-<code>-l</code>：除文件名外，同时将文件形态（d表示目录，-表示文件）、权限、拥有者、文件大小等详细信息<br>
+<p><strong>作用：</strong>显示指定目录下的内容
+<strong>语法：</strong><code>ls [-al] [dir]</code>
+<strong>说明：</strong>
+<code>-a</code>：显示所有文件及目录（.开头的隐藏文件也会列出）
+<code>-l</code>：除文件名外，同时将文件形态（d表示目录，-表示文件）、权限、拥有者、文件大小等详细信息
 <code>ls -l</code>可以简写为<code>ll</code></p>
 <h5 id="cd">cd</h5>
-<p>**作用：**用于切换当前工作目录，即进入指定目录<br>
-<strong>语法：</strong><code>cd [dirName]</code><br>
-<strong>说明：</strong><br>
-~表示用户的home目录<br>
-.表示当前所在的目录<br>
-…表示当前所在的目录的上级目录<br>
+<p><strong>作用：</strong>用于切换当前工作目录，即进入指定目录
+<strong>语法：</strong><code>cd [dirName]</code> <strong>说明：</strong>
+~表示用户的home目录 .表示当前所在的目录 ..表示当前所在的目录的上级目录
 比如：<code>cd ~</code>切换到当前用户的home目录，<code>cd ..</code>切换到当前目录的上一级目录</p>
 <h5 id="cat">cat</h5>
-<p>**作用：**用于显示文件内容<br>
-<strong>语法：</strong><code>cat [-n] fileName</code><br>
+<p><strong>作用：</strong>用于显示文件内容
+<strong>语法：</strong><code>cat [-n] fileName</code>
 <strong>说明：</strong><code>-n</code>表示从1开始对所有输出的行数编号</p>
 <h5 id="more">more</h5>
-<p>**作用：**以分页的形式显示文件内容<br>
-<strong>语法：</strong><code>more fileName</code><br>
-<strong>说明：</strong><br>
-回车键：向下滚动一行<br>
-空格键：向下滚动一屏<br>
-b：返回上一屏<br>
-q或Ctrl+c：退出more</p>
+<p><strong>作用：</strong>以分页的形式显示文件内容
+<strong>语法：</strong><code>more fileName</code>
+<strong>说明：</strong> 回车键：向下滚动一行 空格键：向下滚动一屏
+b：返回上一屏 q或Ctrl+c：退出more</p>
 <h5 id="tail">tail</h5>
-<p>**作用：**查看文件末尾的内容<br>
-<strong>语法：</strong><code>tail [-f] fileName</code><br>
-<strong>说明：</strong><code>-f</code>动态读取文件末尾内容并显示，通常用于日志文件的内容输出<br>
-比如：<br>
-<code>tail /etc/profile</code>显示/etc目录下的profile文件末尾10行的内容<br>
-<code>tail -20 /etc/profile</code>显示/etc目录下的profile文件末尾20行的内容<br>
+<p><strong>作用：</strong>查看文件末尾的内容
+<strong>语法：</strong><code>tail [-f] fileName</code>
+<strong>说明：</strong><code>-f</code>动态读取文件末尾内容并显示，通常用于日志文件的内容输出
+比如：
+<code>tail /etc/profile</code>显示/etc目录下的profile文件末尾10行的内容
+<code>tail -20 /etc/profile</code>显示/etc目录下的profile文件末尾20行的内容
 <code>tail -f /etc/profile</code>动态读取/etc目录下的profile文件末尾的内容</p>
 <h5 id="mkdir">mkdir</h5>
-<p>**作用：**创建目录<br>
-<strong>语法：</strong><code>mkdir [-p] dirName</code><br>
-<strong>说明：</strong><code>-p</code>确保目录名称存在，不存在的就创建一个。通过此选项，可以实现多层目录同时创建<br>
+<p><strong>作用：</strong>创建目录
+<strong>语法：</strong><code>mkdir [-p] dirName</code>
+<strong>说明：</strong><code>-p</code>确保目录名称存在，不存在的就创建一个。通过此选项，可以实现多层目录同时创建
 比如：<code>mkdir -p test/demo</code>在工作目录下的test目录下建立名为demo的子目录，如果test目录不存在，则建立一个</p>
 <h5 id="rmdir">rmdir</h5>
-<p>**作用：**删除空目录<br>
-<strong>语法：</strong><code>rmdir [-p] dirName</code><br>
-<strong>说明：</strong><code>-p</code>当子目录被删除后使父目录为空目录的话，一并删除<br>
-比如：<br>
-<code>rmdir test</code>删除名为test的空目录<br>
-<code>rmdir -p test/demo</code>删除test目录下的demo目录，如果demo目录删除后test目录为空目录，则也被删除<br>
+<p><strong>作用：</strong>删除空目录
+<strong>语法：</strong><code>rmdir [-p] dirName</code>
+<strong>说明：</strong><code>-p</code>当子目录被删除后使父目录为空目录的话，一并删除
+比如： <code>rmdir test</code>删除名为test的空目录
+<code>rmdir -p test/demo</code>删除test目录下的demo目录，如果demo目录删除后test目录为空目录，则也被删除
 <code>rmdir test*</code>删除名称以test开头的空目录</p>
 <h5 id="rm">rm</h5>
-<p>**作用：**删除文件或者目录<br>
-<strong>语法：</strong><code>rm [-rf] name</code><br>
-<strong>说明：</strong><br>
-<code>-r</code>将目录及目录中所有文件（目录）逐一删除，即递归删除<br>
-<code>-f</code>无需确认，直接删除<br>
-比如：<br>
-<code>rm -r test/</code>删除名为test的目录和目录中所有文件，删除前需确认<br>
-<code>rm -rf test/</code>无需确认，直接删除名为test的目录和目录中所有文件<br>
+<p><strong>作用：</strong>删除文件或者目录
+<strong>语法：</strong><code>rm [-rf] name</code>
+<strong>说明：</strong>
+<code>-r</code>将目录及目录中所有文件（目录）逐一删除，即递归删除
+<code>-f</code>无需确认，直接删除 比如：
+<code>rm -r test/</code>删除名为test的目录和目录中所有文件，删除前需确认
+<code>rm -rf test/</code>无需确认，直接删除名为test的目录和目录中所有文件
 <code>rm -f hello.txt</code>无需确认，直接删除hello.txt文件</p>
 <h4 id="拷贝移动命令">拷贝移动命令</h4>
 <h5 id="cp">cp</h5>
-<p>**作用：**用于复制文件或目录<br>
-<strong>语法：</strong><code>cp [-r] source dest</code><br>
-<strong>说明：</strong><code>-r</code>如果复制的是目录需要使用此选项，此时将复制该目录下所有的子目录和文件<br>
-比如：<br>
-<code>cp hello.txt test/</code>将hello.txt复制到test目录下<br>
-<code>cp hello.txt ./hi.txt</code>将hello.txt复制到当前目录，并改名为hi.txt<br>
-<code>cp -r test/ ./demo/</code>将test目录和目录下所有文件复制到demo目录下<br>
+<p><strong>作用：</strong>用于复制文件或目录
+<strong>语法：</strong><code>cp [-r] source dest</code>
+<strong>说明：</strong><code>-r</code>如果复制的是目录需要使用此选项，此时将复制该目录下所有的子目录和文件
+比如： <code>cp hello.txt test/</code>将hello.txt复制到test目录下
+<code>cp hello.txt ./hi.txt</code>将hello.txt复制到当前目录，并改名为hi.txt
+<code>cp -r test/ ./demo/</code>将test目录和目录下所有文件复制到demo目录下
 <code>cp -r test/* ./demo/</code>将test目录下所有文件复制到demo目录下</p>
 <h5 id="mv">mv</h5>
-<p>**作用：**为文件或目录改名，或将文件或目录移动到其他位置<br>
-<strong>语法：</strong><code>mv source dest</code><br>
-比如：<br>
-<code>mv hello.txt hi.txt</code>将hello.txt改名为hi.txt<br>
-<code>mv hi.txt test/</code>将hi.txt移动到test目录下<br>
-<code>mv hi.txt test/hello.txt</code>将hi.txt移动到test目录下，并改名为hello.txt<br>
-<code>mv test/ demo/</code>如果demo目录不存在，将test目录改名为demo目录<br>
+<p><strong>作用：</strong>为文件或目录改名，或将文件或目录移动到其他位置
+<strong>语法：</strong><code>mv source dest</code> 比如：
+<code>mv hello.txt hi.txt</code>将hello.txt改名为hi.txt
+<code>mv hi.txt test/</code>将hi.txt移动到test目录下
+<code>mv hi.txt test/hello.txt</code>将hi.txt移动到test目录下，并改名为hello.txt
+<code>mv test/ demo/</code>如果demo目录不存在，将test目录改名为demo目录
 <code>mv test/ demo/</code>如果demo目录存在，将test目录移动到demo目录</p>
-<h4 id="打包压缩命令：tar">打包压缩命令：tar</h4>
-<p>**作用：**对文件进行打包、解包、压缩、解压<br>
-<strong>语法：</strong><code>tar [-zcxvf] fileName [files]</code><br>
-包文件后缀为.tar表示只是完成了打包，并没有压缩<br>
-包文件后缀为.tar.gz表示打包的同时还进行了压缩<br>
-<strong>说明：</strong><br>
-<code>-z</code>代表的是gzip，通过gzip命令处理文件，gzip可以对文件压缩或者解压<br>
-<code>-c</code>代表的是create，即创建新的包文件<br>
-<code>-x</code>代表的是extract，实现从包文件中还原文件<br>
-<code>-v</code>代表的是verbose，显示命令的执行过程<br>
-<code>-f</code>代表的是file，用于指定包文件的名称<br>
-比如：</p>
-<ol>
-<li>打包：<br>
-<code>tar -cvf hello.tar ./*</code>将当前目录下所有文件打包，打包后的文件名为hello.tar<br>
-<code>tar -zcvf hello.tar.gz ./*</code>将当前目录下所有文件打包并压缩，打包后的文件名为hello.tar.gz</li>
-<li>解包<br>
-<code>tar -xvf hello.tar</code>将hello.tar文件进行解包，并将解包后的文件放在当前目录<br>
-**<code>tar -zxvf hello.tar.gz</code>**将hello.tar.gz文件进行解压，并将解压后的文件放在当前目录<br>
-**<code>tar -zxvf hello.tar.gz -C /usr/local</code>**将hello.tar.gz文件进行解压，并将解压后的文件放在指定目录</li>
-</ol>
-<h4 id="文本编辑命令：vi-vim">文本编辑命令：vi/vim</h4>
-<p><strong>作用：</strong><code>vi</code>命令是Linux系统提供的一个文本编辑工具，可以对文件内容进行编辑，类似于Windows中的记事本<br>
-<strong>语法：</strong><code>vi fileName</code><br>
-<strong>说明：</strong></p>
-<ol>
-<li><code>vim</code>是从<code>vi</code>发展来的一个功能更加强大的文本编辑工具，在编辑文本时可以对文本内容进行着色，方便我们对文件进行编辑处理，所以实际工作中<code>vim</code>更加常用</li>
-<li>要使用<code>vim</code>命令，需要我们自己完成安装。可以使用下面的命令来完成安装<code>yum install vim</code></li>
-</ol>
+<h4 id="打包压缩命令tar">打包压缩命令：tar</h4>
+<p><strong>作用：</strong>对文件进行打包、解包、压缩、解压
+<strong>语法：</strong><code>tar [-zcxvf] fileName [files]</code>
+包文件后缀为.tar表示只是完成了打包，并没有压缩
+包文件后缀为.tar.gz表示打包的同时还进行了压缩 <strong>说明：</strong>
+<code>-z</code>代表的是gzip，通过gzip命令处理文件，gzip可以对文件压缩或者解压
+<code>-c</code>代表的是create，即创建新的包文件
+<code>-x</code>代表的是extract，实现从包文件中还原文件
+<code>-v</code>代表的是verbose，显示命令的执行过程
+<code>-f</code>代表的是file，用于指定包文件的名称 比如： 1. 打包：
+<code>tar -cvf hello.tar ./*</code>将当前目录下所有文件打包，打包后的文件名为hello.tar
+<code>tar -zcvf hello.tar.gz ./*</code>将当前目录下所有文件打包并压缩，打包后的文件名为hello.tar.gz
+2. 解包
+<code>tar -xvf hello.tar</code>将hello.tar文件进行解包，并将解包后的文件放在当前目录
+<strong><code>tar -zxvf hello.tar.gz</code></strong>将hello.tar.gz文件进行解压，并将解压后的文件放在当前目录
+<strong><code>tar -zxvf hello.tar.gz -C /usr/local</code></strong>将hello.tar.gz文件进行解压，并将解压后的文件放在指定目录</p>
+<h4 id="文本编辑命令vivim">文本编辑命令：vi/vim</h4>
+<p><strong>作用：</strong><code>vi</code>命令是Linux系统提供的一个文本编辑工具，可以对文件内容进行编辑，类似于Windows中的记事本
+<strong>语法：</strong><code>vi fileName</code> <strong>说明：</strong>
+1.
+<code>vim</code>是从<code>vi</code>发展来的一个功能更加强大的文本编辑工具，在编辑文本时可以对文本内容进行着色，方便我们对文件进行编辑处理，所以实际工作中<code>vim</code>更加常用
+2.
+要使用<code>vim</code>命令，需要我们自己完成安装。可以使用下面的命令来完成安装<code>yum install vim</code></p>
 <h5 id="vim">vim</h5>
-<p>**作用：**对文件内容进行编辑，<code>vim</code>其实就是一个文本编辑器<br>
-<strong>语法：</strong><code>vim fileName</code><br>
-<strong>说明：</strong></p>
-<ol>
-<li>在使用<code>vim</code>命令编辑文件时，如果指定的文件存在则直接打开此文件。如果指定的文件不存在则新建文件</li>
-<li><code>vim</code>在进行文本编辑时共分为三种模式：命令模式（Command mode）、插入模式（Insert mode）和底行模式（Last line mode）</li>
-</ol>
-<p><strong>针对<code>vim</code>中的三种模式说明如下：</strong></p>
-<ul>
-<li>命令模式：</li>
-</ul>
-<ol>
-<li>命令模式下可以查看文件内容、移动光标（上下左右箭头、gg、G）</li>
-<li>通过<code>vim</code>命令打开文件后，默认进入命令模式</li>
-<li>另外两种模式需要首先进入命令模式，才能进入彼此</li>
-</ol>
-<ul>
-<li>插入模式：</li>
-</ul>
-<ol>
-<li>插入模式下可以对文件内容进行编辑</li>
-<li>在命令模式下按下<code>i</code>、<code>a</code>和<code>o</code>键任何一个，可以进入插入模式。进入插入模式后，下方会出现inset字样</li>
-<li>在插入模式下按下Esc键，回到命令模式</li>
-</ol>
-<ul>
-<li>底行模式</li>
-</ul>
-<ol>
-<li>底行模式下可以通过命令对文件内容进行查找、显示行号、退出等操作</li>
-<li>在命令模式下按下<code>:</code>和<code>/</code>键任何一个，可以进入底行模式</li>
-<li>通过<code>/</code>方式进入底行模式后，可以对文件内容进行查找，比如<code>/name</code>查找name文本</li>
-<li>通过<code>:</code>方式进入底行模式后，可以输入<code>wq</code>（保存并退出）、<code>q!</code>（不保存退出）、<code>set nu</code>显示行号</li>
-</ol>
+<p><strong>作用：</strong>对文件内容进行编辑，<code>vim</code>其实就是一个文本编辑器
+<strong>语法：</strong><code>vim fileName</code> <strong>说明：</strong>
+1.
+在使用<code>vim</code>命令编辑文件时，如果指定的文件存在则直接打开此文件。如果指定的文件不存在则新建文件
+2. <code>vim</code>在进行文本编辑时共分为三种模式：命令模式（Command
+mode）、插入模式（Insert mode）和底行模式（Last line mode）</p>
+<p><strong>针对<code>vim</code>中的三种模式说明如下：</strong> -
+命令模式： 1.
+命令模式下可以查看文件内容、移动光标（上下左右箭头、gg、G） 2.
+通过<code>vim</code>命令打开文件后，默认进入命令模式 3.
+另外两种模式需要首先进入命令模式，才能进入彼此 - 插入模式： 1.
+插入模式下可以对文件内容进行编辑 2.
+在命令模式下按下<code>i</code>、<code>a</code>和<code>o</code>键任何一个，可以进入插入模式。进入插入模式后，下方会出现inset字样
+3. 在插入模式下按下Esc键，回到命令模式 - 底行模式 1.
+底行模式下可以通过命令对文件内容进行查找、显示行号、退出等操作 2.
+在命令模式下按下<code>:</code>和<code>/</code>键任何一个，可以进入底行模式
+3.
+通过<code>/</code>方式进入底行模式后，可以对文件内容进行查找，比如<code>/name</code>查找name文本
+4.
+通过<code>:</code>方式进入底行模式后，可以输入<code>wq</code>（保存并退出）、<code>q!</code>（不保存退出）、<code>set nu</code>显示行号</p>
 <h4 id="查找命令">查找命令</h4>
 <h5 id="find">find</h5>
-<p>**作用：**在指定目录下查找文件<br>
-<strong>语法：</strong><code>find dirName -option fileName</code><br>
-比如：<br>
-<code>find . -name &quot;*.java&quot;</code>在当前目录及其子目录查找.java结尾的文件<br>
-<code>find /test -name &quot;*.java&quot;</code>在test目录及其子目录查找.java结尾的文件</p>
+<p><strong>作用：</strong>在指定目录下查找文件
+<strong>语法：</strong><code>find dirName -option fileName</code> 比如：
+<code>find . -name "*.java"</code>在当前目录及其子目录查找.java结尾的文件
+<code>find /test -name "*.java"</code>在test目录及其子目录查找.java结尾的文件</p>
 <h5 id="grep">grep</h5>
-<p>**作用：**从指定文件中查找指定的文本内容<br>
-<strong>语法：</strong><code>grep word fileName</code><br>
-比如：<br>
-<code>grep Hello HelloWorld.java</code>查找HelloWorld.java文件中出现的Hello字符串的位置<br>
+<p><strong>作用：</strong>从指定文件中查找指定的文本内容
+<strong>语法：</strong><code>grep word fileName</code> 比如：
+<code>grep Hello HelloWorld.java</code>查找HelloWorld.java文件中出现的Hello字符串的位置
 <code>grep hello *.java</code>查找当前目录中所有.java结尾的文件中包含hello字符串的位置</p>
 <h3 id="软件安装">软件安装</h3>
 <h4 id="软件安装方式">软件安装方式</h4>
-<ol>
+<ol type="1">
 <li>二进制发布包安装：软件已经针对具体平台编译打包发布，只要解压，修改配置即可</li>
 <li>rpm安装：软件已经按照redhat的包管理规范进行打包，使用rpm命令进行安装，不能自行解决库依赖问题</li>
 <li>yum安装：一种在线软件安装方式，本质上还是rpm安装，自动下载安装包并安装，安装过程中自动解决库依赖问题</li>
-<li>源码编译安装：软件以源码工程的形式发布，需要自己编译打包</li>
-</ol>
-<h4 id="安装jdk">安装jdk</h4>
-<ol>
+<li>源码编译安装：软件以源码工程的形式发布，需要自己编译打包 ####
+安装jdk</li>
 <li>使用FinalShell自带的上传工具将jdk的二进制发布包上传到Linux</li>
 <li>解压安装包，命令为<code>tar -zxvf jdk-8u171-linux-x64.tar.gz -C /usr/local</code></li>
-<li>配置环境变量，使用<code>vim</code>命令修改<code>/etc/profile</code>文件，在文件模式加入以下配置：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/jdk1.8.0_171</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
-<ol start="4">
+<li>配置环境变量，使用<code>vim</code>命令修改<code>/etc/profile</code>文件，在文件模式加入以下配置：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">JAVA_HOME=/usr/local/jdk1.8.0_171</span><br><span class="line">PATH=$JAVA_HOME/bin:$PATH</span><br></pre></td></tr></table></figure></li>
 <li>重新加载profile文件，使更改的配置立即生效，命令为<code>source /etc/profile</code></li>
 <li>检查安装是否成功，命令为<code>java -version</code></li>
 </ol>
-<h4 id="安装Tomcat">安装Tomcat</h4>
+<h4 id="安装tomcat">安装Tomcat</h4>
 <ul>
 <li>安装Tomcat：</li>
 </ul>
-<ol>
+<ol type="1">
 <li>使用FinalShell自带的上传工具将Tomcat的二进制发布包上传到Linux</li>
 <li>解压安装包，命令为<code>tar -zxvf apache-tomcat-7.0.57.tar.gz -C /usr/local</code></li>
 <li>进入Tomcat的bin目录启动服务，命令为<code>sh startup.sh</code>或者<code>./startup.sh</code></li>
@@ -536,155 +497,99 @@ q或Ctrl+c：退出more</p>
 <ul>
 <li>验证Tomcat启动是否成功，有多种方式：</li>
 </ul>
-<ol>
-<li>查看启动日志<br>
-<code>more /usr/local/apache-tomcat-7.0.57/logs/catalina.out</code><br>
+<ol type="1">
+<li>查看启动日志
+<code>more /usr/local/apache-tomcat-7.0.57/logs/catalina.out</code>
 <code>tail -50 /usr/local/apache-tomcat-7.0.57/logs/catalina.out</code></li>
-<li>查看进程<br>
-<code>ps -ef | grep tomcat</code><br>
-<code>ps</code>命令是Linux下非常强大的进程查看命令，通过<code>ps -ef</code>可以查看当前运行的所有进程的详细信息<br>
-<code>|</code>在Linux中称为管道符，可以将前一个命令的结果输出给后一个命令作为输入<br>
+<li>查看进程 <code>ps -ef | grep tomcat</code>
+<code>ps</code>命令是Linux下非常强大的进程查看命令，通过<code>ps -ef</code>可以查看当前运行的所有进程的详细信息
+<code>|</code>在Linux中称为管道符，可以将前一个命令的结果输出给后一个命令作为输入
 使用<code>ps</code>命令查看进程时，经常配合管道符和查找命令<code>grep</code>一起使用，来查看特定进程</li>
 </ol>
 <ul>
-<li>
-<p>在浏览器输入<code>ip地址:8080</code>以访问服务器<br>
-通常是无法访问的，是因为防火墙未关闭或8080端口未开放</p>
-</li>
-<li>
-<p>防火墙操作：</p>
-</li>
+<li><p>在浏览器输入<code>ip地址:8080</code>以访问服务器
+通常是无法访问的，是因为防火墙未关闭或8080端口未开放</p></li>
+<li><p>防火墙操作：</p></li>
 </ul>
-<ol>
+<ol type="1">
 <li>查看防火墙状态：<code>systemctl status firewalld</code>或<code>firewall-cmd --state</code></li>
 <li>暂时关闭防火墙：<code>systemctl stop firewalld</code></li>
-<li>永久关闭防火墙：<code>systemctl disable firewalld</code></li>
-</ol>
-<hr>
-<ol start="4">
+<li><h2
+id="永久关闭防火墙systemctl-disable-firewalld">永久关闭防火墙：<code>systemctl disable firewalld</code></h2></li>
 <li>开放指定端口：<code>firewall-cmd --zone=public --add-port=8080/tcp --permanent</code></li>
 <li>关闭指定端口：<code>firewall-cmd --zone=public --remove-port=8080/tcp --permanent</code></li>
-<li>立即生效：<code>firewall-cmd --reload</code></li>
-</ol>
-<hr>
-<ol start="7">
-<li>查看开放的端口：<code>firewall-cmd --zone=public --list-ports</code><br>
-注意：<br>
-<code>systemctl</code>是管理Linux中服务的命令，可以对服务进行启动、停止、重启、查看状态等操作<br>
-<code>firewall-cmd</code>是Linux中专门于控制防火墙的命令<br>
+<li><h2
+id="立即生效firewall-cmd---reload">立即生效：<code>firewall-cmd --reload</code></h2></li>
+<li>查看开放的端口：<code>firewall-cmd --zone=public --list-ports</code>
+注意：
+<code>systemctl</code>是管理Linux中服务的命令，可以对服务进行启动、停止、重启、查看状态等操作
+<code>firewall-cmd</code>是Linux中专门于控制防火墙的命令
 为了保证系统安全，服务器的防火墙不建议关闭</li>
 </ol>
 <ul>
 <li>停止Tomcat服务的方式：</li>
 </ul>
-<ol>
+<ol type="1">
 <li>运行Tomcat的bin目录中提供的停止服务的脚本文件<code>sh shutdown.sh</code>或<code>./shutdown.sh</code></li>
-<li>结束Tomcat进程：查看Tomcat进程，获得PID，执行命令结束进程<code>kill -9 PID</code><br>
+<li>结束Tomcat进程：查看Tomcat进程，获得PID，执行命令结束进程<code>kill -9 PID</code>
 注意：<code>kill</code>命令是Linux提供的用于结束进程的命令，<code>-9</code>表示强制结束</li>
 </ol>
-<h4 id="安装MySQL">安装MySQL</h4>
-<ol>
-<li>检测当前系统是否安装MySQL数据库</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa</span><br><span class="line">rpm -qa | grep mysql</span><br><span class="line">rpm -qa | grep mariadb</span><br></pre></td></tr></table></figure>
-<p>RPM（Red-Hat Package Manager）RPM软件包管理器，是红帽Linux用于管理和安装软件的工具<br>
-注意：如果当前系统中已经安装有MySQL数据库，安装将失败。CentOS7自带mariadb，与MySQL数据库冲突</p>
-<ol start="2">
-<li>卸载已经安装的冲突软件</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps 软件名称</span><br><span class="line">rpm -e --nodeps mariadb-libs-5.5.60-1.el7_5.x86_64</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>将MySQL安装包上传到Linux并解压</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/mysql</span><br><span class="line">tar -zxvf mysql-5.7.25-1.el7.x86_64.rpm-bundle.tar.gz -C /usr/local/mysql</span><br></pre></td></tr></table></figure>
-<p>说明：解压后会得到6个rpm安装包文件<br>
-4. <strong>按顺序</strong>安装rpm软件包</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-devel-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">yum install net-tools</span><br><span class="line">rpm -ivh mysql-community-server-5.7.25-1.el7.x86_64.rpm --force --nodeps</span><br></pre></td></tr></table></figure>
-<ol start="5">
-<li>启动MySQL</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld  启动mysql服务</span><br><span class="line">systemctl status mysqld  查看mysql服务状态</span><br></pre></td></tr></table></figure>
-<p>说明：可以设置开机时启动mysql服务，避免每次开机启动mysql</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable mysqld  开机启动mysql服务</span><br><span class="line">netstat -tunlp | grep mysql  查看已经启动的服务</span><br><span class="line">ps -ef | grep mysql  查看mysql进程</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>登录MySQL数据库，查阅临时密码</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/mysqld.log | grep password</span><br></pre></td></tr></table></figure>
-<p>查看文件内容中包含password的行信息，在执行结果中复制冒号后面的密码</p>
-<ol start="7">
-<li>登录到MySQL，修改密码，开放访问权限</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p  登录mysql（先使用临时密码登录）</span><br><span class="line"></span><br><span class="line">#修改密码</span><br><span class="line">set global validate_password_length=4;  设置密码长度最低位数</span><br><span class="line">set global validate_password_policy=LOW;  设置密码安全等级</span><br><span class="line">set password=password(&#x27;2002&#x27;);  设置密码</span><br><span class="line"></span><br><span class="line">#开启访问权限</span><br><span class="line">grant all on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;root&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
-<ol start="8">
-<li>验证MySQL数据库是否正常工作</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure>
-<ol start="9">
-<li>如果需要在外部连接Linux中的数据库，和Tomcat类似，需要开放端口等操作</li>
+<h4 id="安装mysql">安装MySQL</h4>
+<ol type="1">
+<li><p>检测当前系统是否安装MySQL数据库 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa</span><br><span class="line">rpm -qa | grep mysql</span><br><span class="line">rpm -qa | grep mariadb</span><br></pre></td></tr></table></figure> RPM（Red-Hat
+Package Manager）RPM软件包管理器，是红帽Linux用于管理和安装软件的工具
+注意：如果当前系统中已经安装有MySQL数据库，安装将失败。CentOS7自带mariadb，与MySQL数据库冲突</p></li>
+<li><p>卸载已经安装的冲突软件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps 软件名称</span><br><span class="line">rpm -e --nodeps mariadb-libs-5.5.60-1.el7_5.x86_64</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将MySQL安装包上传到Linux并解压 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /usr/local/mysql</span><br><span class="line">tar -zxvf mysql-5.7.25-1.el7.x86_64.rpm-bundle.tar.gz -C /usr/local/mysql</span><br></pre></td></tr></table></figure>
+说明：解压后会得到6个rpm安装包文件</p></li>
+<li><p><strong>按顺序</strong>安装rpm软件包 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh mysql-community-common-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-devel-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-libs-compat-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">rpm -ivh mysql-community-client-5.7.25-1.el7.x86_64.rpm</span><br><span class="line">yum install net-tools</span><br><span class="line">rpm -ivh mysql-community-server-5.7.25-1.el7.x86_64.rpm --force --nodeps</span><br></pre></td></tr></table></figure></p></li>
+<li><p>启动MySQL <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start mysqld  启动mysql服务</span><br><span class="line">systemctl status mysqld  查看mysql服务状态</span><br></pre></td></tr></table></figure>
+说明：可以设置开机时启动mysql服务，避免每次开机启动mysql
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable mysqld  开机启动mysql服务</span><br><span class="line">netstat -tunlp | grep mysql  查看已经启动的服务</span><br><span class="line">ps -ef | grep mysql  查看mysql进程</span><br></pre></td></tr></table></figure></p></li>
+<li><p>登录MySQL数据库，查阅临时密码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /var/log/mysqld.log | grep password</span><br></pre></td></tr></table></figure>
+查看文件内容中包含password的行信息，在执行结果中复制冒号后面的密码</p></li>
+<li><p>登录到MySQL，修改密码，开放访问权限 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p  登录mysql（先使用临时密码登录）</span><br><span class="line"></span><br><span class="line">#修改密码</span><br><span class="line">set global validate_password_length=4;  设置密码长度最低位数</span><br><span class="line">set global validate_password_policy=LOW;  设置密码安全等级</span><br><span class="line">set password=password(&#x27;2002&#x27;);  设置密码</span><br><span class="line"></span><br><span class="line">#开启访问权限</span><br><span class="line">grant all on *.* to &#x27;root&#x27;@&#x27;%&#x27; identified by &#x27;root&#x27;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>验证MySQL数据库是否正常工作 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show databases;</span><br></pre></td></tr></table></figure></p></li>
+<li><p>如果需要在外部连接Linux中的数据库，和Tomcat类似，需要开放端口等操作</p></li>
 </ol>
 <h4 id="安装lrzsz">安装lrzsz</h4>
-<p>lrzsz是一个文件上传下载工具，和FinallShell自带的上传功能是一样的</p>
-<ol>
-<li>搜索lrzsz安装包，命令为<code>yum list lrzsz</code></li>
-<li>使用<code>yum</code>命令在线安装，命令为<code>yum install lrzsz.x86_64</code></li>
-<li>使用命令<code>rz</code>打开该工具</li>
-</ol>
+<p>lrzsz是一个文件上传下载工具，和FinallShell自带的上传功能是一样的 1.
+搜索lrzsz安装包，命令为<code>yum list lrzsz</code> 2.
+使用<code>yum</code>命令在线安装，命令为<code>yum install lrzsz.x86_64</code>
+3. 使用命令<code>rz</code>打开该工具</p>
 <h3 id="项目部署">项目部署</h3>
 <h4 id="手工部署">手工部署</h4>
-<ol>
+<ol type="1">
 <li>在IDEA中开发SpirngBoot项目并打成jar包</li>
 <li>将jar包上传到Linux服务器：<code>mkdir /usr/local/app</code>创建目录，并将项目jar包放到此目录</li>
 <li>启动SpringBoot程序：<code>java -jar XXX.jar</code></li>
 <li>检查防火墙，确保8080端口对外开放，访问SpringBoot项目</li>
-<li>改为后台运行SpringBoot程序，并将日志输出到日志文件：<code>nohup java -jar XXX.jar &amp;&gt; hello.log &amp;</code><br>
+<li>改为后台运行SpringBoot程序，并将日志输出到日志文件：<code>nohup java -jar XXX.jar &amp;&gt; hello.log &amp;</code>
 目前程序运行的问题：线上程序不会采用控制台霸屏的形式运行程序，而是将程序在后台运行；线上程序不会将日志输出到控制台，而是输出到日志文件，方便运维查阅信息</li>
-<li>停止SpringBoot程序</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep &#x27;java -jar&#x27;</span><br><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure>
-<h4 id="自动部署">自动部署</h4>
-<ol>
-<li>在Linux中安装Git</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum list git</span><br><span class="line">yum install git.x86_64</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>使用Git克隆代码</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">git clone 项目地址</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>使用上传工具上传Maven安装包，在Linux中安装Maven</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.5.4-bin.tar.gz -C /usr/local</span><br><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
-<p>在配置文件末尾加上Maven的环境变量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/usr/local/apache-maven-3.5.4</span><br><span class="line">export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH</span><br></pre></td></tr></table></figure>
-<p>重新加载配置文件</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
-<p>通过检查版本确认安装是否成功<code>mvn -version</code><br>
-先在<code>/usr/local</code>目录下创建<code>repo</code>目录，然后修改Maven的配置文件<code>vim /usr/local/apache-maven-3.5.4/conf/setting.xml</code>，找到<code>&lt;localRepository&gt;</code>配置项并添加以下代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;/usr/local/repo&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>将<code>bootstart.sh</code>文件复制到Linux中</li>
-</ol>
-<blockquote>
-<p>Shell脚本是一种Linux系统中的脚本程序。使用Shell脚本跟JavaScript、Java编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了</p>
-</blockquote>
+<li>停止SpringBoot程序 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep &#x27;java -jar&#x27;</span><br><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure> #### 自动部署</li>
+<li>在Linux中安装Git <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum list git</span><br><span class="line">yum install git.x86_64</span><br></pre></td></tr></table></figure></li>
+<li>使用Git克隆代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line">git clone 项目地址</span><br></pre></td></tr></table></figure></li>
+<li>使用上传工具上传Maven安装包，在Linux中安装Maven <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-maven-3.5.4-bin.tar.gz -C /usr/local</span><br><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+在配置文件末尾加上Maven的环境变量 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export MAVEN_HOME=/usr/local/apache-maven-3.5.4</span><br><span class="line">export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH</span><br></pre></td></tr></table></figure> 重新加载配置文件
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure> 通过检查版本确认安装是否成功<code>mvn -version</code>
+先在<code>/usr/local</code>目录下创建<code>repo</code>目录，然后修改Maven的配置文件<code>vim /usr/local/apache-maven-3.5.4/conf/setting.xml</code>，找到<code>&lt;localRepository&gt;</code>配置项并添加以下代码
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;localRepository&gt;/usr/local/repo&lt;/localRepository&gt;</span><br></pre></td></tr></table></figure></li>
+<li>将<code>bootstart.sh</code>文件复制到Linux中 &gt;
+Shell脚本是一种Linux系统中的脚本程序。使用Shell脚本跟JavaScript、Java编程一样，只要有一个能编写代码的文本编辑器和一个能解释执行的脚本解释器就可以了
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">echo 停止原来运行中的工程</span><br><span class="line">APP_NAME=helloworld</span><br><span class="line"></span><br><span class="line">tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line">if [ $&#123;tpid&#125; ]; then</span><br><span class="line">    echo &#x27;Stop Process...&#x27;</span><br><span class="line">    kill -15 $tpid</span><br><span class="line">fi</span><br><span class="line">sleep 2</span><br><span class="line">tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk &#x27;&#123;print $2&#125;&#x27;`</span><br><span class="line">if [ $&#123;tpid&#125; ]; then</span><br><span class="line">    echo &#x27;Kill Process!&#x27;</span><br><span class="line">    kill -9 $tpid</span><br><span class="line">else</span><br><span class="line">    echo &#x27;Stop Success!&#x27;</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">echo 准备从Git仓库拉取最新代码</span><br><span class="line">cd /usr/local/helloworld</span><br><span class="line"></span><br><span class="line">echo 开始从Git仓库拉取最新代码</span><br><span class="line">git init</span><br><span class="line">git pull https://github.com/1354478648/LinuxTestProject.git</span><br><span class="line">echo 代码拉取完成</span><br><span class="line"></span><br><span class="line">echo 开始打包</span><br><span class="line">output=`mvn clean package -Dmaven.test.skip=true`</span><br><span class="line"></span><br><span class="line">cd /usr/local/sh/target</span><br><span class="line"></span><br><span class="line">echo 启动项目</span><br><span class="line">nohup java -jar linuxTestProject-0.0.1-SNAPSHOT.jar &amp;&gt; helloworld.log &amp;</span><br><span class="line">echo 项目启动完成</span><br></pre></td></tr></table></figure>
-<p>需要修改的地方：项目名称、Git项目保存路径、Git项目地址、jar包导入路径、jar包名称、日志文件名称<br>
-5. 为用户授权<br>
-<code>chmod</code>命令是控制用户对文件的权限的命令<br>
-Linux中的权限分为：读（r）、写（w）、执行（x）三种权限<br>
-Linux的文件调用权限分为三级：文件所有者（Owner）、用户组（Group）、其他用户（Other Users）<br>
-只有文件的所有者和超级用户可以修改文件或目录的权限<br>
-要执行Shell脚本需要有对此脚本文件的执行权限，如果没有则不能执行</p>
-<ul>
-<li><code>chmod</code>命令可以使用八进制来指定权限</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 bootstart.sh 为所有用户授予读、写、执行权限</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>执行Shell脚本文件<code>./bootstart.sh</code><br>
-如果一直卡在打包，可以使用阿里云镜像</li>
+需要修改的地方：项目名称、Git项目保存路径、Git项目地址、jar包导入路径、jar包名称、日志文件名称</li>
+<li>为用户授权 <code>chmod</code>命令是控制用户对文件的权限的命令
+Linux中的权限分为：读（r）、写（w）、执行（x）三种权限
+Linux的文件调用权限分为三级：文件所有者（Owner）、用户组（Group）、其他用户（Other
+Users） 只有文件的所有者和超级用户可以修改文件或目录的权限
+要执行Shell脚本需要有对此脚本文件的执行权限，如果没有则不能执行</li>
 </ol>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="7">
+<ul>
+<li><code>chmod</code>命令可以使用八进制来指定权限 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 bootstart.sh 为所有用户授予读、写、执行权限</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="6" type="1">
+<li>执行Shell脚本文件<code>./bootstart.sh</code>
+如果一直卡在打包，可以使用阿里云镜像 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>aliyunmaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>*<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>阿里云公共仓库<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">url</span>&gt;</span>https://maven.aliyun.com/repository/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
 <li>设置静态ip</li>
 </ol>
 
@@ -791,7 +696,7 @@ Linux的文件调用权限分为三级：文件所有者（Owner）、用户组�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Linux安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">简单命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">文件目录操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ls"><span class="nav-number">2.2.1.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd"><span class="nav-number">2.2.2.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cat"><span class="nav-number">2.2.3.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#more"><span class="nav-number">2.2.4.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tail"><span class="nav-number">2.2.5.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mkdir"><span class="nav-number">2.2.6.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rmdir"><span class="nav-number">2.2.7.</span> <span class="nav-text">rmdir</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rm"><span class="nav-number">2.2.8.</span> <span class="nav-text">rm</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E7%A7%BB%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">拷贝移动命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cp"><span class="nav-number">2.3.1.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mv"><span class="nav-number">2.3.2.</span> <span class="nav-text">mv</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4%EF%BC%9Atar"><span class="nav-number">2.4.</span> <span class="nav-text">打包压缩命令：tar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4%EF%BC%9Avi-vim"><span class="nav-number">2.5.</span> <span class="nav-text">文本编辑命令：vi&#x2F;vim</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#vim"><span class="nav-number">2.5.1.</span> <span class="nav-text">vim</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">查找命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#find"><span class="nav-number">2.6.1.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grep"><span class="nav-number">2.6.2.</span> <span class="nav-text">grep</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">软件安装方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85jdk"><span class="nav-number">3.2.</span> <span class="nav-text">安装jdk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Tomcat"><span class="nav-number">3.3.</span> <span class="nav-text">安装Tomcat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85MySQL"><span class="nav-number">3.4.</span> <span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85lrzsz"><span class="nav-number">3.5.</span> <span class="nav-text">安装lrzsz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">项目部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E9%83%A8%E7%BD%B2"><span class="nav-number">4.1.</span> <span class="nav-text">手工部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-number">4.2.</span> <span class="nav-text">自动部署</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#linux%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">Linux安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">简单命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C%E5%91%BD%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">文件目录操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ls"><span class="nav-number">2.2.1.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cd"><span class="nav-number">2.2.2.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#cat"><span class="nav-number">2.2.3.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#more"><span class="nav-number">2.2.4.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tail"><span class="nav-number">2.2.5.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mkdir"><span class="nav-number">2.2.6.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rmdir"><span class="nav-number">2.2.7.</span> <span class="nav-text">rmdir</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#rm"><span class="nav-number">2.2.8.</span> <span class="nav-text">rm</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E7%A7%BB%E5%8A%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">拷贝移动命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#cp"><span class="nav-number">2.3.1.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mv"><span class="nav-number">2.3.2.</span> <span class="nav-text">mv</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9%E5%91%BD%E4%BB%A4tar"><span class="nav-number">2.4.</span> <span class="nav-text">打包压缩命令：tar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%91%BD%E4%BB%A4vivim"><span class="nav-number">2.5.</span> <span class="nav-text">文本编辑命令：vi&#x2F;vim</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#vim"><span class="nav-number">2.5.1.</span> <span class="nav-text">vim</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">查找命令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#find"><span class="nav-number">2.6.1.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#grep"><span class="nav-number">2.6.2.</span> <span class="nav-text">grep</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">软件安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%96%B9%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">软件安装方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85tomcat"><span class="nav-number">3.2.</span> <span class="nav-text">安装Tomcat</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B0%B8%E4%B9%85%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99systemctl-disable-firewalld"><span class="nav-number"></span> <span class="nav-text">永久关闭防火墙：systemctl disable firewalld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E5%8D%B3%E7%94%9F%E6%95%88firewall-cmd---reload"><span class="nav-number"></span> <span class="nav-text">立即生效：firewall-cmd --reload</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85mysql"><span class="nav-number">0.1.</span> <span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85lrzsz"><span class="nav-number">0.2.</span> <span class="nav-text">安装lrzsz</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2"><span class="nav-number">1.</span> <span class="nav-text">项目部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%B7%A5%E9%83%A8%E7%BD%B2"><span class="nav-number">1.1.</span> <span class="nav-text">手工部署</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -883,12 +788,12 @@ Linux的文件调用权限分为三级：文件所有者（Owner）、用户组�
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">688k</span>
+    <span title="站点总字数">694k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:52</span>
+    <span title="站点阅读时长">21:02</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
