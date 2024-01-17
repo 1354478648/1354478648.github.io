@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Git是一个免费的、开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目 - 版本控制：主要功能是追踪文件的变更 - 集中式版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件 - 分布式版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次">
+  <meta name="description" content="Git是一个免费的、开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目  **版本控制：**主要功能是追踪文件的变更 集中式版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件 分布式版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次文件提取操">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git的学习笔记">
 <meta property="og:url" content="http://1354478648.github.io/2023/01/31/Git%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="糖泥的个人博客">
-<meta property="og:description" content="Git是一个免费的、开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目 - 版本控制：主要功能是追踪文件的变更 - 集中式版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件 - 分布式版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次">
+<meta property="og:description" content="Git是一个免费的、开源的分布式版本控制系统，可以快速高效地处理从小型到大型的各种项目  **版本控制：**主要功能是追踪文件的变更 集中式版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件 分布式版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次文件提取操">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-31T07:55:16.000Z">
 <meta property="article:modified_time" content="2023-10-10T14:54:46.461Z">
@@ -255,7 +255,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.3k</span>
+              <span>4.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -274,134 +274,194 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Git是一个免费的、开源的<strong>分布式版本控制系统</strong>，可以快速高效地处理从小型到大型的各种项目
-- <strong>版本控制：</strong>主要功能是追踪文件的变更 -
-<strong>集中式</strong>版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件
--
-<strong>分布式</strong>版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次文件提取操作，实际上都是一次对整个文件仓库的完整备份，这样任何一处协调工作用的文件发生故障，事后都可以用其他客户端的本地仓库进行恢复</p>
+        <p>Git是一个免费的、开源的<strong>分布式版本控制系统</strong>，可以快速高效地处理从小型到大型的各种项目</p>
+<ul>
+<li>**版本控制：**主要功能是追踪文件的变更</li>
+<li><strong>集中式</strong>版本控制系统：例如CVS、SVN等等，都有一个单一的集中管理的服务器，保存所有文件的修订版本。协调工作的人们都通过客户端连接到这台服务器，提交更新或者取出最新的文件</li>
+<li><strong>分布式</strong>版本控制系统：客户端把代码仓库完整地镜像下来（本地库）。因为每个客户端的每一次文件提取操作，实际上都是一次对整个文件仓库的完整备份，这样任何一处协调工作用的文件发生故障，事后都可以用其他客户端的本地仓库进行恢复</li>
+</ul>
 <span id="more"></span>
 <ul>
-<li><strong>工作机制：</strong> 工作区 ———<code>git add</code>———&gt;
-暂存区 ———<code>git commit</code>———&gt; 本地库
-———<code>git push</code>———&gt;远程库</li>
+<li><strong>工作机制：</strong><br>
+工作区 ———<code>git add</code>———&gt; 暂存区 ———<code>git commit</code>———&gt; 本地库 ———<code>git push</code>———&gt;远程库</li>
 </ul>
-<ol type="1">
+<ol>
 <li>工作区：保存本地代码的磁盘位置</li>
 <li>暂存区：临时存储</li>
 <li>本地库：生成一个历史版本</li>
-<li>远程库：代码托管中心 ***</li>
+<li>远程库：代码托管中心</li>
 </ol>
+<hr>
 <ul>
-<li><strong>代码托管中心</strong>
-代码托管中心是基于网络服务器的远程代码仓库，称为远程库
-局域网：GitLab；互联网：GitHub（外网），Gitee 码云（国内） *** ###
-常用命令 #### 设置用户签名
-首次安装Git后必须设置用户签名，否则无法提交代码</li>
-<li>设置用户名： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name 用户名</span><br></pre></td></tr></table></figure></li>
-<li>设置用户邮箱： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email 邮箱</span><br></pre></td></tr></table></figure> #### 初始化本地库
-在想要做成本地库的文件夹中右键Git Bash Here <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-初始化完成后，会出现隐藏文件夹.git #### 查看本地库状态 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-可以尝试使用Linux命令创建一个<code>hello.txt</code>文件，再使用<code>git status</code>命令查看本地库状态
-#### 添加到暂存区
-使用<code>git status</code>查看位于工作区的文件是红色的，说明该文件尚未添加到暂存区，Git尚未追踪到该文件</li>
-<li>把文件添加到暂存区 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
-再次使用<code>git status</code>发现文件转为绿色，说明该文件成功添加到暂存区</li>
-<li>从暂存区删除文件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached 文件</span><br></pre></td></tr></table></figure>
-暂存区的文件被删除是不会影响到原来工作区的文件 #### 提交本地库
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;日志信息&quot; 文件名</span><br></pre></td></tr></table></figure></li>
-<li>示例： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;first commit&quot; hello.txt</span><br></pre></td></tr></table></figure> #### 查看历史版本</li>
-<li>查看版本信息 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure></li>
-<li>查看版本详细信息 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure> #### 版本穿梭 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
-工作区的文件将受到版本穿梭的影响
-<strong>Git切换版本，底层其实是移动的HEAD指针</strong> *** ### 分支
-在版本控制过程中，同时推进多个任务。为每个任务，我们就可以创建每个任务的单独分支。使用分支意味着程序员可以把自己的工作从开发主线上分离开来，开发自己分支的时候，不会影响主线分支的运行</li>
-<li><strong>分支的好处：</strong>同时并行推进多个功能开发，提高开发效率；各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响，失败的分支删除重新开始即可
-#### 查看分支 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -v</span><br></pre></td></tr></table></figure> #### 创建分支 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure> #### 切换分支
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure> #### 合并分支 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge 分支名</span><br></pre></td></tr></table></figure>
-<strong>注意：</strong>是“分支名”合并到当前分支上，比如先切换到master分支，使用<code>git merge hot-fix</code>，意思是hot-fix热修分支合并到master分支上
-#### 代码冲突问题
-合并分支时，两个分支在<strong>同一个文件的同一个位置</strong>有两套完全不同的修改。Git无法替我们决定使用哪一个，必须<strong>人为修改并决定</strong>新代码内容
-<strong>注意：</strong>修改完成后，提交本地库命令<code>git commit -m "日志信息"</code>是不能带文件名的</li>
-<li>切换分支的本质是移动HEAD指针；HEAD指针指向BRANCH指针，BRANCH指针里面保存着所有历史版本
-*** ### GitHub操作 #### 创建远程库</li>
+<li><strong>代码托管中心</strong><br>
+代码托管中心是基于网络服务器的远程代码仓库，称为远程库<br>
+局域网：GitLab；互联网：GitHub（外网），Gitee 码云（国内）</li>
 </ul>
-<ol type="1">
+<hr>
+<h3 id="常用命令">常用命令</h3>
+<h4 id="设置用户签名">设置用户签名</h4>
+<p>首次安装Git后必须设置用户签名，否则无法提交代码</p>
+<ul>
+<li>设置用户名：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name 用户名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置用户邮箱：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email 邮箱</span><br></pre></td></tr></table></figure>
+<h4 id="初始化本地库">初始化本地库</h4>
+<p>在想要做成本地库的文件夹中右键Git Bash Here</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<p>初始化完成后，会出现隐藏文件夹.git</p>
+<h4 id="查看本地库状态">查看本地库状态</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<p>可以尝试使用Linux命令创建一个<code>hello.txt</code>文件，再使用<code>git status</code>命令查看本地库状态</p>
+<h4 id="添加到暂存区">添加到暂存区</h4>
+<p>使用<code>git status</code>查看位于工作区的文件是红色的，说明该文件尚未添加到暂存区，Git尚未追踪到该文件</p>
+<ul>
+<li>把文件添加到暂存区</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名</span><br></pre></td></tr></table></figure>
+<p>再次使用<code>git status</code>发现文件转为绿色，说明该文件成功添加到暂存区</p>
+<ul>
+<li>从暂存区删除文件</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached 文件</span><br></pre></td></tr></table></figure>
+<p>暂存区的文件被删除是不会影响到原来工作区的文件</p>
+<h4 id="提交本地库">提交本地库</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;日志信息&quot; 文件名</span><br></pre></td></tr></table></figure>
+<ul>
+<li>示例：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;first commit&quot; hello.txt</span><br></pre></td></tr></table></figure>
+<h4 id="查看历史版本">查看历史版本</h4>
+<ul>
+<li>查看版本信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看版本详细信息</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+<h4 id="版本穿梭">版本穿梭</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号</span><br></pre></td></tr></table></figure>
+<p>工作区的文件将受到版本穿梭的影响<br>
+<strong>Git切换版本，底层其实是移动的HEAD指针</strong></p>
+<hr>
+<h3 id="分支">分支</h3>
+<p>在版本控制过程中，同时推进多个任务。为每个任务，我们就可以创建每个任务的单独分支。使用分支意味着程序员可以把自己的工作从开发主线上分离开来，开发自己分支的时候，不会影响主线分支的运行</p>
+<ul>
+<li>**分支的好处：**同时并行推进多个功能开发，提高开发效率；各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响，失败的分支删除重新开始即可</li>
+</ul>
+<h4 id="查看分支">查看分支</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -v</span><br></pre></td></tr></table></figure>
+<h4 id="创建分支">创建分支</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+<h4 id="切换分支">切换分支</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+<h4 id="合并分支">合并分支</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge 分支名</span><br></pre></td></tr></table></figure>
+<p>**注意：**是“分支名”合并到当前分支上，比如先切换到master分支，使用<code>git merge hot-fix</code>，意思是hot-fix热修分支合并到master分支上</p>
+<h4 id="代码冲突问题">代码冲突问题</h4>
+<p>合并分支时，两个分支在<strong>同一个文件的同一个位置</strong>有两套完全不同的修改。Git无法替我们决定使用哪一个，必须<strong>人为修改并决定</strong>新代码内容<br>
+**注意：**修改完成后，提交本地库命令<code>git commit -m &quot;日志信息&quot;</code>是不能带文件名的</p>
+<ul>
+<li>切换分支的本质是移动HEAD指针；HEAD指针指向BRANCH指针，BRANCH指针里面保存着所有历史版本</li>
+</ul>
+<hr>
+<h3 id="GitHub操作">GitHub操作</h3>
+<h4 id="创建远程库">创建远程库</h4>
+<ol>
 <li>登录GitHub</li>
 <li>创建远程库，并为远程库起名，尽量和本地库同名</li>
 <li>复制链接</li>
-<li>创建远程库别名 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add 别名 远程库链接</span><br></pre></td></tr></table></figure></li>
-<li>查看当前所有远程库别名 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure> #### 推送本地库到远程库
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push 别名(或远程库链接) 分支名</span><br></pre></td></tr></table></figure> #### 拉取远程库到本地库
-远程库的文件更新后，需要拉取最新版本的代码 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 别名(或远程库链接) 分支名</span><br></pre></td></tr></table></figure> ####
-克隆远程库到本地 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程库链接</span><br></pre></td></tr></table></figure> clone会做如下操作：1.拉取代码
-2.初始化本地库 3.创建别名 #### 团队内协作</li>
+<li>创建远程库别名</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add 别名 远程库链接</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>查看当前所有远程库别名</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure>
+<h4 id="推送本地库到远程库">推送本地库到远程库</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push 别名(或远程库链接) 分支名</span><br></pre></td></tr></table></figure>
+<h4 id="拉取远程库到本地库">拉取远程库到本地库</h4>
+<p>远程库的文件更新后，需要拉取最新版本的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 别名(或远程库链接) 分支名</span><br></pre></td></tr></table></figure>
+<h4 id="克隆远程库到本地">克隆远程库到本地</h4>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程库链接</span><br></pre></td></tr></table></figure>
+<p>clone会做如下操作：1.拉取代码 2.初始化本地库 3.创建别名</p>
+<h4 id="团队内协作">团队内协作</h4>
 <ul>
-<li>添加团队成员 Settings --&gt; Collaborators --&gt; Add people --&gt;
-输入用户名 --&gt; 复制<strong>邀请函链接</strong>发送给团队成员
-团队成员打开链接 --&gt; Accept invitation #### 跨团队协作</li>
-<li>复制远程库：团队外成员点击右上角Fork --&gt;
-远程库资源被复制到团队外成员的远程库中 --&gt;
-团队外成员可以在线编辑代码，也可以clone到自己本地库</li>
-<li>发送修改好的代码：Pull requests --&gt; New pull request --&gt;
-Create pull request --&gt; 编辑标题或留言</li>
-<li>团队内成员审核代码：查看Pull requests --&gt; 审核通过后Merge pull
-request合并申请 --&gt; 点击“确定合并” #### SSH免密登录
-生成秘钥：在C盘-用户-“windows用户”文件夹 --&gt; 右键打开Git命令行窗口
---&gt; 输入以下命令 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C 邮箱号</span><br></pre></td></tr></table></figure> --&gt; 敲四下回车 --&gt;
-打开<code>id_rsa.pub</code>文件(<code>cat id_rsa.pub</code>命令) --&gt;
-复制秘钥 --&gt; 回到GitHub，点击头像-设置-<code>SSH and GPG keys</code>
---&gt; New SSH key --&gt; 起名(可随意)并粘贴秘钥 --&gt;
-<code>SSH</code>链接可以替代<code>HTTPS</code>链接进行免密登录操作 ###
-IDEA集成Git #### 配置Git忽略文件
-为了屏蔽IDE工具之间的差异，我们需要忽略与项目无关的、不参与服务器部署运行的文件</li>
+<li>添加团队成员<br>
+Settings --&gt; Collaborators --&gt; Add people --&gt; 输入用户名 --&gt; 复制<strong>邀请函链接</strong>发送给团队成员<br>
+团队成员打开链接 --&gt; Accept invitation</li>
 </ul>
-<ol type="1">
-<li>在windows用户文件夹下创建忽略规则文件<code>XXX.ignore</code>(前缀名随意，建议是git.ignore)，里面输入以下内容
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Compiled class file</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line"># Log file</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># BlueJ files</span><br><span class="line">*.ctxt</span><br><span class="line"></span><br><span class="line"># Mobile Tools for Java (J2ME)</span><br><span class="line">.mtj.tmp/# Package Files #</span><br><span class="line">*.jar</span><br><span class="line">*.war</span><br><span class="line">*.nar</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line"></span><br><span class="line">hs_err_pid*</span><br><span class="line"></span><br><span class="line">.classpath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">target</span><br><span class="line">.idea</span><br><span class="line">*.iml</span><br></pre></td></tr></table></figure></li>
-<li>打开<code>.gitconfig</code>文件，添加以下内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	excludesfile = C:/Users/windows用户名/git.ignore</span><br></pre></td></tr></table></figure></li>
-<li>打开IDEA，点击Files-Settings-Version Control-Git --&gt;
-选择git安装路径(bin目录下的<code>git.exe</code>) --&gt;
-点击Test，出现Git版本号说明成功 --&gt; 保存确定 ####
-以Maven项目为例添加Git追踪</li>
-</ol>
+<h4 id="跨团队协作">跨团队协作</h4>
 <ul>
-<li>提交暂存区 选中一个项目 --&gt; 点击上方菜单栏VCS-Create Git
-Repository --&gt; 会自动选中当前项目文件夹(没有自动选中，可以手动选中)
---&gt;
-打开项目文件夹会发现已经创建.git文件夹，且IDEA里POM.XML变成红色，说明POM.XML还未添加到暂存区
---&gt; 右键POM.XML-Git-Add --&gt; POM.XML变绿说明成功添加到暂存区
+<li>复制远程库：团队外成员点击右上角Fork --&gt; 远程库资源被复制到团队外成员的远程库中 --&gt; 团队外成员可以在线编辑代码，也可以clone到自己本地库</li>
+<li>发送修改好的代码：Pull requests --&gt; New pull request --&gt; Create pull request --&gt; 编辑标题或留言</li>
+<li>团队内成员审核代码：查看Pull requests --&gt; 审核通过后Merge pull request合并申请 --&gt; 点击“确定合并”</li>
+</ul>
+<h4 id="SSH免密登录">SSH免密登录</h4>
+<p>生成秘钥：在C盘-用户-“windows用户”文件夹 --&gt; 右键打开Git命令行窗口 --&gt; 输入以下命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C 邮箱号</span><br></pre></td></tr></table></figure>
+<p>–&gt; 敲四下回车 --&gt; 打开<code>id_rsa.pub</code>文件(<code>cat id_rsa.pub</code>命令) --&gt; 复制秘钥 --&gt; 回到GitHub，点击头像-设置-<code>SSH and GPG keys</code> --&gt; New SSH key --&gt; 起名(可随意)并粘贴秘钥 --&gt; <code>SSH</code>链接可以替代<code>HTTPS</code>链接进行免密登录操作</p>
+<h3 id="IDEA集成Git">IDEA集成Git</h3>
+<h4 id="配置Git忽略文件">配置Git忽略文件</h4>
+<p>为了屏蔽IDE工具之间的差异，我们需要忽略与项目无关的、不参与服务器部署运行的文件</p>
+<ol>
+<li>在windows用户文件夹下创建忽略规则文件<code>XXX.ignore</code>(前缀名随意，建议是git.ignore)，里面输入以下内容</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># Compiled class file</span><br><span class="line">*.class</span><br><span class="line"></span><br><span class="line"># Log file</span><br><span class="line">*.log</span><br><span class="line"></span><br><span class="line"># BlueJ files</span><br><span class="line">*.ctxt</span><br><span class="line"></span><br><span class="line"># Mobile Tools for Java (J2ME)</span><br><span class="line">.mtj.tmp/# Package Files #</span><br><span class="line">*.jar</span><br><span class="line">*.war</span><br><span class="line">*.nar</span><br><span class="line">*.ear</span><br><span class="line">*.zip</span><br><span class="line">*.tar.gz</span><br><span class="line">*.rar</span><br><span class="line"></span><br><span class="line">hs_err_pid*</span><br><span class="line"></span><br><span class="line">.classpath</span><br><span class="line">.project</span><br><span class="line">.settings</span><br><span class="line">target</span><br><span class="line">.idea</span><br><span class="line">*.iml</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>打开<code>.gitconfig</code>文件，添加以下内容</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[core]</span><br><span class="line">	excludesfile = C:/Users/windows用户名/git.ignore</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>打开IDEA，点击Files-Settings-Version Control-Git --&gt; 选择git安装路径(bin目录下的<code>git.exe</code>) --&gt; 点击Test，出现Git版本号说明成功 --&gt; 保存确定</li>
+</ol>
+<h4 id="以Maven项目为例添加Git追踪">以Maven项目为例添加Git追踪</h4>
+<ul>
+<li>提交暂存区<br>
+选中一个项目 --&gt; 点击上方菜单栏VCS-Create Git Repository --&gt; 会自动选中当前项目文件夹(没有自动选中，可以手动选中) --&gt; 打开项目文件夹会发现已经创建.git文件夹，且IDEA里POM.XML变成红色，说明POM.XML还未添加到暂存区 --&gt; 右键POM.XML-Git-Add --&gt; POM.XML变绿说明成功添加到暂存区<br>
 注：如果写了多个代码文件，可以直接右键项目根目录，提交到暂存区</li>
-<li>提交本地库 右键项目根目录-Git-Commit Directory --&gt; 输入commit
-message内容(就是<code>commit</code>命令中<code>-m</code>里填写的内容)
---&gt; 点击commit #### 切换版本 以提交了三个版本的代码为例 --&gt;
-左下角点击Git就可以看到三个版本 --&gt;
-右键某个版本-<code>checkout Revision 版本号</code>，即可切换版本 ####
-创建分支&amp;切换分支 右下角点击版本号(或分支名) --&gt; New Branch
---&gt; 起分支名 #### 合并分支</li>
-<li>正常合并 来到master分支 --&gt; 右下角点击版本号(或分支名) --&gt;
-选中hot-fix分支 --&gt; merge 'hot-fix' into 'master'</li>
-<li>代码冲突 merge代码后出现警告弹窗 --&gt; 点击merge --&gt;
-左右两边是修改过的代码，中间是没修改过的代码 #### 设置GitHub账号
-进入GitHub --&gt; 点击头像-设置-Developer Settings-Personal access
-tokens --&gt; 权限全部选中 --&gt; 复制token(注意：刷新后就消失了) --&gt;
-回到IDEA --&gt;点击Files-Settings-Version Control-GitHub --&gt;
-使用token登录，粘贴token #### 推送到远程库 上方菜单栏Git --&gt; Share
-Project on Github --&gt; 起别名
-如果发现GitHub创建了远程库，但没有代码文件，可以尝试右下角选中分支-点击Push
-使用SSH免密登录：右下角点击分支-点击Push --&gt; 点击项目名 --&gt;
-点击Define Remote --&gt; 起别名，粘贴SSH链接 --&gt;
-再次点击项目名，选中设置的别名 --&gt; 点击Push #### 拉取远程库到本地库
-建议：在动手修改本地代码之前，先检查远程库最新的代码和本地老的代码的区别，如果本地库的代码已经落后，切记前pull远程库的代码，将本地代码更新到最新，再提交推送
-上方菜单栏Git-Pull --&gt; 在弹窗中设置需要拉取的分支
-注意：如果自动合并失败，需要手动解决代码冲突问题 #### 克隆远程库
-在IDEA初始化页面选择Get From Version Control --&gt; 在Repository
-URL中粘贴HTTPS或SSH链接，设置克隆的项目路径 ### 码云 ####
-IDEA集成码云</li>
-<li>需要下载Gitee插件 其他操作类似GitHub #### 导入GitHub仓库 新建仓库
---&gt; 导入仓库 --&gt; 复制粘贴HTTPS链接 ### GitLab
-GitLab是使用MIT许可证的基于网络的Git仓库管理工具 <em>待更新...</em></li>
+<li>提交本地库<br>
+右键项目根目录-Git-Commit Directory --&gt; 输入commit message内容(就是<code>commit</code>命令中<code>-m</code>里填写的内容) --&gt; 点击commit</li>
 </ul>
+<h4 id="切换版本">切换版本</h4>
+<p>以提交了三个版本的代码为例 --&gt; 左下角点击Git就可以看到三个版本 --&gt; 右键某个版本-<code>checkout Revision 版本号</code>，即可切换版本</p>
+<h4 id="创建分支-切换分支">创建分支&amp;切换分支</h4>
+<p>右下角点击版本号(或分支名) --&gt; New Branch --&gt; 起分支名</p>
+<h4 id="合并分支-2">合并分支</h4>
+<ul>
+<li>正常合并<br>
+来到master分支 --&gt; 右下角点击版本号(或分支名) --&gt; 选中hot-fix分支 --&gt; merge ‘hot-fix’ into ‘master’</li>
+<li>代码冲突<br>
+merge代码后出现警告弹窗 --&gt; 点击merge --&gt; 左右两边是修改过的代码，中间是没修改过的代码</li>
+</ul>
+<h4 id="设置GitHub账号">设置GitHub账号</h4>
+<p>进入GitHub --&gt; 点击头像-设置-Developer Settings-Personal access tokens --&gt; 权限全部选中 --&gt; 复制token(注意：刷新后就消失了) --&gt; 回到IDEA --&gt;点击Files-Settings-Version Control-GitHub --&gt; 使用token登录，粘贴token</p>
+<h4 id="推送到远程库">推送到远程库</h4>
+<p>上方菜单栏Git --&gt; Share Project on Github --&gt; 起别名<br>
+如果发现GitHub创建了远程库，但没有代码文件，可以尝试右下角选中分支-点击Push<br>
+使用SSH免密登录：右下角点击分支-点击Push --&gt; 点击项目名 --&gt; 点击Define Remote --&gt; 起别名，粘贴SSH链接 --&gt; 再次点击项目名，选中设置的别名 --&gt; 点击Push</p>
+<h4 id="拉取远程库到本地库-2">拉取远程库到本地库</h4>
+<p>建议：在动手修改本地代码之前，先检查远程库最新的代码和本地老的代码的区别，如果本地库的代码已经落后，切记前pull远程库的代码，将本地代码更新到最新，再提交推送<br>
+上方菜单栏Git-Pull --&gt; 在弹窗中设置需要拉取的分支<br>
+注意：如果自动合并失败，需要手动解决代码冲突问题</p>
+<h4 id="克隆远程库">克隆远程库</h4>
+<p>在IDEA初始化页面选择Get From Version Control --&gt; 在Repository URL中粘贴HTTPS或SSH链接，设置克隆的项目路径</p>
+<h3 id="码云">码云</h3>
+<h4 id="IDEA集成码云">IDEA集成码云</h4>
+<ul>
+<li>需要下载Gitee插件<br>
+其他操作类似GitHub</li>
+</ul>
+<h4 id="导入GitHub仓库">导入GitHub仓库</h4>
+<p>新建仓库 --&gt; 导入仓库 --&gt; 复制粘贴HTTPS链接</p>
+<h3 id="GitLab">GitLab</h3>
+<p>GitLab是使用MIT许可证的基于网络的Git仓库管理工具<br>
+<em>待更新…</em></p>
 
     </div>
 
@@ -505,6 +565,7 @@ GitLab是使用MIT许可证的基于网络的Git仓库管理工具 <em>待更新
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E7%AD%BE%E5%90%8D"><span class="nav-number">1.1.</span> <span class="nav-text">设置用户签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="nav-number">1.2.</span> <span class="nav-text">初始化本地库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E5%BA%93%E7%8A%B6%E6%80%81"><span class="nav-number">1.3.</span> <span class="nav-text">查看本地库状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="nav-number">1.4.</span> <span class="nav-text">添加到暂存区</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="nav-number">1.5.</span> <span class="nav-text">提交本地库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">1.6.</span> <span class="nav-text">查看历史版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E7%A9%BF%E6%A2%AD"><span class="nav-number">1.7.</span> <span class="nav-text">版本穿梭</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E6%94%AF"><span class="nav-number">2.</span> <span class="nav-text">分支</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%88%86%E6%94%AF"><span class="nav-number">2.1.</span> <span class="nav-text">查看分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF"><span class="nav-number">2.2.</span> <span class="nav-text">创建分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">2.3.</span> <span class="nav-text">切换分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="nav-number">2.4.</span> <span class="nav-text">合并分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%86%B2%E7%AA%81%E9%97%AE%E9%A2%98"><span class="nav-number">2.5.</span> <span class="nav-text">代码冲突问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub%E6%93%8D%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">GitHub操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">创建远程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%BA%93%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">3.2.</span> <span class="nav-text">推送本地库到远程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%88%B0%E6%9C%AC%E5%9C%B0%E5%BA%93"><span class="nav-number">3.3.</span> <span class="nav-text">拉取远程库到本地库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%88%B0%E6%9C%AC%E5%9C%B0"><span class="nav-number">3.4.</span> <span class="nav-text">克隆远程库到本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A2%E9%98%9F%E5%86%85%E5%8D%8F%E4%BD%9C"><span class="nav-number">3.5.</span> <span class="nav-text">团队内协作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%A8%E5%9B%A2%E9%98%9F%E5%8D%8F%E4%BD%9C"><span class="nav-number">3.6.</span> <span class="nav-text">跨团队协作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="nav-number">3.7.</span> <span class="nav-text">SSH免密登录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IDEA%E9%9B%86%E6%88%90Git"><span class="nav-number">4.</span> <span class="nav-text">IDEA集成Git</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEGit%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">配置Git忽略文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A5Maven%E9%A1%B9%E7%9B%AE%E4%B8%BA%E4%BE%8B%E6%B7%BB%E5%8A%A0Git%E8%BF%BD%E8%B8%AA"><span class="nav-number">4.2.</span> <span class="nav-text">以Maven项目为例添加Git追踪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%87%E6%8D%A2%E7%89%88%E6%9C%AC"><span class="nav-number">4.3.</span> <span class="nav-text">切换版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%88%86%E6%94%AF-%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF"><span class="nav-number">4.4.</span> <span class="nav-text">创建分支&amp;切换分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF-2"><span class="nav-number">4.5.</span> <span class="nav-text">合并分支</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEGitHub%E8%B4%A6%E5%8F%B7"><span class="nav-number">4.6.</span> <span class="nav-text">设置GitHub账号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A8%E9%80%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">4.7.</span> <span class="nav-text">推送到远程库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E5%BA%93%E5%88%B0%E6%9C%AC%E5%9C%B0%E5%BA%93-2"><span class="nav-number">4.8.</span> <span class="nav-text">拉取远程库到本地库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%8B%E9%9A%86%E8%BF%9C%E7%A8%8B%E5%BA%93"><span class="nav-number">4.9.</span> <span class="nav-text">克隆远程库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A0%81%E4%BA%91"><span class="nav-number">5.</span> <span class="nav-text">码云</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDEA%E9%9B%86%E6%88%90%E7%A0%81%E4%BA%91"><span class="nav-number">5.1.</span> <span class="nav-text">IDEA集成码云</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5GitHub%E4%BB%93%E5%BA%93"><span class="nav-number">5.2.</span> <span class="nav-text">导入GitHub仓库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitLab"><span class="nav-number">6.</span> <span class="nav-text">GitLab</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -596,12 +657,12 @@ GitLab是使用MIT许可证的基于网络的Git仓库管理工具 <em>待更新
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">688k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:54</span>
+    <span title="站点阅读时长">20:52</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->

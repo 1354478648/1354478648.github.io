@@ -262,10 +262,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>UniApp 是一个使用 Vue.js
-开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台。</p>
+          <p>UniApp 是一个使用 Vue.js 开发所有前端应用的框架，开发者编写一套代码，可发布到iOS、Android、Web（响应式）、以及各种小程序、快应用等多个平台。</p>
 <blockquote>
-<p>UniApp官方网站：https://uniapp.dcloud.net.cn/</p>
+<p>UniApp官方网站：<a target="_blank" rel="noopener" href="https://uniapp.dcloud.net.cn/">https://uniapp.dcloud.net.cn/</a></p>
 </blockquote>
           <!--noindex-->
             <div class="post-button">
@@ -361,8 +360,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="vue核心">Vue核心</h2>
-<h3 id="初识vue">初识Vue</h3>
+          <h2 id="Vue核心">Vue核心</h2>
+<h3 id="初识Vue">初识Vue</h3>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--准备一个容器--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;root&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;&#123;name&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//创建Vue实例</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//el用于指定当前Vue实例为哪个容器服务，值通常是css选择器字符串</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">el</span>: <span class="string">&#x27;#root&#x27;</span>, <span class="comment">//此处是id选择器</span></span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//data用于存储数据，数据供el所指定的容器去使用</span></span></span><br><span class="line"><span class="language-javascript">        <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="attr">name</span>: <span class="string">&#x27;Vue!&#x27;</span></span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;)</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
@@ -439,7 +438,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
+              <span>16k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -553,9 +552,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Redis是一个基于<strong>内存</strong>的key-value结构数据库。NoSQL（Not
-Only
-SQL），不仅仅是SQL，泛指<strong>非关系型数据库</strong>，NoSQL数据库并不是要取代关系型数据库，而是关系型数据库的补充。</p>
+          <p>Redis是一个基于<strong>内存</strong>的key-value结构数据库。NoSQL（Not Only SQL），不仅仅是SQL，泛指<strong>非关系型数据库</strong>，NoSQL数据库并不是要取代关系型数据库，而是关系型数据库的补充。</p>
 <ul>
 <li>Reids的应用场景：缓存、任务队列、消息队列、分布式锁</li>
 </ul>
@@ -641,7 +638,7 @@ SQL），不仅仅是SQL，泛指<strong>非关系型数据库</strong>，NoSQL�
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2:55</span>
+              <span>2:54</span>
             </span>
 
         </div>
@@ -657,14 +654,11 @@ SQL），不仅仅是SQL，泛指<strong>非关系型数据库</strong>，NoSQL�
 <li>瑞吉外卖项目组成员 + 1</li>
 </ul>
 <p>其实我个人认为整个项目有很多有意思的细节被大量增删改查操作埋没了，这里总结一下：</p>
-<ol type="1">
+<ol>
 <li>基于MP自动生成的对持久层增删改查的代码可以极大减少开发成本，另外使用<code>LambdaQueryWrapper</code>也可以实现更灵活的自定义查询</li>
 <li>公共字段，即创建时间、更新时间、创建用户、更新用户，我们通过实现MP的<code>MetaObjectHandler</code>接口，配合全局上下文重写填充方法以实现写数据前的公共字段填充</li>
-<li>基于<code>@Cacheable</code>注解和 Redis
-实现对查询结果的缓存，大幅降低服务器数据库的压力和接口响应时间。如果更新数据则使用<code>@CacheEvict</code>注解删除缓存以保持
-MySQL 和 Redis 的数据一致性。</li>
-<li>通过配置 MySQL
-的主从复制以实现数据库的读写分离，其中基于<code>sharding-jdbc</code>库配置读写分离策略</li>
+<li>基于<code>@Cacheable</code>注解和 Redis 实现对查询结果的缓存，大幅降低服务器数据库的压力和接口响应时间。如果更新数据则使用<code>@CacheEvict</code>注解删除缓存以保持 MySQL 和 Redis 的数据一致性。</li>
+<li>通过配置 MySQL 的主从复制以实现数据库的读写分离，其中基于<code>sharding-jdbc</code>库配置读写分离策略</li>
 <li>对于用户登录操作，我们使用过滤器<code>Filter</code>实现全局登录校验，并使用<code>AntPathMatcher</code>路径匹配符动态地筛选当前路径是否可以放行</li>
 <li>封装全局异常处理器，通过<code>@ExceptionHandler</code>注解捕获对应异常，并处理与返回异常信息</li>
 </ol>
@@ -762,22 +756,24 @@ MySQL 和 Redis 的数据一致性。</li>
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="linux安装">Linux安装</h3>
-<ol type="1">
-<li>安装VMWare 除了修改安装位置，其他一律无脑下一步</li>
-<li>安装CentOS镜像
-选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7
-64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD/DVD，选择”使用ISO映像文件“，选择CentOS镜像的文件路径-完成
-进入系统-选择”Install CentOS 7“-选择语言-确认安装信息摘要，开始安装
+          <h3 id="Linux安装">Linux安装</h3>
+<ol>
+<li>安装VMWare<br>
+除了修改安装位置，其他一律无脑下一步</li>
+<li>安装CentOS镜像<br>
+选择“典型”-选择“稍后安装操作系统”-选择“Linux”，版本选择“CentOS 7 64位”-修改虚拟机名称和位置-最大磁盘大小默认“20G”，选择“将虚拟磁盘拆分为多个文件”-选择“自定义硬件”-可将内存改为“2G”，处理器数量改为“2”个，点击新CD/DVD，选择”使用ISO映像文件“，选择CentOS镜像的文件路径-完成<br>
+进入系统-选择”Install CentOS 7“-选择语言-确认安装信息摘要，开始安装<br>
 设置Root密码</li>
-<li>网卡设置 输入以下命令修改网络初始化配置，设定网卡在系统启动时初始化
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">cd etc</span><br><span class="line">cd sysconfig</span><br><span class="line">cd network-scripts</span><br><span class="line">vi ifcfg-ens33</span><br></pre></td></tr></table></figure>
-进入编辑页面后，敲击i键进入编辑状态，把<code>ONBOOT=no</code>修改为<code>ONBOOT=yes</code>，敲击ESC键，输入<code>:wq</code>保存退出</li>
-<li>安装SSH连接工具 输入<code>ip addr</code>命令获取ip地址
-安装FinalShell，除了安装位置，其他一律无脑下一步
-点击左上角“文件夹”图标-点击左上角白色带加号文件夹，选择“SSH连接”-设置名称，输入刚才获取到的ip地址，输入用户名密码
-点击快速连接进入系统-选择保存密码</li>
+<li>网卡设置<br>
+输入以下命令修改网络初始化配置，设定网卡在系统启动时初始化</li>
 </ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">cd etc</span><br><span class="line">cd sysconfig</span><br><span class="line">cd network-scripts</span><br><span class="line">vi ifcfg-ens33</span><br></pre></td></tr></table></figure>
+<p>进入编辑页面后，敲击i键进入编辑状态，把<code>ONBOOT=no</code>修改为<code>ONBOOT=yes</code>，敲击ESC键，输入<code>:wq</code>保存退出<br>
+4. 安装SSH连接工具<br>
+输入<code>ip addr</code>命令获取ip地址<br>
+安装FinalShell，除了安装位置，其他一律无脑下一步<br>
+点击左上角“文件夹”图标-点击左上角白色带加号文件夹，选择“SSH连接”-设置名称，输入刚才获取到的ip地址，输入用户名密码<br>
+点击快速连接进入系统-选择保存密码</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/05/01/Linux%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
@@ -948,7 +944,7 @@ MySQL 和 Redis 的数据一致性。</li>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8.5k</span>
+              <span>8.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1043,7 +1039,7 @@ MySQL 和 Redis 的数据一致性。</li>
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>9.9k</span>
+              <span>9.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1065,14 +1061,20 @@ MySQL 和 Redis 的数据一致性。</li>
           <h3 id="函数">函数</h3>
 <h4 id="系统函数">系统函数</h4>
 <h5 id="聚合函数">聚合函数</h5>
-<p><code>count([distinct]*)</code>：统计所有的行数（distinct表示去重再统计）
-<code>count([distinct]列名)</code>：统计某列的值总和
-<code>sum([distinct]列名)</code>：求一列的和（注意必须是数字类型的）
-<code>avg([distinct]列名)</code>：求一列的平均值（注意必须是数字类型）
-<code>max([distinct]列名)</code>：求一列的最大值
-<code>min([distinct]列名)</code>：求一列的最小值 -
-计算某个表一共有多少行 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> student;</span><br></pre></td></tr></table></figure> - 计算某一列上所有数字的和
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(record) <span class="keyword">FROM</span> cash;</span><br></pre></td></tr></table></figure></p>
+<p><code>count([distinct]*)</code>：统计所有的行数（distinct表示去重再统计）<br>
+<code>count([distinct]列名)</code>：统计某列的值总和<br>
+<code>sum([distinct]列名)</code>：求一列的和（注意必须是数字类型的）<br>
+<code>avg([distinct]列名)</code>：求一列的平均值（注意必须是数字类型）<br>
+<code>max([distinct]列名)</code>：求一列的最大值<br>
+<code>min([distinct]列名)</code>：求一列的最小值</p>
+<ul>
+<li>计算某个表一共有多少行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>) <span class="keyword">FROM</span> student;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算某一列上所有数字的和</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> <span class="built_in">SUM</span>(record) <span class="keyword">FROM</span> cash;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/04/20/MySQL%E9%AB%98%E7%BA%A7%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
@@ -1167,10 +1169,7 @@ MySQL 和 Redis 的数据一致性。</li>
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Spring
-Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。它提供了一组可以在Spring应用上下文中配置的Bean，充分利用了Spring
-IoC，DI（控制反转Inversion of Control ,DI:Dependency Injection
-依赖注入）和AOP（面向切面编程）功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作</p>
+          <p>Spring Security是一个能够为基于Spring的企业应用系统提供声明式的安全访问控制解决方案的安全框架。它提供了一组可以在Spring应用上下文中配置的Bean，充分利用了Spring IoC，DI（控制反转Inversion of Control ,DI:Dependency Injection 依赖注入）和AOP（面向切面编程）功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复代码的工作</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/03/30/SpringSecurity%E7%9A%84%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
@@ -1340,12 +1339,12 @@ IoC，DI（控制反转Inversion of Control ,DI:Dependency Injection
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">690k</span>
+    <span title="站点总字数">688k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:54</span>
+    <span title="站点阅读时长">20:52</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
