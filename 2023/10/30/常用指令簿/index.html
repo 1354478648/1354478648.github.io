@@ -273,64 +273,34 @@
       
         <p>这篇文档收录了我平时会用到的指令，是为了防止遗忘以及方便复制粘贴而建立的</p>
 <span id="more"></span>
-<h2 id="Git">Git</h2>
-<ol>
-<li>全局设置Git<br>
-设置用户名和邮箱，以记录代码的提交者是谁</li>
+<h2 id="git">Git</h2>
+<ol type="1">
+<li><p>全局设置Git 设置用户名和邮箱，以记录代码的提交者是谁
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name [用户名]</span><br></pre></td></tr></table></figure> <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email [邮箱 XXX@XX.com]</span><br></pre></td></tr></table></figure></p></li>
+<li><p>创建本地代码仓库 在指定文件夹下初始化代码仓库 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+如果该文件夹出现了隐藏的 .git 文件，则代表创建成功</p></li>
+<li><p>将文件提交到暂存区 比如创建一个读我文件 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch README.md</span><br></pre></td></tr></table></figure>
+单独将读我文件提交到暂存区 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add README.md</span><br></pre></td></tr></table></figure>
+将所有文件提交到暂存区，<code>.</code>表示该目录下的全部文件
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将暂存区的文件推送到本地仓库 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m [注释]</span><br></pre></td></tr></table></figure>
+注释是指解释本次提交修改的内容</p></li>
+<li><p>与远程仓库建立连接 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add [远程库昵称，通常是origin] [仓库地址，HTTPS和SSH地址]</span><br></pre></td></tr></table></figure></p></li>
+<li><p>将本地仓库的文件推送到远程仓库 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u [远程库昵称，通常是origin] [分支名，主干分支是master]</span><br></pre></td></tr></table></figure>
+注意：如果使用<code>-u</code>用于绑定后面指定的远程库和分支，那么下次提交可以直接<code>git push</code>，即省略了后面的远程库和分支；不使用<code>-u</code>也可以，但就必须每次都指定远程库和分支。</p></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name [用户名]</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email [邮箱 XXX@XX.com]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>创建本地代码仓库<br>
-在指定文件夹下初始化代码仓库</li>
+<h2 id="jupyter">Jupyter</h2>
+<ol type="1">
+<li>将 ipynb 文件转为 html 文件 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter nbconvert --to html [文件名称].ipynb</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<p>如果该文件夹出现了隐藏的 .git 文件，则代表创建成功</p>
-<ol start="3">
-<li>将文件提交到暂存区<br>
-比如创建一个读我文件</li>
+<h2 id="hexo博客">Hexo博客</h2>
+<ol type="1">
+<li>新建md笔记 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo new pages [笔记名称]</span><br></pre></td></tr></table></figure></li>
+<li>清理缓存、生成静态文件、启动本地预览 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo g &amp;&amp; npx hexo s</span><br></pre></td></tr></table></figure></li>
+<li>清理缓存、生成静态文件、推送到 GitHub 仓库 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo g &amp;&amp; npx hexo d</span><br></pre></td></tr></table></figure></li>
+<li>管理员打开终端，跳转到 Hexo 文件夹 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /d D:\Software\Hexo</span><br></pre></td></tr></table></figure></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch README.md</span><br></pre></td></tr></table></figure>
-<p>单独将读我文件提交到暂存区</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add README.md</span><br></pre></td></tr></table></figure>
-<p>将所有文件提交到暂存区，<code>.</code>表示该目录下的全部文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>将暂存区的文件推送到本地仓库</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m [注释]</span><br></pre></td></tr></table></figure>
-<p>注释是指解释本次提交修改的内容</p>
-<ol start="5">
-<li>与远程仓库建立连接</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add [远程库昵称，通常是origin] [仓库地址，HTTPS和SSH地址]</span><br></pre></td></tr></table></figure>
-<ol start="6">
-<li>将本地仓库的文件推送到远程仓库</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u [远程库昵称，通常是origin] [分支名，主干分支是master]</span><br></pre></td></tr></table></figure>
-<p>注意：如果使用<code>-u</code>用于绑定后面指定的远程库和分支，那么下次提交可以直接<code>git push</code>，即省略了后面的远程库和分支；不使用<code>-u</code>也可以，但就必须每次都指定远程库和分支。</p>
-<h2 id="Jupyter">Jupyter</h2>
-<ol>
-<li>将 ipynb 文件转为 html 文件</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter nbconvert --to html [文件名称].ipynb</span><br></pre></td></tr></table></figure>
-<h2 id="Hexo博客">Hexo博客</h2>
-<ol>
-<li>新建md笔记</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo new pages [笔记名称]</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>清理缓存、生成静态文件、启动本地预览</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo g &amp;&amp; npx hexo s</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>清理缓存、生成静态文件、推送到 GitHub 仓库</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx hexo clean &amp;&amp; npx hexo g &amp;&amp; npx hexo d</span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>管理员打开终端，跳转到 Hexo 文件夹</li>
-</ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /d D:\Software\Hexo</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -430,7 +400,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jupyter"><span class="nav-number">2.</span> <span class="nav-text">Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">Hexo博客</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jupyter"><span class="nav-number">2.</span> <span class="nav-text">Jupyter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">Hexo博客</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,7 +416,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-count">30</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -525,12 +495,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">677k</span>
+    <span title="站点总字数">679k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20:32</span>
+    <span title="站点阅读时长">20:35</span>
 </div>
   <div class="powered-by">
     <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
