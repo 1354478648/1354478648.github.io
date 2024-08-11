@@ -1,291 +1,470 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Java,后端,Vue,前端,全栈">
+    <meta name="description" content="大杯牛乳红茶 去冰 三分糖">
+    <meta name="author" content="糖泥">
+    
+    <title>
+        
+            聚类算法 |
+        
+        糖泥的个人博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
-  <script src="/lib/pace/pace.min.js"></script>
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"1354478648.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    
+        <link rel="shortcut icon" href="/images/avatar.jpg">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"1354478648.github.io","root":"/","language":"zh-CN","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"糖泥的个人博客","author":"糖泥","avatar":"/images/avatar.jpg","logo":"/images/avatar.jpg","favicon":"/images/avatar.jpg","mode":"light"},"menu":{"home":"/                      || fa-solid fa-home","archives":"/archives          || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","categories":"/categories      || fa-solid fa-layer-group","photos":"/photos              || fa-solid fa-image","我":{"icon":"fa-solid fa-face-kiss-beam","children":[{"about":"/about                || fa-solid fa-user-graduate"},{"links":"/links                || fa-solid fa-link"},{"tools":"/tools                || fa-solid fa-tools"}]}},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"大杯牛乳红茶，少冰，三分糖，加波霸。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/1354478648","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":"2024-08-11：博客主题从NEXT改为了KEEP，感谢NEXT的陪伴，希望KEEP能给你带来更好的体验。","post_block":true,"category":true,"tag":true,"post_datetime":"created","post_datetime_format":"YYYY年MM月DD日"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["木镐","石镐","铁镐","钻石镐","下界合金镐"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY年MM月DD日","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":"/images/打赏收款码.jpg","text":"请作者喝1点点","icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"left"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2023,"word_count":true,"site_deploy":{"enable":true,"provider":"github","url":"https://github.com/"},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"title":"朋友们"},{"name":"东南DNF","link":"https://dnf.doyi.online/","description":"向着全栈迈进的码农","avatar":"https://lib.dnf.doyi.online/imgs/avatar/dnf-avatar.jpeg"},{"name":"RayBoki","link":"https://www.lray-iu.ink/","description":"生活不只需要有韧性,还要有弹性","avatar":"https://lray-iu.oss-cn-hangzhou.aliyuncs.com/tenten.png"}],"photos":[{"url":"/images/photos/杭州2024-1.jpg","name":"杭州2024-1"},{"url":"/images/photos/杭州2024-2.jpg","name":"杭州2024-2"},{"url":"/images/photos/济南2024-1.jpg","name":"济南2024-1"},{"url":"/images/photos/济南2024-2.jpg","name":"济南2024-2"},{"url":"/images/photos/济南2024-3.jpg","name":"济南2024-3"}],"tools":[{"category":"AI 工具","anchorId":"QUklMjAlRTUlQjclQTUlRTUlODUlQjc0"},{"name":"ChatGPT","link":"https://chat.openai.com/","description":"Optimizing Language Models for Dialogue","image":"/images/tools/chatgpt-6.svg"},{"name":"HuggingFace","link":"https://huggingface.co/","description":"The AI community building the future","image":"/images/tools/huggingface_logo-noborder.svg"},{"name":"Ollama","link":"https://ollama.com/","description":"Get up and running with large language models","image":"/images/tools/ollama.png"},{"category":"技术社区","anchorId":"JUU2JThBJTgwJUU2JTlDJUFGJUU3JUE0JUJFJUU1JThDJUJB4"},{"name":"GitHub","link":"https://github.com/","description":"The complete developer platform to build, scale, and deliver secure software","image":"/images/tools/github-icon-1.svg"},{"name":"Gitee","link":"https://gitee.com/","description":"代码托管·协作开发平台","image":"/images/tools/logo_gitee_g_red.svg"},{"name":"稀土掘金","link":"https://juejin.cn/","description":"一个帮助开发者成长的社区","image":"https://xpoet.cn/images/tools/juejin.svg"},{"category":"技术文档","anchorId":"JUU2JThBJTgwJUU2JTlDJUFGJUU2JTk2JTg3JUU2JUExJUEz8"},{"name":"高德开放平台","link":"https://lbs.amap.com/","description":"国内技术优质的LBS服务提供商","image":"https://a.amap.com/pc/static/favicon.ico"},{"name":"Element","link":"https://element.eleme.cn/#/zh-CN","description":"网站快速成型工具","image":"https://element.eleme.cn/favicon.ico"},{"name":"ElementPlus","link":"https://element-plus.org/zh-CN/#/zh-CN","description":"基于 Vue 3，面向设计师和开发者的组件库","image":"https://element-plus.org/images/element-plus-logo-small.svg"},{"name":"ECharts","link":"https://echarts.apache.org/zh/index.html","description":"一个基于 JavaScript 的开源可视化图表库","image":"https://echarts.apache.org/zh/images/favicon.png?_v_=20240226"},{"category":"云计算","anchorId":"JUU0JUJBJTkxJUU4JUFFJUExJUU3JUFFJTk313"},{"name":"阿里云","link":"https://www.aliyun.com/","description":"为了无法计算的价值","image":"/images/tools/aliyun.jpeg"}]},"version":"4.2.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
-
-  <meta name="description" content="聚类算法 聚类算法又叫做“无监督分类”，其目的是将数据划分成有意义或有用的组(或簇)。这种划分可以基于我们的业务需求或建模需求来完成，也可以单纯地帮助我们探索数据的自然结构和分布。 无监督学习：在进行模型训练的时候，只需要特征矩阵 X，不需要真实标签 Y">
-<meta property="og:type" content="article">
-<meta property="og:title" content="聚类算法">
-<meta property="og:url" content="http://1354478648.github.io/2023/10/11/%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/index.html">
-<meta property="og:site_name" content="糖泥的个人博客">
-<meta property="og:description" content="聚类算法 聚类算法又叫做“无监督分类”，其目的是将数据划分成有意义或有用的组(或簇)。这种划分可以基于我们的业务需求或建模需求来完成，也可以单纯地帮助我们探索数据的自然结构和分布。 无监督学习：在进行模型训练的时候，只需要特征矩阵 X，不需要真实标签 Y">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://1354478648.github.io/images/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E9%9B%86.png">
-<meta property="og:image" content="http://1354478648.github.io/images/KMeans%E8%81%9A%E7%B1%BB%E7%BB%93%E6%9E%9C.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E8%BD%AE%E5%BB%93%E7%B3%BB%E7%BB%9F%E5%85%AC%E5%BC%8F.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E8%BD%AE%E5%BB%93%E7%B3%BB%E6%95%B0.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E9%9B%86%E5%9C%86%E5%92%8C%E6%9C%88.png">
-<meta property="og:image" content="http://1354478648.github.io/images/DBSCAN%E5%92%8CKMeans%E5%9C%A8%E5%8F%8C%E7%8E%AF%E5%9B%BE%E4%B8%8A%E7%9A%84%E5%8C%BA%E5%88%AB.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E9%B8%A2%E5%B0%BE%E8%8A%B1iris%E8%81%9A%E7%B1%BB%E7%BB%93%E6%9E%9C.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E9%B8%A2%E5%B0%BE%E8%8A%B1iris%E8%81%9A%E7%B1%BB%E8%BD%AE%E5%BB%93%E7%B3%BB%E6%95%B0.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E9%B8%A2%E5%B0%BE%E8%8A%B1iris%E8%81%9A%E7%B1%BB%E5%8D%A1%E6%9E%97%E6%96%AF%E5%9F%BA%20-%20%E5%93%88%E6%8B%89%E5%B7%B4%E6%96%AF%E6%8C%87%E6%95%B0.png">
-<meta property="og:image" content="http://1354478648.github.io/images/%E9%B8%A2%E5%B0%BE%E8%8A%B1iris%E8%81%9A%E7%B1%BBFMI%E8%AF%84%E4%BB%B7%E6%B3%95.png">
-<meta property="article:published_time" content="2023-10-11T04:32:42.000Z">
-<meta property="article:modified_time" content="2023-10-24T14:57:55.773Z">
-<meta property="article:author" content="Downey">
-<meta property="article:tag" content="实习记录">
-<meta property="article:tag" content="数据分析">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="机器学习">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://1354478648.github.io/images/%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E9%9B%86.png">
-
-<link rel="canonical" href="http://1354478648.github.io/2023/10/11/%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/">
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'zh-CN'
-  };
-</script>
-
-  <title>聚类算法 | 糖泥的个人博客</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">糖泥的个人博客</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">欢迎！ Welcome!</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
-
-  </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div id="search-result">
-  <div id="no-result">
-    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</div>
-    </header>
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
 
-          <div class="content post posts-expand">
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
             
+<header class="header-wrapper">
 
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://1354478648.github.io/2023/10/11/%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/">
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               糖泥的个人博客
+            </a>
+        </div>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Downey">
-      <meta itemprop="description" content="大杯牛乳红茶 去冰 三分糖">
-    </span>
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                相册
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box has-sub-menu">
+                            <a class="menu-text-color border-box" href="javascript:void(0);">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-face-kiss-beam"></i>
+                                
+                                我
+                                
+                                    <i class="menu-text-color collapse-icon fa-solid fa-angle-down"></i>
+                                
+                            </a>
+                            
+                                <ul class="sub-menu-list border-box">
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/about">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                                
+                                                关于
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/links">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-link"></i>
+                                                
+                                                友链
+                                            </a>
+                                        </li>
+                                    
+                                        
+                                        <li class="sub-menu-item border-box ">
+                                            <a class="menu-text-color border-box flex-start" href="/tools">
+                                                
+                                                    <i class="menu-text-color sub-menu-icon fa-solid fa-tools"></i>
+                                                
+                                                工具
+                                            </a>
+                                        </li>
+                                    
+                                </ul>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="糖泥的个人博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          聚类算法
-        </h1>
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            相册
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box has-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="javascript:void(0);">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-face-kiss-beam"></i>
+                                </span>
+                            
+                            我
+                        </a>
+                        
+                            <i class="right-side collapse-icon fa-solid fa-angle-left"></i>
+                        
+                    </label>
+                    
+                        <ul class="drawer-sub-menu-list border-box">
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/about">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-user-graduate"></i>
+                                            </span>
+                                        
+                                        关于
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/links">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-link"></i>
+                                            </span>
+                                        
+                                        友链
+                                    </a>
+                                </li>
+                            
+                                
+                                <li class="sub-menu-item border-box">
+                                    <a class="drawer-menu-text-color border-box flex-start" href="/tools">
+                                        
+                                            <span class="sub-menu-icon-wrap border-box flex-center">
+                                                <i class="drawer-menu-text-color sub-menu-icon fa-solid fa-tools"></i>
+                                            </span>
+                                        
+                                        工具
+                                    </a>
+                                </li>
+                            
+                        </ul>
+                    
+                </li>
+            
+        </ul>
+    </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
+    <div class="window-mask"></div>
 
-              <time title="创建时间：2023-10-11 12:32:42" itemprop="dateCreated datePublished" datetime="2023-10-11T12:32:42+08:00">2023-10-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-24 22:57:55" itemprop="dateModified" datetime="2023-10-24T22:57:55+08:00">2023-10-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a>
-                </span>
-            </span>
+</header>
 
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>7.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>14 分钟</span>
-            </span>
 
         </div>
-      </header>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        聚类算法
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">糖泥</span>
+                                
+                                    <span class="author-badge">铁镐</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2023年10月11日</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Tue Oct 24 2023 22:57:55 GMT+0800">2023年10月24日</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/">实习记录</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Python/">Python</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>3.2k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>12 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
 
-      
-        <h1 id="聚类算法">聚类算法</h1>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="聚类算法">聚类算法</h1>
 <p>聚类算法又叫做“无监督分类”，其目的是将数据划分成有意义或有用的组(或簇)。这种划分可以基于我们的业务需求或建模需求来完成，也可以单纯地帮助我们探索数据的自然结构和分布。</p>
 <p>无监督学习：在进行模型训练的时候，只需要特征矩阵 X，不需要真实标签
 Y</p>
@@ -309,7 +488,12 @@ K-Means的核心任务就是根据我们设定好的K，找出K个最优的质�
 <h4 id="创建数据集">创建数据集</h4>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_blobs</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入数据集</span></span><br><span class="line">x, y = make_blobs(</span><br><span class="line">    n_samples=<span class="number">1000</span>,  <span class="comment"># 1000个数据</span></span><br><span class="line">    n_features=<span class="number">2</span>,  <span class="comment"># 二维平面图</span></span><br><span class="line">    centers=<span class="number">4</span>,  <span class="comment"># 4个中心点</span></span><br><span class="line">    random_state=<span class="number">1</span>)  <span class="comment"># 随机数种子，保证每次创建的数据集一样</span></span><br><span class="line"></span><br><span class="line">plt.scatter(</span><br><span class="line">    x[:, <span class="number">0</span>],  <span class="comment"># 横坐标</span></span><br><span class="line">    x[:, <span class="number">1</span>],  <span class="comment"># 纵坐标</span></span><br><span class="line">    s=<span class="number">8</span>)  <span class="comment"># 点的大小</span></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 <p><code>make_blobs</code>方法有两个返回值，第一个值表示生成的数据点，第二个值表示每个数据点的标签（或类别）（但是这在无监督学习中并没有用处）</p>
-<p><img src="\images\生成数据集.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\生成数据集.png"
+                         width="80%" height="auto"
+                 ></p>
 <h4 id="k-means聚类">K-Means聚类</h4>
 <ol type="1">
 <li>重要参数<code>n_clusters</code>：要生成的簇数和要生成的质心数，即上文的K，默认值为8
@@ -337,11 +521,21 @@ inertia
 <ul>
 <li>数据可视化： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure()</span><br><span class="line">plt.scatter(x[:, <span class="number">0</span>], x[:, <span class="number">1</span>], c=labels)</span><br><span class="line">plt.scatter(centroid[:, <span class="number">0</span>], centroid[:, <span class="number">1</span>], marker=<span class="string">&#x27;x&#x27;</span>, s=<span class="number">100</span>, c=<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
 </ul>
-<p><img src="\images\KMeans聚类结果.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\KMeans聚类结果.png"
+                         width="80%" height="auto"
+                 ></p>
 <h4 id="轮廓系数">轮廓系数</h4>
 <p>由于是无监督学习，所以我们是对没有真实标签的数据进行探索，需要完全依赖于评价簇内的稠密程度（簇内差异小）和簇间的离散程度（簇外差异大）来评估聚类的效果，所以引入了轮廓系数这个评判依据</p>
 <p>某样本的轮廓系数计算公式：</p>
-<p><img src="\images\轮廓系统公式.png" width="20%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\轮廓系统公式.png"
+                         width="20%" height="auto"
+                 ></p>
 <p>其中，a是该样本点与其簇内其他所有样本点的平均距离，b是该样本点与另一个最近的簇内所有样本点的平均距离。轮廓系数的计算结果是<code>(-1,1)</code>，其中：
 -
 值越接近1，表示样本与自己所在的簇中的样本很相似，并且与其他簇中的样本不相似。
@@ -357,7 +551,12 @@ inertia
 <li><p>使用可视化工具可以更直观地找到拐点</p></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plt.figure()</span><br><span class="line">axis_x = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">3</span>, <span class="number">10</span>))</span><br><span class="line">plt.plot(axis_x, inertia_list)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="\images\轮廓系数.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\轮廓系数.png"
+                         width="80%" height="auto"
+                 ></p>
 <p>可见，当K=4的时候，轮廓系数接近1，聚类结果最好</p>
 <h2 id="dbscan算法">DBSCAN算法</h2>
 <h3 id="算法过程-1">算法过程</h3>
@@ -382,14 +581,24 @@ inertia
 <h4 id="创建数据集-1">创建数据集</h4>
 <p>我们可以通过<code>make_circles</code>或者<code>make_moons</code>生成有特殊形状的数据集
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_circles</span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> make_moons</span><br><span class="line"><span class="keyword">import</span> matplotlib.pylab <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x1, y1 = make_circles(</span><br><span class="line">    n_samples=<span class="number">3000</span>,  <span class="comment"># 样本数</span></span><br><span class="line">    factor=<span class="number">0.3</span>,  <span class="comment"># 内环和外环的比例因子，越小越分离</span></span><br><span class="line">    noise=<span class="number">0.05</span>,  <span class="comment"># 噪声值，越小越向心</span></span><br><span class="line">    random_state=<span class="number">666</span>)  <span class="comment"># 随机数种子，保证每次创建的数据集一样</span></span><br><span class="line">x2, y2 = make_moons(</span><br><span class="line">    n_samples=<span class="number">3000</span>,</span><br><span class="line">    noise=<span class="number">0.05</span>,  <span class="comment"># 噪声值，越小则两条线越清晰</span></span><br><span class="line">    random_state=<span class="number">666</span>)</span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;make_circles&#x27;</span>)</span><br><span class="line">plt.scatter(x1[:, <span class="number">0</span>], x1[:, <span class="number">1</span>], s=<span class="number">8</span>)</span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;make_moons&#x27;</span>)</span><br><span class="line">plt.scatter(x2[:, <span class="number">0</span>], x2[:, <span class="number">1</span>], s=<span class="number">8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
-<p><img src="\images\生成数据集圆和月.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\生成数据集圆和月.png"
+                         width="80%" height="auto"
+                 ></p>
 <h4 id="dbscan聚类">DBSCAN聚类</h4>
 <ol type="1">
 <li><code>DBSCAN</code>有两个重要参数：<code>eps</code>：邻域半径；<code>min_samples</code>：一个核心对象应该拥有的最少样本数
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> DBSCAN</span><br><span class="line"><span class="keyword">from</span> sklearn.cluster <span class="keyword">import</span> KMeans</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用DBSCAN聚类</span></span><br><span class="line">y_pred1 = DBSCAN(eps=<span class="number">0.2</span>, min_samples=<span class="number">5</span>).fit_predict(x1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用KMeans聚类</span></span><br><span class="line">cluster = KMeans(n_clusters=<span class="number">2</span>)</span><br><span class="line">y_pred2 = cluster.fit_predict(x1)</span><br><span class="line">centroid = cluster.cluster_centers_</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据可视化</span></span><br><span class="line">plt.figure()</span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;DBSCAN&#x27;</span>)</span><br><span class="line">plt.scatter(x1[:, <span class="number">0</span>], x1[:, <span class="number">1</span>], c=y_pred1)</span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;K-Means&#x27;</span>)</span><br><span class="line">plt.scatter(x1[:, <span class="number">0</span>], x1[:, <span class="number">1</span>], c=y_pred2)</span><br><span class="line">plt.scatter(centroid[:, <span class="number">0</span>], centroid[:, <span class="number">1</span>], marker=<span class="string">&#x27;x&#x27;</span>, s=<span class="number">100</span>, c=<span class="string">&#x27;black&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
 </ol>
 <p>其余参数详见文档</p>
-<p><img src="\images\DBSCAN和KMeans在双环图上的区别.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\DBSCAN和KMeans在双环图上的区别.png"
+                         width="80%" height="auto"
+                 ></p>
 <p>可见，K-Means与DBSCAN的区别：K-Means只能用于具有明确定义的质心（比如均值或中位数）的数据；DBSCAN要求密度定义（基于传统的欧几里得密度概念）对于数据是有意义的。</p>
 <ol start="2" type="1">
 <li>重要属性<code>labels_</code>：指聚类完成后，每个样本所对应的簇数
@@ -409,332 +618,506 @@ inertia
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据预处理：标准差标准化</span></span><br><span class="line">MMS = MinMaxScaler().fit(x)</span><br><span class="line">data = MMS.transform(x)</span><br></pre></td></tr></table></figure> - 使用K-Means聚类算法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 3.构建KMeans模型训练数据</span></span><br><span class="line">cluster = KMeans(n_clusters=<span class="number">3</span>,random_state=<span class="number">10</span>,n_init=<span class="number">10</span>).fit(data)</span><br><span class="line"><span class="comment"># 3.1 获取聚类结果</span></span><br><span class="line">y_pred = cluster.labels_</span><br><span class="line"><span class="comment"># 3.2 获取质心</span></span><br><span class="line">centers = cluster.cluster_centers_</span><br><span class="line"><span class="comment"># 3.3 查看簇内平方和</span></span><br><span class="line">inertia = cluster.inertia_</span><br></pre></td></tr></table></figure> - 数据可视化</p>
 <p>由于数据集是四维的（即四个特征），我们需要对其进行降维处理，目标是降到二维平面使用散点图进行数据可视化。这里我们使用TSNE降维法：
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 4.聚类结果可视化</span></span><br><span class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> TSNE</span><br><span class="line"><span class="comment"># 进行数据降维处理</span></span><br><span class="line">tsne = TSNE(n_components=<span class="number">2</span>,init=<span class="string">&#x27;random&#x27;</span>,random_state=<span class="number">0</span>).fit(data)</span><br><span class="line">df = pd.DataFrame(tsne.embedding_)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 绘制散点图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line">plt.scatter(df[<span class="number">0</span>],df[<span class="number">1</span>],c=y_pred,s=<span class="number">8</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></p>
-<p><img src="\images\鸢尾花iris聚类结果.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\鸢尾花iris聚类结果.png"
+                         width="80%" height="auto"
+                 ></p>
 <ul>
 <li>聚类模型评估</li>
 </ul>
 <ol type="1">
 <li>轮廓系数 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5.聚类模型评估</span></span><br><span class="line"><span class="comment"># 5.1轮廓系数</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> silhouette_score</span><br><span class="line">silhouetteScore = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="comment"># 构建并训练模型</span></span><br><span class="line">    kmeans = KMeans(n_clusters=i,random_state=<span class="number">0</span>,n_init=<span class="number">10</span>).fit(data)</span><br><span class="line">    score = silhouette_score(data,kmeans.labels_)</span><br><span class="line">    silhouetteScore.append(score)</span><br><span class="line">plt.figure(figsize=(<span class="number">8</span>,<span class="number">6</span>))</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>),silhouetteScore,linewidth=<span class="number">1.5</span>,linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><img src="\images\鸢尾花iris聚类轮廓系数.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\鸢尾花iris聚类轮廓系数.png"
+                         width="80%" height="auto"
+                 ></p>
 <ol start="2" type="1">
 <li>卡林斯基 - 哈拉巴斯指数 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5.2 卡林斯基-哈拉巴斯指数</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> calinski_harabasz_score</span><br><span class="line">chs = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="comment"># 构建聚类模型</span></span><br><span class="line">    kmeans = KMeans(n_clusters=i,random_state=<span class="number">0</span>,n_init=<span class="number">10</span>).fit(data)</span><br><span class="line">    chsScore = calinski_harabasz_score(data,kmeans.labels_)</span><br><span class="line">    chs.append(chsScore)</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">8</span>))</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>, <span class="number">10</span>), chs, linewidth=<span class="number">1.5</span>, linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
 </ol>
-<p><img src="\images\鸢尾花iris聚类卡林斯基 - 哈拉巴斯指数.png" width="80%" height="auto"></p>
+<p><img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\鸢尾花iris聚类卡林斯基 - 哈拉巴斯指数.png"
+                         width="80%" height="auto"
+                 ></p>
 <ol start="3" type="1">
 <li>FMI评价法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 5.3 FMI评价法</span></span><br><span class="line"><span class="comment"># 注意：需要有真实标签</span></span><br><span class="line">y = iris_data.target</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> fowlkes_mallows_score</span><br><span class="line">fms = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>,<span class="number">10</span>):</span><br><span class="line">    <span class="comment"># 构建聚类模型</span></span><br><span class="line">    kmeans = KMeans(n_clusters=i,random_state=<span class="number">0</span>,n_init=<span class="number">10</span>).fit(data)</span><br><span class="line">    fmsScore = fowlkes_mallows_score(y,kmeans.labels_)</span><br><span class="line">    fms.append(fmsScore)</span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">8</span>))</span><br><span class="line">plt.plot(<span class="built_in">range</span>(<span class="number">2</span>, <span class="number">10</span>), fms, linewidth=<span class="number">1.5</span>, linestyle=<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="\images\鸢尾花iris聚类FMI评价法.png" width="80%" height="auto"></li>
+<img    
+                       lazyload
+                       alt="image"
+                       data-src="\images\鸢尾花iris聚类FMI评价法.png"
+                         width="80%" height="auto"
+                 ></li>
 </ol>
 <ul>
 <li>完整代码
 <iframe src="/custom_html/sklearn_KMeans_test/sklearn_KMeans_test.html" width=100% height=600px></iframe></li>
 </ul>
 
-    </div>
+                    
+                </div>
 
-    
-    
-    
-        
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                聚类算法
+            </div>
 
-<div>
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者： </strong>糖泥
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="http://1354478648.github.io/2023/10/11/%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95/" title="聚类算法">http://1354478648.github.io/2023/10/11/聚类算法/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="tag"># 实习记录</a>
-              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据分析</a>
-              <a href="/tags/Python/" rel="tag"># Python</a>
-              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
-          </div>
-
-        
-
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2023/10/09/%E6%97%B6%E5%BA%8F%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/" rel="prev" title="时域特征提取">
-      <i class="fa fa-chevron-left"></i> 时域特征提取
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/10/14/%E4%BB%8E%E6%A1%88%E4%BE%8B%E5%87%BA%E5%8F%91%E7%86%9F%E6%82%89Pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BA%93/" rel="next" title="从案例出发熟悉Pandas数据分析库">
-      从案例出发熟悉Pandas数据分析库 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
-  </article>
-  
-  
-  
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
+            <div class="copyright-post-link border-box text-ellipsis">
+                2023/10/11/聚类算法/
+            </div>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">糖泥</div>
+            </div>
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E7%AE%97%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means%E8%81%9A%E7%B1%BB"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">K-Means聚类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E5%BB%93%E7%B3%BB%E6%95%B0"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">轮廓系数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dbscan%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">DBSCAN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86-1"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dbscan%E8%81%9A%E7%B1%BB"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">DBSCAN聚类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%BB%83%E4%B9%A0%E9%B8%A2%E5%B0%BE%E8%8A%B1"><span class="nav-number">1.3.</span> <span class="nav-text">聚类练习：鸢尾花</span></a></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="Downey"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">Downey</p>
-  <div class="site-description" itemprop="description">大杯牛乳红茶 去冰 三分糖</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">30</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">43</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/1354478648" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;1354478648" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:t13544786448@gmail.com" title="E-Mail → mailto:t13544786448@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-  <div class="cc-license motion-element" itemprop="license">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
-  </div>
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2023-10-11 12:32</div>
+            </div>
 
 
-  <div class="links-of-blogroll motion-element">
-    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
-      Links
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
     </div>
-    <ul class="links-of-blogroll-list">
-        <li class="links-of-blogroll-item">
-          <a href="https://space.bilibili.com/208947807" title="https:&#x2F;&#x2F;space.bilibili.com&#x2F;208947807" rel="noopener" target="_blank">我的B站主页</a>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E5%AE%9E%E4%B9%A0%E8%AE%B0%E5%BD%95/">实习记录</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Python/">Python</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
         </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://steamcommunity.com/id/1354478648/" title="https:&#x2F;&#x2F;steamcommunity.com&#x2F;id&#x2F;1354478648&#x2F;" rel="noopener" target="_blank">我的Steam主页</a>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
         </li>
-        <li class="links-of-blogroll-item">
-          <a href="https://dnf.doyi.online/" title="https:&#x2F;&#x2F;dnf.doyi.online&#x2F;" rel="noopener" target="_blank">东南dnf的博客</a>
-        </li>
-        <li class="links-of-blogroll-item">
-          <a href="http://lray-iu.ink/" title="http:&#x2F;&#x2F;lray-iu.ink&#x2F;" rel="noopener" target="_blank">RayBoKi的博客</a>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
         </li>
     </ul>
-  </div>
+</div>
 
-      </div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2023/10/14/%E4%BB%8E%E6%A1%88%E4%BE%8B%E5%87%BA%E5%8F%91%E7%86%9F%E6%82%89Pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BA%93/"
+                                   title="从案例出发熟悉Pandas数据分析库"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">从案例出发熟悉Pandas数据分析库</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2023/10/09/%E6%97%B6%E5%BA%8F%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96/"
+                                   title="时域特征提取"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">时域特征提取</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc left-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-text">聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E7%AE%97%E6%B3%95"><span class="nav-text">K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B"><span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means%E8%81%9A%E7%B1%BB"><span class="nav-text">K-Means聚类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E5%BB%93%E7%B3%BB%E6%95%B0"><span class="nav-text">轮廓系数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dbscan%E7%AE%97%E6%B3%95"><span class="nav-text">DBSCAN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B-1"><span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86-1"><span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dbscan%E8%81%9A%E7%B1%BB"><span class="nav-text">DBSCAN聚类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%BB%83%E4%B9%A0%E9%B8%A2%E5%B0%BE%E8%8A%B1"><span class="nav-text">聚类练习：鸢尾花</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2023</span>&nbsp;-&nbsp;2024
+        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">糖泥</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+                <a target="_blank" rel="nofollow" href="https://github.com/">
+            
+            本站由 <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span> 提供部署服务
+            
+                </a>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">总字数</span>
+                    <span class="item-value border-box word">207.2k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools left-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
 
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
 
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2024</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Downey</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-area"></i>
-    </span>
-    <span title="站点总字数">681k</span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-    <span title="站点阅读时长">20:39</span>
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
-  <div class="powered-by">
-    <!--由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动 -->
-  </div>
 
-<!-- 网站运行时间的设置 -->
-<span id="timeDate">载入天数...</span>
-<span id="times">载入时分秒...</span>
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%AE%97%E6%B3%95"><span class="nav-text">聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means%E7%AE%97%E6%B3%95"><span class="nav-text">K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B"><span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#k-means%E8%81%9A%E7%B1%BB"><span class="nav-text">K-Means聚类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BD%AE%E5%BB%93%E7%B3%BB%E6%95%B0"><span class="nav-text">轮廓系数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dbscan%E7%AE%97%E6%B3%95"><span class="nav-text">DBSCAN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B-1"><span class="nav-text">算法过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0-1"><span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E9%9B%86-1"><span class="nav-text">创建数据集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#dbscan%E8%81%9A%E7%B1%BB"><span class="nav-text">DBSCAN聚类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%81%9A%E7%B1%BB%E7%BB%83%E4%B9%A0%E9%B8%A2%E5%B0%BE%E8%8A%B1"><span class="nav-text">聚类练习：鸢尾花</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.1/js/libs/pjax.min.js"></script>
 <script>
-    var now = new Date();
-    function createtime() {
-        var grt= new Date("10/08/2023 12:00:00"); //此处修改你的建站时间或者网站上线时间
-        now.setTime(now.getTime()+250);
-        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
-        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
-        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
-        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
-        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
-        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
-        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
-        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒.";
-    }
-setInterval("createtime()",250);
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
 </script>
-        
-<div class="busuanzi-count">
-  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-user"></i>
-      </span>
-      <span class="site-uv" title="总访客量">
-        <span id="busuanzi_value_site_uv"></span>
-      </span>
-    </span>
-    <span class="post-meta-divider">|</span>
-    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
-      <span class="post-meta-item-icon">
-        <i class="fa fa-eye"></i>
-      </span>
-      <span class="site-pv" title="总访问量">
-        <span id="busuanzi_value_site_pv"></span>
-      </span>
-    </span>
-</div>
 
 
 
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/muse.js"></script>
-
-
-<script src="/js/next-boot.js"></script>
-
-
-
-
-  
-
-
-
-
-  
-<script src="/js/local-search.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
 
 </body>
 </html>
